@@ -6,14 +6,28 @@
 package pong;
 
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 /**
  *
  * @author d.peters
  */
 public class Flipper extends Rectangle {
+    public boolean UP = false, DOWN = false; 
+    private int score = 0;
+    private int speed = 10;
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+    public void incrementScore(){
+        int oldScore = this.getScore();
+        setScore(oldScore += 1);
+    }
+    
     public Flipper(int posX, int posY, int width, int height) {
         this.x = posX;
         this.y = posY;
@@ -21,16 +35,24 @@ public class Flipper extends Rectangle {
         this.height = height;
     }
     
-    //private final int step = 5;
-    public void moveUp(int step) {
-        if (this.y <= (super.getHeight() - 25)) {
-            this.y += step;
+    public void move (int panelHeight){
+        if (this.UP){
+            this.moveUp();
+        }
+        if (this.DOWN) {
+            this.moveDown(panelHeight);
         }
     }
-    
-    public void moveDown(int step){
+
+    public void moveUp() {
         if (this.y >= 0) {
-            this.y -= step;
+            this.y -= speed;
+        }
+    }
+
+    public void moveDown(int panelHeight) {
+        if (this.getY() <= panelHeight) {
+            this.y += speed;
         }
     }
 }

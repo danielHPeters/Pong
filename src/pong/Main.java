@@ -1,89 +1,49 @@
 package pong;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+
 
 public class Main extends JFrame {
-
-    private static final long serialVersionUID = 1L; // Eclipse added this automatically
-
-    private JPanel jContentPane = null;
-
-    private PanelPelota panel = null; // This is the panel of the game class
-
-    private PanelPelota getPanel() {
-        if (panel == null) {
-            panel = new PanelPelota(); // The panel is created
-        }
-        return panel;
-    }
+    private final JFrame window = new JFrame();
+    private final GamePanel panel = new GamePanel(); // This is the panel of the game class
+    Thread gameLoop = new Thread();
 
     /**
      * This is the default constructor
      */
     public Main() {
-        super();
         initialize();
-        // Listeners for the keyboard
-        this.addKeyListener(new KeyAdapter() {
-            //Method for the key pressed
-            @Override
-            public void keyPressed(KeyEvent evt) {
-                formKeyPressed(evt);
-            }
-            // Method for the key released
-            @Override
-            public void keyReleased(KeyEvent evt) {
-                formKeyReleased(evt);
-            }
-        });
-    }
-
-// Here i'm stating the method that will send the key pressed to the game class
-    private void formKeyPressed(KeyEvent evt) {
-        panel.keyPressed(evt);
-    }
-
-// Here i'm stating the method that will send the key released to the game class
-    private void formKeyReleased(KeyEvent evt) {
-        panel.keyReleased(evt);
     }
 
     /**
-     * This method initializes this
+     * This method initializes this JFrame
      *
      * @return void
      */
     private void initialize() {
-        this.setResizable(false);
-        this.setBounds(new Rectangle(312, 184, 250, 250)); // Position on the desktop
-        this.setMinimumSize(new Dimension(250, 250));
-        this.setMaximumSize(new Dimension(250, 250));
-        this.setContentPane(getJContentPane());
-        this.setTitle("Pong");
+        GameKeyBindings gameKeyBindings = new GameKeyBindings(
+                panel, panel.playerOne, panel.playerTwo
+        );
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setResizable(false);
+        window.setBounds(new Rectangle(312, 184, 250, 250)); // Position on the desktop
+        window.setMinimumSize(new Dimension(250, 250));
+        window.setMaximumSize(new Dimension(250, 250));
+        window.setTitle("Pong");
+        window.add(panel);
+        window.pack();
+        window.setVisible(true);
     }
-
-    /**
-     * This method initializes jContentPane
-     *
-     * @return javax.swing.JPanel
-     */
-    private JPanel getJContentPane() {
-        if (jContentPane == null) {
-            jContentPane = new JPanel();
-            jContentPane.setLayout(new BorderLayout());
-            jContentPane.add(getPanel(), BorderLayout.CENTER);
-        }
-        return jContentPane;
-    }
+    
+    
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
         SwingUtilities.invokeLater(() -> {
-            Main thisClass = new Main();
-            thisClass.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            thisClass.setVisible(true);
+            Main pong = new Main();
         });
     }
 }
