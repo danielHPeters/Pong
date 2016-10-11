@@ -1,7 +1,9 @@
-package pong;
+package pong.uiElements;
 
 import java.awt.*;
 import javax.swing.*;
+import pong.gameObjcects.Ball;
+import pong.gameObjcects.Player;
 
 public class GamePanel extends JPanel implements Runnable {
     
@@ -9,9 +11,9 @@ public class GamePanel extends JPanel implements Runnable {
     private int victoryCond = 6; // Score required for victoryCond
     private int gameSpeed = 50;
     private int paddleW = 5, paddleH = 30;
-    Paddle playerOne = new Paddle(10, 100, paddleW, paddleH, 1);
-    Paddle playerTwo = new Paddle(225, 100, paddleW, paddleH, 2);
-    Ball ball = new Ball(100, 100);
+    public Player playerOne = new Player(10, 100, paddleW, paddleH, 1);
+    public Player playerTwo = new Player(225, 100, paddleW, paddleH, 2);
+    public Ball ball = new Ball(100, 100);
 
     public boolean isPlaying() {
         return playing;

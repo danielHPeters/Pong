@@ -1,54 +1,68 @@
 package pong;
 
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import javax.swing.JFrame;
+import pong.configuration.GameKeyBindings;
+import pong.uiElements.GamePanel;
+import pong.uiElements.GameWindow;
 import javax.swing.SwingUtilities;
 
+/**
+ * Starter class of the pong game this is a simple remake of the classic pong
+ * using an object oriented approach
+ *
+ * @author d.peters
+ * @version 2.0
+ * @since 11.10.2016
+ */
+public class Main {
 
+    /**
+     * the game window
+     */
+    private final GameWindow window = new GameWindow();
 
-public class Main extends JFrame {
-    private final JFrame window = new JFrame();
-    private final GamePanel panel = new GamePanel(); // This is the panel of the game class
+    /**
+     * the drawing panel containing the game loop and objects
+     */
+    private final GamePanel panel = new GamePanel();
+
+    /**
+     * initialize the keybindings of the game
+     */
+    GameKeyBindings gameKeyBindings = new GameKeyBindings(
+            window, panel, panel.playerOne, panel.playerTwo
+    );
+
+    /**
+     * thread which runs the game loop
+     */
     Thread gameLoop;
 
     /**
-     * This is the default constructor
+     * This is the default constructor It initializes all the components
      */
     public Main() {
-        initialize();
-    }
-    
-    public void initWindow(){
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
-        window.setBounds(new Rectangle(312, 184, 250, 250)); // Position on the desktop
-        window.setMinimumSize(new Dimension(250, 250));
-        window.setMaximumSize(new Dimension(250, 250));
-        window.setTitle("Pong");
-        window.add(panel);
-        window.pack();
-        window.setVisible(true);
     }
 
     /**
-     * This method initializes this JFrame
-     *
-     * @return void
+     * initializes the JFrame window
      */
-    private void initialize() {
-        GameKeyBindings gameKeyBindings = new GameKeyBindings(
-                window, panel, panel.playerOne, panel.playerTwo
-        );
-        initWindow();
+    public void initialize() {
+        window.add(panel);
+        window.pack();
+        window.setVisible(true);
+        panel.setPlaying(true);
+        gameLoop = new Thread(panel);
+        gameLoop.start();
     }
 
+    /**
+     *
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             Main pong = new Main();
-            pong.panel.setPlaying(true);
-            pong.gameLoop = new Thread(pong.panel);
-            pong.gameLoop.start();
+            pong.initialize();
         });
     }
 }

@@ -1,4 +1,4 @@
-package pong;
+package pong.gameObjcects;
 
 import java.awt.*;
 
@@ -7,7 +7,7 @@ import java.awt.*;
  *
  * @author d.peters
  */
-public class Paddle extends Rectangle {
+public class Player extends Rectangle {
 
     /**
      * Flags to check for keyboard input
@@ -117,7 +117,7 @@ public class Paddle extends Rectangle {
      * @param height height of the paddle
      * @param playerId
      */
-    public Paddle(int posX, int posY, int width, int height, int playerId) {
+    public Player(int posX, int posY, int width, int height, int playerId) {
         this.x = posX;
         this.y = posY;
         this.width = width;
@@ -141,8 +141,8 @@ public class Paddle extends Rectangle {
     }
 
     /**
-     * Moves the Paddle up by speed of itself checks if the Paddle is out of
-     * bounds
+     * Moves the Player up by speed of itself checks if the player is
+     * out of bounds
      */
     public void moveUp() {
         if (this.y > 0) {
@@ -151,9 +151,8 @@ public class Paddle extends Rectangle {
     }
 
     /**
-     * Moves the Paddle down by speed of itself checks if the Paddle is out of
-     * bounds
-     *
+     * Moves the Player down by speed of itself checks if the Player is
+     * out of bounds
      * @param panelHeight
      */
     public void moveDown(int panelHeight) {
@@ -162,6 +161,11 @@ public class Paddle extends Rectangle {
         }
     }
 
+    /**
+     * 
+     * @param victCond
+     * @return 
+     */
     public boolean hasWon(int victCond) {
         boolean isWinner = false;
         if (this.score == victCond) {
@@ -170,6 +174,12 @@ public class Paddle extends Rectangle {
         return isWinner;
     }
 
+    /**
+     * 
+     * @param ballX
+     * @param ballY
+     * @return 
+     */
     public boolean deflectedBall(int ballX, int ballY) {
         int playerPos;
         if (this.playerId == 1){

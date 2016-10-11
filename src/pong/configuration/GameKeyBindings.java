@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pong;
+package pong.configuration;
 
+import pong.gameObjcects.Player;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
@@ -23,7 +24,7 @@ public class GameKeyBindings {
      * @param playerTwo
      */
     public GameKeyBindings(
-            JFrame window, JPanel panel, Paddle playerOne, Paddle playerTwo
+            JFrame window, JPanel panel, Player playerOne, Player playerTwo
     ) {
 
         /* Key pressed and key released actions */
