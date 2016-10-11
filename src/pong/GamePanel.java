@@ -7,8 +7,10 @@ public class GamePanel extends JPanel implements Runnable {
 
     Thread gameLoop;
     boolean playing, gameOver;
-    Flipper playerOne = new Flipper(10, 100, 10, 25);
-    Flipper playerTwo = new Flipper(230, 100, 10, 25);
+    private int victory = 6; // Score required for victory
+    private int gameSpeed = 50; // 
+    Paddle playerOne = new Paddle(10, 100, 10, 25);
+    Paddle playerTwo = new Paddle(230, 100, 10, 25);
     Ball ball = new Ball(100, 100);
 
     public GamePanel() {
@@ -43,13 +45,26 @@ public class GamePanel extends JPanel implements Runnable {
         }
         repaint();
     }
-    public void gameLoop(){
+
+    public void gameLoop() {
         // TODO Auto-generated method stub
         boolean moveRight = true;
         boolean moveUp = true;
 
         while (playing) {
-            // The ball move from left to right
+            
+            /**
+             * Delay the game loop (otherwise the game will instantly end)
+             * the 
+             * 
+             */
+            try {
+                Thread.sleep(gameSpeed);
+            } catch (InterruptedException ex) {
+
+            }
+            
+            // The ball moves from left to right
             if (moveRight) {
                 // a la moveRight
                 ball.moveRight();
@@ -77,43 +92,43 @@ public class GamePanel extends JPanel implements Runnable {
                 if (ball.getyPos() <= 0) {
                     moveUp = true;
                 }
-            }
+            }   
 
-            // Delay
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException ex) {
-
-            }
-
-            // The score of the player 1 increase
+            // check if player one scored
             if (ball.getxPos() >= (this.getWidth() - ball.getSize())) {
                 playerOne.incrementScore();
             }
 
-            // The score of the player 2 increase
+            // check if player two scored
             if (ball.getxPos() == 0) {
                 playerTwo.incrementScore();
             }
 
-            // Game over. Here you can change 6 to any value
-            // When the score reach to the value, the game will end
-            if (playerOne.getScore() == 6 || playerTwo.getScore() == 6) {
+            // if a player reaches the victory condition, the game will end
+            if (playerOne.hasWon(victory) || playerTwo.hasWon(victory)) {
                 playing = false;
                 gameOver = true;
             }
 
-            // Player one catches ball
-            if (ball.getxPos() == playerOne.getX() + 10 && ball.getyPos() >= playerOne.getY() && ball.getyPos() <= (playerOne.getY() + 25)) {
+            // check if player one deflected the ball
+            if (ball.getxPos() == playerOne.getX() + 10 &&
+                    ball.getyPos() >= playerOne.getY() &&
+                    ball.getyPos() <= (playerOne.getY() + 25)) {
                 moveRight = true;
             }
 
-            // Player two catches ball
-            if (ball.getxPos() == (playerTwo.getX() - 5) && ball.getyPos() >= playerTwo.getY() && ball.getyPos() <= (playerTwo.getY() + 25)) {
+            // check if player two deflected the ball
+            if (ball.getxPos() == (playerTwo.getX() - 5)
+                    && ball.getyPos() >= playerTwo.getY()
+                    && ball.getyPos() <= (playerTwo.getY() + 25)) {
                 moveRight = false;
             }
         }
     }
+
+    /**
+     * Start the game loop
+     */
     @Override
     public void run() {
         gameLoop();

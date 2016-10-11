@@ -14,71 +14,89 @@ import javax.swing.*;
  * @author d.peters
  */
 public class GameKeyBindings {
-    public GameKeyBindings(JPanel panel, Flipper playerOne, Flipper playerTwo) {
+    /**
+     * 
+     * @param panel
+     * @param playerOne
+     * @param playerTwo 
+     */
+    public GameKeyBindings(JPanel panel, Paddle playerOne, Paddle playerTwo) {
+
+        /* Key pressed and key released actions */
+        
+        
+        // UP arrow functions
+        
         Action upAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 playerTwo.UP = true;
+                 playerTwo.setUP(true);
             }
         };
 
         Action upReleasedAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                playerTwo.UP = false;
+                playerTwo.setUP(false);
             }
         };
 
+        // DOWN arrow functions
+        
         Action downAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                playerTwo.DOWN = true;
+                playerTwo.setDOWN(true);
             }
         };
 
         Action downReleasedAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                playerTwo.DOWN = false;
+                playerTwo.setDOWN(false);
             }
         };
+        
+        // W key functions
 
         Action wAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                playerOne.UP = true;
+                playerOne.setUP(true);
             }
 
         };
-
+        
         Action wReleasedAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                playerOne.UP = false;
+                playerOne.setUP(false);
             }
         };
+        
+        // S key functions
 
         Action sAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (playerOne.getY() <= panel.getHeight() - 30) {
-                    playerOne.DOWN = true;
-                }
+                    playerOne.setDOWN(true);
             }
         };
 
         Action sReleasedAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                playerOne.DOWN = false;
+                playerOne.setDOWN(false);
             }
         };
         
+        // Get the input map of the GamePanel and put the action functions to the map
         InputMap inputMap = panel.getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
         ActionMap actionMap = panel.getActionMap();
-
+        
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0, false), "W pressed");
         actionMap.put("W pressed", wAction);
+        // Boolean param true for key released
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0, true), "W released");
         actionMap.put("W released", wReleasedAction);
 
