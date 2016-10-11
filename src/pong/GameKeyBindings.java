@@ -14,23 +14,24 @@ import javax.swing.*;
  * @author d.peters
  */
 public class GameKeyBindings {
+
     /**
-     * 
+     *
+     * @param window
      * @param panel
      * @param playerOne
-     * @param playerTwo 
+     * @param playerTwo
      */
-    public GameKeyBindings(JPanel panel, Paddle playerOne, Paddle playerTwo) {
+    public GameKeyBindings(
+            JFrame window, JPanel panel, Paddle playerOne, Paddle playerTwo
+    ) {
 
         /* Key pressed and key released actions */
-        
-        
         // UP arrow functions
-        
         Action upAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 playerTwo.setUP(true);
+                playerTwo.setUP(true);
             }
         };
 
@@ -42,7 +43,6 @@ public class GameKeyBindings {
         };
 
         // DOWN arrow functions
-        
         Action downAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,9 +56,8 @@ public class GameKeyBindings {
                 playerTwo.setDOWN(false);
             }
         };
-        
-        // W key functions
 
+        // W key functions
         Action wAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,20 +65,19 @@ public class GameKeyBindings {
             }
 
         };
-        
+
         Action wReleasedAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 playerOne.setUP(false);
             }
         };
-        
-        // S key functions
 
+        // S key functions
         Action sAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                    playerOne.setDOWN(true);
+                playerOne.setDOWN(true);
             }
         };
 
@@ -89,11 +87,20 @@ public class GameKeyBindings {
                 playerOne.setDOWN(false);
             }
         };
-        
+
+        final AbstractAction escapeAction = new AbstractAction() {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                window.dispose();
+            }
+        };
+
         // Get the input map of the GamePanel and put the action functions to the map
         InputMap inputMap = panel.getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
         ActionMap actionMap = panel.getActionMap();
-        
+
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0, false), "W pressed");
         actionMap.put("W pressed", wAction);
         // Boolean param true for key released
@@ -114,5 +121,8 @@ public class GameKeyBindings {
         actionMap.put("DOWN pressed", downAction);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, true), "DOWN released");
         actionMap.put("DOWN released", downReleasedAction);
+
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true), "ESCAPE_KEY");
+        actionMap.put("ESCAPE_KEY", escapeAction);
     }
 }

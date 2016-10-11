@@ -10,7 +10,7 @@ import javax.swing.SwingUtilities;
 public class Main extends JFrame {
     private final JFrame window = new JFrame();
     private final GamePanel panel = new GamePanel(); // This is the panel of the game class
-    Thread gameLoop = new Thread();
+    Thread gameLoop;
 
     /**
      * This is the default constructor
@@ -18,16 +18,8 @@ public class Main extends JFrame {
     public Main() {
         initialize();
     }
-
-    /**
-     * This method initializes this JFrame
-     *
-     * @return void
-     */
-    private void initialize() {
-        GameKeyBindings gameKeyBindings = new GameKeyBindings(
-                panel, panel.playerOne, panel.playerTwo
-        );
+    
+    public void initWindow(){
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setBounds(new Rectangle(312, 184, 250, 250)); // Position on the desktop
@@ -38,12 +30,25 @@ public class Main extends JFrame {
         window.pack();
         window.setVisible(true);
     }
-    
-    
+
+    /**
+     * This method initializes this JFrame
+     *
+     * @return void
+     */
+    private void initialize() {
+        GameKeyBindings gameKeyBindings = new GameKeyBindings(
+                window, panel, panel.playerOne, panel.playerTwo
+        );
+        initWindow();
+    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             Main pong = new Main();
+            pong.panel.setPlaying(true);
+            pong.gameLoop = new Thread(pong.panel);
+            pong.gameLoop.start();
         });
     }
 }

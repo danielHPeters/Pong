@@ -10,30 +10,33 @@ package pong;
  * @author d.peters
  */
 public class Ball {
-    private int xPos;
-    private int yPos;
+
+    private int x;
+    private int y;
     private int size = 8;
     private int speed = 5;
-    
-    public Ball (int xPos, int yPos){
-        this.xPos = xPos;
-        this.yPos = yPos;
+    boolean moveRight = true;
+    boolean moveUp = true;
+
+    public Ball(int xPos, int yPos) {
+        this.x = xPos;
+        this.y = yPos;
     }
 
-    public int getxPos() {
-        return xPos;
+    public int getX() {
+        return x;
     }
 
-    public void setxPos(int xPos) {
-        this.xPos = xPos;
+    public void setX(int x) {
+        this.x = x;
     }
 
-    public int getyPos() {
-        return yPos;
+    public int getY() {
+        return y;
     }
 
-    public void setyPos(int yPos) {
-        this.yPos = yPos;
+    public void setY(int y) {
+        this.y = y;
     }
 
     public int getSize() {
@@ -43,26 +46,79 @@ public class Ball {
     public void setSize(int size) {
         this.size = size;
     }
-    
-    public void moveUp(){
-        int move = getyPos() + speed;
-        setyPos(move);
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
     
-    public void moveDown(){
-        int move = getyPos() - speed;
-        setyPos(move);
+    public boolean isMoveRight() {
+        return moveRight;
+    }
+
+    public void moveRight(boolean moveRight) {
+        this.moveRight = moveRight;
+    }
+
+    public boolean isMoveUp() {
+        return moveUp;
+    }
+
+    public void moveUp(boolean moveUp) {
+        this.moveUp = moveUp;
     }
     
-    public void moveLeft(){
-        int move = getxPos() - speed;
-        setxPos(move);
+    
+
+    public void moveUp() {
+        int move = getY() + speed;
+        setY(move);
     }
-    
-    public void moveRight(){
-        int move = getxPos() + speed;
-        setxPos(move);
+
+    public void moveDown() {
+        int move = getY() - speed;
+        setY(move);
     }
-    
-    
+
+    public void moveLeft() {
+        int move = getX() - speed;
+        setX(move);
+    }
+
+    public void moveRight() {
+        int move = getX() + speed;
+        setX(move);
+    }
+
+    public void moveHor(int panelWidth) {
+        if (this.moveRight) {
+            moveRight();
+            if (this.getX() >= (panelWidth - this.getSize())) {
+                this.moveRight = false;
+            }
+        } else {
+            moveLeft();
+            if (this.getX() <= 0) {
+                this.moveRight = true;
+            }
+        }
+    }
+
+    public void moveVert(int panelHeight) {
+        if (this.moveUp) {
+            moveUp();
+            if (this.getY() >= (panelHeight - this.getSize())) {
+                this.moveUp = false;
+            }
+        } else {
+            moveDown();
+            if (this.getY() <= 0) {
+                this.moveUp = true;
+            }
+        }
+    }
+
 }
