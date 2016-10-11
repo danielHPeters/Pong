@@ -11,7 +11,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.*;
 
 /**
- *
+ * Keyboard configuration of the Game
  * @author d.peters
  */
 public class GameKeyBindings {

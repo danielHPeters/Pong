@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pong.uiElements;
 
 import java.awt.Dimension;
@@ -26,6 +21,5 @@ public class GameWindow extends JFrame{
         this.setMinimumSize(new Dimension(250, 250));
         this.setMaximumSize(new Dimension(250, 250));
         this.setTitle("Pong");
-        
     }
 }

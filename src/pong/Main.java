@@ -10,7 +10,7 @@ import javax.swing.SwingUtilities;
  * using an object oriented approach
  *
  * @author d.peters
- * @version 2.0
+ * @version 2.1
  * @since 11.10.2016
  */
 public class Main {
@@ -29,7 +29,7 @@ public class Main {
      * initialize the keybindings of the game
      */
     GameKeyBindings gameKeyBindings = new GameKeyBindings(
-            window, panel, panel.playerOne, panel.playerTwo
+            window, panel, panel.pl1, panel.pl2
     );
 
     /**

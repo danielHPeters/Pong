@@ -1,14 +1,17 @@
 package pong.gameObjcects;
 
-import java.awt.*;
-
 /**
- * Keyboard configuration of the Game
+ * Definition of the player object
  *
  * @author d.peters
  */
-public class Player extends Rectangle {
+public class Player extends GameShape {
 
+    /**
+     * Dimensions of the player object
+     */
+    int width, height;
+    
     /**
      * Flags to check for keyboard input
      */
@@ -23,11 +26,54 @@ public class Player extends Rectangle {
      * Counter for player score
      */
     private int score = 0;
+    
+    /**
+     * Initialize the Paddle with XY position, width and height
+     *
+     * @param posX X position on gamearea
+     * @param posY Y position on gamearea
+     * @param playerId
+     */
+    public Player(int posX, int posY, int playerId) {
+        this.x = posX;
+        this.y = posY;
+        this.speed = 10;
+        this.width = 5;
+        this.height = 30;
+        this.playerId = playerId;
+    }
 
     /**
-     * Defines how fast the flipper/player can move
+     *
+     * @return
      */
-    private int speed = 10;
+    public int getWidth() {
+        return width;
+    }
+
+    /**
+     *
+     * @param width
+     */
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getHeight() {
+        return height;
+    }
+
+    /**
+     *
+     * @param height
+     */
+    public void setHeight(int height) {
+        this.height = height;
+    }
 
     /**
      * Check if UP was set
@@ -75,7 +121,7 @@ public class Player extends Rectangle {
     }
 
     /**
-     * Setter for the flipper/player score
+     * Setter for the player score
      *
      * @param score new score
      */
@@ -84,49 +130,15 @@ public class Player extends Rectangle {
     }
 
     /**
-     * add +1 to score counter of the paddle/player
+     * add +1 to score counter of the player
      */
     public void incrementScore() {
         setScore(this.getScore() + 1);
     }
 
     /**
-     * Getter for the flipper speed
-     *
-     * @return The current speed
-     */
-    public int getSpeed() {
-        return speed;
-    }
-
-    /**
-     * Setter for the flipper speed
-     *
-     * @param speed New speed
-     */
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    /**
-     * Initialize the Paddle with XY position, width and height
-     *
-     * @param posX X position on gamearea
-     * @param posY Y position on gamearea
-     * @param width width of the paddle
-     * @param height height of the paddle
-     * @param playerId
-     */
-    public Player(int posX, int posY, int width, int height, int playerId) {
-        this.x = posX;
-        this.y = posY;
-        this.width = width;
-        this.height = height;
-        this.playerId = playerId;
-    }
-
-    /**
-     * Check for keys pressed and move (Workaround for input lag)
+     * Check for keys pressed and move according to key
+     * (Workaround for input lag)
      *
      * @param panelHeight Height of the Panel to see if out of bounds when
      * moving down
@@ -141,8 +153,7 @@ public class Player extends Rectangle {
     }
 
     /**
-     * Moves the Player up by speed of itself checks if the player is
-     * out of bounds
+     * Moves the Player up by his speed. checks if the player is out of bounds
      */
     public void moveUp() {
         if (this.y > 0) {
@@ -151,9 +162,9 @@ public class Player extends Rectangle {
     }
 
     /**
-     * Moves the Player down by speed of itself checks if the Player is
-     * out of bounds
-     * @param panelHeight
+     * Moves the Player down by his speed. checks if the Player is out of bounds
+     *
+     * @param panelHeight current height of the game panel object
      */
     public void moveDown(int panelHeight) {
         if (this.getY() < panelHeight - this.getHeight()) {
@@ -162,9 +173,10 @@ public class Player extends Rectangle {
     }
 
     /**
-     * 
-     * @param victCond
-     * @return 
+     * check if the player has won the game
+     *
+     * @param victCond the amount of scores required to win
+     * @return boolean which tells the game whether the player has won
      */
     public boolean hasWon(int victCond) {
         boolean isWinner = false;
@@ -175,17 +187,21 @@ public class Player extends Rectangle {
     }
 
     /**
-     * 
-     * @param ballX
-     * @param ballY
-     * @return 
+     * checks if the player has deflected the ball because each player has a
+     * different location, the player id needs to be checked in order to make
+     * this method to work
+     *
+     * @param ballX position X of the ball object
+     * @param ballY position Y of the ball object
+     * @return boolean that tells the game whether the ball has been deflected
+     * by the player
      */
     public boolean deflectedBall(int ballX, int ballY) {
         int playerPos;
-        if (this.playerId == 1){
-            playerPos = (int)this.getX() + (int)this.getWidth();
+        if (this.playerId == 1) {
+            playerPos = (int) this.getX() + (int) this.getWidth();
         } else {
-            playerPos = (int)this.getX() - (int)this.getWidth();
+            playerPos = (int) this.getX() - (int) this.getWidth();
         }
         boolean deflected = false;
         if (ballX == playerPos && ballY >= this.getY()
