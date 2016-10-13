@@ -9,133 +9,86 @@ package pong.gameObjcects;
  *
  * @author d.peters
  */
-public class Ball extends GameShape {
-
-    private int size = 8;
-    boolean moveRight = true, moveUp = true;
-
+public class Ball extends MovableObject {
+    
     public Ball(int xPos, int yPos) {
+        this.UP = true;
+        this.RIGHT = false;
         this.x = xPos;
         this.y = yPos;
         this.speed = 5;
-        this.size = 8;
+        this.width = 8;
+        this.height = 8;
         this.speed = 5;
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public int getSize() {
-        return size;
+        return width;
     }
 
     /**
-     * 
-     * @param size 
+     *
+     * @param size
      */
     public void setSize(int size) {
-        this.size = size;
-    }
-    
-    /**
-     * 
-     * @return 
-     */
-    public boolean isMoveRight() {
-        return moveRight;
+        this.width = size;
+        this.height = size;
     }
 
     /**
-     * 
-     * @param moveRight 
-     */
-    public void moveRight(boolean moveRight) {
-        this.moveRight = moveRight;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    public boolean isMoveUp() {
-        return moveUp;
-    }
-
-    /**
-     * 
-     * @param moveUp 
-     */
-    public void moveUp(boolean moveUp) {
-        this.moveUp = moveUp;
-    }
-    
-    /**
-     * 
-     */
-    public void moveUp() {
-        int move = getY() + speed;
-        setY(move);
-    }
-
-    /**
-     * 
-     */
-    public void moveDown() {
-        int move = getY() - speed;
-        setY(move);
-    }
-
-    /**
-     * 
-     */
-    public void moveLeft() {
-        int move = getX() - speed;
-        setX(move);
-    }
-
-    /**
-     * 
-     */
-    public void moveRight() {
-        int move = getX() + speed;
-        setX(move);
-    }
-
-    /**
-     * 
-     * @param panelWidth 
+     *
+     * @param panelWidth
      */
     public void moveHor(int panelWidth) {
-        if (this.moveRight) {
+        if (this.RIGHT) {
             moveRight();
-            if (this.getX() >= (panelWidth - this.getSize())) {
-                this.moveRight = false;
+            if (this.x >= (panelWidth - this.getSize())) {
+                this.RIGHT = false;
             }
         } else {
             moveLeft();
-            if (this.getX() <= 0) {
-                this.moveRight = true;
+            if (this.x <= 0) {
+                this.RIGHT = true;
             }
         }
     }
 
     /**
-     * 
-     * @param panelHeight 
+     *
+     * @param panelHeight
      */
     public void moveVert(int panelHeight) {
-        if (this.moveUp) {
+        if (this.UP) {
             moveUp();
-            if (this.getY() >= (panelHeight - this.getSize())) {
-                this.moveUp = false;
+            if (this.y <= 0) {
+                this.UP = false;
             }
         } else {
             moveDown();
-            if (this.getY() <= 0) {
-                this.moveUp = true;
+            if (this.y >= (panelHeight - this.getSize())) {
+                this.UP = true;
             }
         }
     }
 
+    public void changeVertDir() {
+        if (this.RIGHT == true) {
+            this.RIGHT = false;
+        } else {
+            this.RIGHT = true;
+        }
+    }
+    
+    public boolean collision(Player pl1, Player pl2){
+        boolean coll = false;
+        if (pl1.getBounds().intersects(this.getBounds()) ||
+                pl2.getBounds().intersects(this.getBounds())){
+            coll = true;
+        }
+        return coll;
+    }
 }

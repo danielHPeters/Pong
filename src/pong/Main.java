@@ -1,5 +1,6 @@
 package pong;
 
+import java.awt.BorderLayout;
 import pong.configuration.GameKeyBindings;
 import pong.uiElements.GamePanel;
 import pong.uiElements.GameWindow;
@@ -10,27 +11,27 @@ import javax.swing.SwingUtilities;
  * using an object oriented approach
  *
  * @author d.peters
- * @version 2.1
- * @since 11.10.2016
+ * @version 2.5
+ * @since 12.10.2016
  */
 public class Main {
 
+    private final int dimension = 500;
+    
     /**
      * the game window
      */
-    private final GameWindow window = new GameWindow();
+    private final GameWindow window = new GameWindow(dimension);
 
     /**
      * the drawing panel containing the game loop and objects
      */
-    private final GamePanel panel = new GamePanel();
+    private final GamePanel panel = new GamePanel(dimension);
 
     /**
      * initialize the keybindings of the game
      */
-    GameKeyBindings gameKeyBindings = new GameKeyBindings(
-            window, panel, panel.pl1, panel.pl2
-    );
+    GameKeyBindings gameKeyBindings = new GameKeyBindings(panel, panel.getPlayers());
 
     /**
      * thread which runs the game loop
@@ -47,7 +48,7 @@ public class Main {
      * initializes the JFrame window
      */
     public void initialize() {
-        window.add(panel);
+        window.add(panel, BorderLayout.CENTER);
         window.pack();
         window.setVisible(true);
         panel.setPlaying(true);

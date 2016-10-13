@@ -1,6 +1,7 @@
 package pong.uiElements;
 
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
 import pong.gameObjcects.Ball;
 import pong.gameObjcects.Player;
@@ -8,39 +9,70 @@ import pong.gameObjcects.Player;
 public class GamePanel extends JPanel implements Runnable {
 
     private boolean playing;
+    private int dimension;
     private int victoryCond = 6; // Score required for victoryCond
-    private int gameSpeed = 50;
-    public Player pl1 = new Player(10, 100, 1);
-    public Player pl2 = new Player(225, 100, 2);
-    public Ball ball = new Ball(100, 100);
+    private int gameSpeed = 30; // The lower, the faster the game
+    public Player pl1;
+    public Player pl2;
+    public ArrayList<Player> players = new ArrayList<>();
+    public Ball ball;
 
-    public boolean isPlaying() {
-        return playing;
+    /**
+     * 
+     * @param dim 
+     */
+    public GamePanel(int dim) {
+        initialize(dim);
     }
-
-    public void setPlaying(boolean playing) {
-        this.playing = playing;
+    
+    /**
+     * 
+     * @param dim 
+     */
+    private void initialize(int dim){
+        this.dimension = dim;
+        pl1 = new Player(2 * 5, dimension / 2, 1);
+        pl2 = new Player(dimension - 4 * 5, dimension / 2, 2);
+        players.add(pl1);
+        players.add(pl2);
+        ball = new Ball(dimension / 2, dimension / 2);
     }
 
     /**
      * 
      * @return 
+     */
+    public boolean isPlaying() {
+        return playing;
+    }
+
+    /**
+     * 
+     * @param playing 
+     */
+    public void setPlaying(boolean playing) {
+        this.playing = playing;
+    }
+
+    /**
+     *
+     * @return
      */
     public int getVictoryCond() {
         return victoryCond;
     }
 
     /**
-     * 
-     * @param victoryCond 
+     *
+     * @param victoryCond
      */
     public void setVictoryCond(int victoryCond) {
         this.victoryCond = victoryCond;
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public int getGameSpeed() {
         return gameSpeed;
@@ -48,15 +80,31 @@ public class GamePanel extends JPanel implements Runnable {
 
     /**
      * 
-     * @param gameSpeed 
+     * @return 
+     */
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    /**
+     * 
+     * @param players 
+     */
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
+    
+    /**
+     *
+     * @param gameSpeed
      */
     public void setGameSpeed(int gameSpeed) {
         this.gameSpeed = gameSpeed;
     }
 
     /**
-     * 
-     * @param g 
+     *
+     * @param g
      */
     public void drawBall(Graphics g) {
         g.setColor(Color.black);
@@ -64,8 +112,8 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     /**
-     * 
-     * @param g 
+     *
+     * @param g
      */
     public void drawPlayers(Graphics g) {
         g.fillRect(pl1.getX(), pl1.getY(), pl1.getWidth(), pl1.getHeight());
@@ -73,15 +121,15 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     /**
-     * 
-     * @param g 
+     *
+     * @param g
      */
     public void drawTexts(Graphics g) {
         //Draw scores
         g.drawString("Player 1: " + pl1.getScore(), 25, 10);
-        g.drawString("Player 2: " + pl2.getScore(), 150, 10);
+        g.drawString("Player 2: " + pl2.getScore(), dimension - 100, 10);
         if (!playing) {
-            g.drawString("Game Over", 100, 125);
+            g.drawString("Game Over", dimension / 2 - 20, dimension / 2);
         }
     }
 
@@ -95,7 +143,6 @@ public class GamePanel extends JPanel implements Runnable {
         drawBall(g);
         drawPlayers(g);
         drawTexts(g);
-        repaint();
     }
 
     /**
@@ -121,11 +168,15 @@ public class GamePanel extends JPanel implements Runnable {
             ball.moveVert(this.getHeight());
 
             // Moving players
-            pl1.move(this.getHeight());
-            pl2.move(this.getHeight());
+            pl1.moveVert(this.getHeight());
+            pl2.moveVert(this.getHeight());
+            
+            if (ball.collision(pl1, pl2)){
+                ball.changeVertDir();
+            }
 
             // check if the ball hit the right border
-            if (ball.getX() >= (this.getWidth() - ball.getSize())) {
+            if (ball.getX() > (this.getWidth() - ball.getSize())) {
                 pl1.incrementScore();
             }
 
@@ -139,15 +190,7 @@ public class GamePanel extends JPanel implements Runnable {
                 playing = false;
             }
 
-            // check if pl1 deflected the ball
-            if (pl1.deflectedBall(ball.getX(), ball.getY())) {
-                ball.moveRight(true);
-            }
-
-            // check if pl2 deflected the ball
-            if (pl2.deflectedBall(ball.getX(), ball.getY())) {
-                ball.moveRight(false);
-            }
+            repaint();
         }
     }
 
