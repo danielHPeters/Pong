@@ -5,7 +5,7 @@
  */
 package pong;
 
-import pong.uiElements.GamePanel;
+import pong.uiElements.GameArea;
 
 /**
  *
@@ -14,10 +14,10 @@ import pong.uiElements.GamePanel;
 public class RunGame {
 
     private boolean playing;
-    private int gameSpeed = 30; // The lower, the faster the game
-    private GamePanel game;
+    private int gameSpeed = 18; // The lower, the faster the game
+    private final GameArea game;
 
-    public RunGame(GamePanel game) {
+    public RunGame(GameArea game) {
         this.game = game;
         this.playing = true;
     }
@@ -54,7 +54,7 @@ public class RunGame {
         this.gameSpeed = gameSpeed;
     }
 
-    public void runGameLoop() {
+    public void runLoop() {
         Thread loop = new Thread() {
             @Override
             public void run() {
@@ -66,18 +66,15 @@ public class RunGame {
 
     public void gameLoop() {
         while (playing && !game.isGameOver()) {
-            /**
-             * Delay the game loop (otherwise the game will instantly end) the
-             * duration of the delay also determines the speed of the game
-             *
-             */
+            // Move game objects repaint
             game.update();
+            game.repaint();
+            // Delay loop to avoid instant game over
             try {
                 Thread.sleep(gameSpeed);
             } catch (InterruptedException ex) {
 
             }
-            game.repaint();
         }
     }
 }

@@ -2,7 +2,7 @@ package pong;
 
 import java.awt.BorderLayout;
 import pong.configuration.GameKeyBindings;
-import pong.uiElements.GamePanel;
+import pong.uiElements.GameArea;
 import pong.uiElements.GameWindow;
 import javax.swing.SwingUtilities;
 
@@ -18,6 +18,9 @@ public class Main {
 
     private final int dimension = 500;
     
+    /**
+     * the game loop
+     */
     private RunGame loop;
 
     /**
@@ -28,7 +31,7 @@ public class Main {
     /**
      * the drawing panel containing the game loop and objects
      */
-    private final GamePanel panel = new GamePanel(dimension);
+    private final GameArea panel = new GameArea(dimension);
 
     /**
      * initialize the keybindings of the game
@@ -49,6 +52,11 @@ public class Main {
         window.pack();
         window.setVisible(true);
     }
+    
+    public void start(){
+        loop = new RunGame(panel);
+        loop.runLoop();
+    }
 
     /**
      *
@@ -58,8 +66,7 @@ public class Main {
         SwingUtilities.invokeLater(() -> {
             Main pong = new Main();
             pong.initialize();
-            pong.loop = new RunGame(pong.panel);
-            pong.loop.runGameLoop();
+            pong.start();
         });
     }
 }

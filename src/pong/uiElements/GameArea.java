@@ -6,7 +6,7 @@ import javax.swing.*;
 import pong.gameObjcects.Ball;
 import pong.gameObjcects.Player;
 
-public class GamePanel extends JPanel {
+public class GameArea extends JPanel {
 
     private boolean gameOver = false;
     private int dimension;
@@ -19,7 +19,7 @@ public class GamePanel extends JPanel {
      *
      * @param dim
      */
-    public GamePanel(int dim) {
+    public GameArea(int dim) {
         initialize(dim);
     }
 
@@ -69,8 +69,8 @@ public class GamePanel extends JPanel {
      */
     private void initialize(int dim) {
         this.dimension = dim;
-        pl1 = new Player(2 * 5, dimension / 2, 1);
-        pl2 = new Player(dimension - 4 * 5, dimension / 2, 2);
+        pl1 = new Player(2 * 5, dimension / 2);
+        pl2 = new Player(dimension - 4 * 5, dimension / 2);
         players.add(pl1);
         players.add(pl2);
         ball = new Ball(dimension / 2, dimension / 2);

@@ -8,11 +8,6 @@ package pong.gameObjcects;
 public class Player extends MovableObject {
 
     /**
-     * ID of the Player (set with constructor)
-     */
-    private final int playerId;
-
-    /**
      * Counter for player score
      */
     private int score = 0;
@@ -22,9 +17,8 @@ public class Player extends MovableObject {
      *
      * @param posX X position on gamearea
      * @param posY Y position on gamearea
-     * @param playerId
      */
-    public Player(int posX, int posY, int playerId) {
+    public Player(int posX, int posY) {
         this.UP = false;
         this.DOWN = false;
         this.x = posX;
@@ -32,7 +26,6 @@ public class Player extends MovableObject {
         this.speed = 10;
         this.width = 5;
         this.height = 40;
-        this.playerId = playerId;
     }
 
     /**
