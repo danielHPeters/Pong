@@ -23,6 +23,41 @@ public class MovableObject extends GameObject implements Moveable {
     public int getSpeed() {
         return speed;
     }
+    
+    /**
+     * Setter for UP
+     *
+     * @param UP changes UP if the corresponding Key was pressed or released
+     */
+    public void setUP(boolean UP) {
+        this.UP = UP;
+    }
+
+    /**
+     * Setter for DOWN
+     *
+     * @param DOWN changes UP if the corresponding Key was pressed or released
+     */
+    public void setDOWN(boolean DOWN) {
+        this.DOWN = DOWN;
+    }
+
+    /**
+     * 
+     * @param LEFT 
+     */
+    public void setLEFT(boolean LEFT) {
+        this.LEFT = LEFT;
+    }
+
+    /**
+     * 
+     * @param RIGHT 
+     */
+    public void setRIGHT(boolean RIGHT) {
+        this.RIGHT = RIGHT;
+    }
+    
 
     /**
      * 

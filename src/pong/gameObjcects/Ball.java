@@ -5,6 +5,8 @@
  */
 package pong.gameObjcects;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author d.peters
@@ -37,6 +39,11 @@ public class Ball extends MovableObject {
     public void setSize(int size) {
         this.width = size;
         this.height = size;
+    }
+    
+    public void move(int panelWidth, int panelHeight){
+        moveHor(panelWidth);
+        moveVert(panelHeight);
     }
 
     /**
@@ -83,11 +90,12 @@ public class Ball extends MovableObject {
         }
     }
     
-    public boolean collision(Player pl1, Player pl2){
+    public boolean collision(ArrayList<Player> players){
         boolean coll = false;
-        if (pl1.getBounds().intersects(this.getBounds()) ||
-                pl2.getBounds().intersects(this.getBounds())){
-            coll = true;
+        for (Player pl : players){
+            if (pl.getBounds().intersects(this.getBounds())){
+                coll = true;
+            }
         }
         return coll;
     }

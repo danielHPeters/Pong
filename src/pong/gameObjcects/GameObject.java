@@ -15,6 +15,38 @@ abstract class GameObject implements Collideable{
     int width, height;
 
     protected int x, y;
+    
+    /**
+     *
+     * @return
+     */
+    public int getWidth() {
+        return width;
+    }
+
+    /**
+     *
+     * @param width
+     */
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getHeight() {
+        return height;
+    }
+
+    /**
+     *
+     * @param height
+     */
+    public void setHeight(int height) {
+        this.height = height;
+    }
 
     /**
      * 

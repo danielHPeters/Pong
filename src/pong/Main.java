@@ -18,6 +18,8 @@ public class Main {
 
     private final int dimension = 500;
     
+    private RunGame loop;
+
     /**
      * the game window
      */
@@ -34,11 +36,6 @@ public class Main {
     GameKeyBindings gameKeyBindings = new GameKeyBindings(panel, panel.getPlayers());
 
     /**
-     * thread which runs the game loop
-     */
-    Thread gameLoop;
-
-    /**
      * This is the default constructor It initializes all the components
      */
     public Main() {
@@ -51,9 +48,6 @@ public class Main {
         window.add(panel, BorderLayout.CENTER);
         window.pack();
         window.setVisible(true);
-        panel.setPlaying(true);
-        gameLoop = new Thread(panel);
-        gameLoop.start();
     }
 
     /**
@@ -64,6 +58,8 @@ public class Main {
         SwingUtilities.invokeLater(() -> {
             Main pong = new Main();
             pong.initialize();
+            pong.loop = new RunGame(pong.panel);
+            pong.loop.runGameLoop();
         });
     }
 }

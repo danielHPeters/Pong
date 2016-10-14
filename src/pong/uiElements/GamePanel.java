@@ -6,54 +6,31 @@ import javax.swing.*;
 import pong.gameObjcects.Ball;
 import pong.gameObjcects.Player;
 
-public class GamePanel extends JPanel implements Runnable {
+public class GamePanel extends JPanel {
 
-    private boolean playing;
+    private boolean gameOver = false;
     private int dimension;
     private int victoryCond = 6; // Score required for victoryCond
-    private int gameSpeed = 30; // The lower, the faster the game
-    public Player pl1;
-    public Player pl2;
+    private Player pl1, pl2;
     public ArrayList<Player> players = new ArrayList<>();
     public Ball ball;
 
     /**
-     * 
-     * @param dim 
+     *
+     * @param dim
      */
     public GamePanel(int dim) {
         initialize(dim);
     }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
     
-    /**
-     * 
-     * @param dim 
-     */
-    private void initialize(int dim){
-        this.dimension = dim;
-        pl1 = new Player(2 * 5, dimension / 2, 1);
-        pl2 = new Player(dimension - 4 * 5, dimension / 2, 2);
-        players.add(pl1);
-        players.add(pl2);
-        ball = new Ball(dimension / 2, dimension / 2);
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    public boolean isPlaying() {
-        return playing;
-    }
-
-    /**
-     * 
-     * @param playing 
-     */
-    public void setPlaying(boolean playing) {
-        this.playing = playing;
-    }
-
     /**
      *
      * @return
@@ -74,21 +51,13 @@ public class GamePanel extends JPanel implements Runnable {
      *
      * @return
      */
-    public int getGameSpeed() {
-        return gameSpeed;
-    }
-
-    /**
-     * 
-     * @return 
-     */
     public ArrayList<Player> getPlayers() {
         return players;
     }
 
     /**
-     * 
-     * @param players 
+     *
+     * @param players
      */
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
@@ -96,10 +65,15 @@ public class GamePanel extends JPanel implements Runnable {
     
     /**
      *
-     * @param gameSpeed
+     * @param dim
      */
-    public void setGameSpeed(int gameSpeed) {
-        this.gameSpeed = gameSpeed;
+    private void initialize(int dim) {
+        this.dimension = dim;
+        pl1 = new Player(2 * 5, dimension / 2, 1);
+        pl2 = new Player(dimension - 4 * 5, dimension / 2, 2);
+        players.add(pl1);
+        players.add(pl2);
+        ball = new Ball(dimension / 2, dimension / 2);
     }
 
     /**
@@ -116,8 +90,9 @@ public class GamePanel extends JPanel implements Runnable {
      * @param g
      */
     public void drawPlayers(Graphics g) {
-        g.fillRect(pl1.getX(), pl1.getY(), pl1.getWidth(), pl1.getHeight());
-        g.fillRect(pl2.getX(), pl2.getY(), pl2.getWidth(), pl2.getHeight());
+        players.forEach((pl) -> {
+            g.fillRect(pl.getX(), pl.getY(), pl.getWidth(), pl.getHeight());
+        });
     }
 
     /**
@@ -126,9 +101,9 @@ public class GamePanel extends JPanel implements Runnable {
      */
     public void drawTexts(Graphics g) {
         //Draw scores
-        g.drawString("Player 1: " + pl1.getScore(), 25, 10);
-        g.drawString("Player 2: " + pl2.getScore(), dimension - 100, 10);
-        if (!playing) {
+        g.drawString("Player 1: " + players.get(0).getScore(), 25, 10);
+        g.drawString("Player 2: " + players.get(1).getScore(), dimension - 100, 10);
+        if (gameOver) {
             g.drawString("Game Over", dimension / 2 - 20, dimension / 2);
         }
     }
@@ -148,57 +123,35 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * the game loop which changes the objects according to events
      */
-    public void gameLoop() {
-        while (playing) {
-            /**
-             * Delay the game loop (otherwise the game will instantly end) the
-             * duration of the delay also determines the speed of the game
-             *
-             */
-            try {
-                Thread.sleep(gameSpeed);
-            } catch (InterruptedException ex) {
+    public void update() {
 
-            }
+        // Move the ball horizontally
+        ball.move(this.getWidth(), this.getHeight());
+        // Moving players
+        players.forEach((pl) -> {
+            pl.moveVert(this.getHeight());
+        });
 
-            // Move the ball horizontally
-            ball.moveHor(this.getWidth());
-
-            // Move the ball vertically
-            ball.moveVert(this.getHeight());
-
-            // Moving players
-            pl1.moveVert(this.getHeight());
-            pl2.moveVert(this.getHeight());
-            
-            if (ball.collision(pl1, pl2)){
-                ball.changeVertDir();
-            }
-
-            // check if the ball hit the right border
-            if (ball.getX() > (this.getWidth() - ball.getSize())) {
-                pl1.incrementScore();
-            }
-
-            // check if the ball hit the left border
-            if (ball.getX() == 0) {
-                pl2.incrementScore();
-            }
-
-            // if a player reaches the victoryCond condition, the game will end
-            if (pl1.hasWon(victoryCond) || pl2.hasWon(victoryCond)) {
-                playing = false;
-            }
-
-            repaint();
+        // Check for collision with players
+        if (ball.collision(players)) {
+            ball.changeVertDir();
         }
-    }
 
-    /**
-     * Start the game loop
-     */
-    @Override
-    public void run() {
-        gameLoop();
+        // check if the ball hit the right border
+        if (ball.getX() > (this.getWidth() - ball.getSize())) {
+            players.get(0).incrementScore();
+        }
+
+        // check if the ball hit the left border
+        if (ball.getX() == 0) {
+            players.get(1).incrementScore();
+        }
+
+        // if a player reaches the victoryCond condition, the game will end
+        players.forEach((pl) -> {
+            if (pl.hasWon(victoryCond)) {
+                gameOver = true;
+            }
+        });
     }
 }

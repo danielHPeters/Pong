@@ -2,8 +2,6 @@ package interfaces;
 
 import java.awt.Rectangle;
 
-
-
 /**
  *
  * @author d.peters

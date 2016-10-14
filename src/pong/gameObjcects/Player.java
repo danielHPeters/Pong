@@ -36,56 +36,6 @@ public class Player extends MovableObject {
     }
 
     /**
-     *
-     * @return
-     */
-    public int getWidth() {
-        return width;
-    }
-
-    /**
-     *
-     * @param width
-     */
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getHeight() {
-        return height;
-    }
-
-    /**
-     *
-     * @param height
-     */
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    /**
-     * Setter for UP
-     *
-     * @param UP changes UP if the corresponding Key was pressed or released
-     */
-    public void setUP(boolean UP) {
-        this.UP = UP;
-    }
-
-    /**
-     * Setter for DOWN
-     *
-     * @param DOWN changes UP if the corresponding Key was pressed or released
-     */
-    public void setDOWN(boolean DOWN) {
-        this.DOWN = DOWN;
-    }
-
-    /**
      * Getter for the flipper/player score
      *
      * @return the current score
