@@ -8,19 +8,19 @@ package pong.gameObjcects;
 public class Player extends MovableObject {
 
     /**
-     * Counter for player score
+     * counter for player score
      */
     private int score = 0;
 
     /**
-     * Initialize the Paddle with XY position, width and height
-     *
+     * default constructor.
+     * initializes the players x and y position as well ad the  width and height
      * @param posX X position on gamearea
      * @param posY Y position on gamearea
      */
     public Player(int posX, int posY) {
-        this.UP = false;
-        this.DOWN = false;
+        this.up = false;
+        this.down = false;
         this.x = posX;
         this.y = posY;
         this.speed = 10;
@@ -29,7 +29,7 @@ public class Player extends MovableObject {
     }
 
     /**
-     * Getter for the flipper/player score
+     * getter for the player score
      *
      * @return the current score
      */
@@ -55,16 +55,15 @@ public class Player extends MovableObject {
 
     /**
      * Check for keys pressed and moveVert according to key (Workaround for
-     * input lag)
-     *
+     * input lag)d
      * @param panelHeight Height of the Panel to see if out of bounds when
      * moving down
      */
     public void moveVert(int panelHeight) {
-        if (this.UP && this.y > 0) {
+        if (this.up && this.y > 0) {
             this.moveUp();
         }
-        if (this.DOWN && this.y < panelHeight - this.height) {
+        if (this.down && this.y < panelHeight - this.height) {
             this.moveDown();
         }
     }

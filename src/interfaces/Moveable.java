@@ -1,7 +1,7 @@
 package interfaces;
 
 /**
- *
+ * interface for movable objects
  * @author d.peters
  */
 public interface Moveable {

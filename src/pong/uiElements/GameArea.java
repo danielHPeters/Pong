@@ -16,56 +16,64 @@ public class GameArea extends JPanel {
     public Ball ball;
 
     /**
-     *
+     * the default constructor
      * @param dim
      */
     public GameArea(int dim) {
         initialize(dim);
     }
 
+    /**
+     * getter for gameOver boolean (check if the game stopped)
+     * @return boolean which tells if the game is over
+     */
     public boolean isGameOver() {
         return gameOver;
     }
 
+    /**
+     * setter for gameOver boolean
+     * @param gameOver new game state
+     */
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
     }
-    
+
     /**
-     *
-     * @return
+     * getter for the victory condition
+     * @return the current victory condition
      */
     public int getVictoryCond() {
         return victoryCond;
     }
 
     /**
-     *
-     * @param victoryCond
+     * setter for the victory condition
+     * @param victoryCond new victory condition
      */
     public void setVictoryCond(int victoryCond) {
         this.victoryCond = victoryCond;
     }
 
     /**
-     *
-     * @return
+     * getter for the ArrayList with all players
+     * @return the the players ArrayList
      */
     public ArrayList<Player> getPlayers() {
         return players;
     }
 
     /**
-     *
-     * @param players
+     * setter for the ArrayList with all players
+     * @param players new player ArrayList
      */
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
-    
+
     /**
-     *
-     * @param dim
+     * initializes the dimensions of this object and adds all the game objects
+     * @param dim the initial game dimensions
      */
     private void initialize(int dim) {
         this.dimension = dim;
@@ -77,8 +85,8 @@ public class GameArea extends JPanel {
     }
 
     /**
-     *
-     * @param g
+     * draws the ball object
+     * @param g the graphics object of paintcomponent method
      */
     public void drawBall(Graphics g) {
         g.setColor(Color.black);
@@ -86,8 +94,8 @@ public class GameArea extends JPanel {
     }
 
     /**
-     *
-     * @param g
+     * draws all players
+     * @param g the graphics object of paintcomponent method
      */
     public void drawPlayers(Graphics g) {
         players.forEach((pl) -> {
@@ -96,8 +104,8 @@ public class GameArea extends JPanel {
     }
 
     /**
-     *
-     * @param g
+     * draws all texts on the GameArea
+     * @param g the graphics object of paintcomponent method
      */
     public void drawTexts(Graphics g) {
         //Draw scores
@@ -110,7 +118,6 @@ public class GameArea extends JPanel {
 
     /**
      * Main drawing method
-     *
      */
     @Override
     public void paintComponent(Graphics g) {
@@ -121,21 +128,24 @@ public class GameArea extends JPanel {
     }
 
     /**
-     * the game loop which changes the objects according to events
+     * this method updates all the components on the game area
      */
     public void update() {
-
-        // Move the ball horizontally
-        ball.move(this.getWidth(), this.getHeight());
-        // Moving players
         players.forEach((pl) -> {
+            // move player
             pl.moveVert(this.getHeight());
+            // check for collision with ball
+            if (ball.collision(pl)) {
+                ball.changeHorDir();
+            }
+            // if a player reaches the victoryCond condition, the game will end
+            if (pl.hasWon(victoryCond)) {
+                gameOver = true;
+            }
         });
-
-        // Check for collision with players
-        if (ball.collision(players)) {
-            ball.changeVertDir();
-        }
+        
+        // move the ball
+        ball.move(this.getWidth(), this.getHeight());
 
         // check if the ball hit the right border
         if (ball.getX() > (this.getWidth() - ball.getSize())) {
@@ -146,12 +156,5 @@ public class GameArea extends JPanel {
         if (ball.getX() == 0) {
             players.get(1).incrementScore();
         }
-
-        // if a player reaches the victoryCond condition, the game will end
-        players.forEach((pl) -> {
-            if (pl.hasWon(victoryCond)) {
-                gameOver = true;
-            }
-        });
     }
 }

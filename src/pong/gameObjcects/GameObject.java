@@ -4,7 +4,7 @@ import interfaces.Collideable;
 import java.awt.Rectangle;
 
 /**
- *
+ * abstract base class for game objects.
  * @author d.peters
  */
 abstract class GameObject implements Collideable{
@@ -14,67 +14,70 @@ abstract class GameObject implements Collideable{
      */
     int width, height;
 
+    /**
+     * Position markers of the object
+     */
     protected int x, y;
     
     /**
-     *
-     * @return
+     * getter for object width
+     * @return current width
      */
     public int getWidth() {
         return width;
     }
 
     /**
-     *
-     * @param width
+     * setter for object width
+     * @param width new width
      */
     public void setWidth(int width) {
         this.width = width;
     }
 
     /**
-     *
-     * @return
+     * getter for object height
+     * @return current object height
      */
     public int getHeight() {
         return height;
     }
 
     /**
-     *
-     * @param height
+     * setter for height of object
+     * @param height new height
      */
     public void setHeight(int height) {
         this.height = height;
     }
 
     /**
-     * 
-     * @return 
+     * getter for x position
+     * @return current x position of the object
      */
     public int getX() {
         return x;
     }
 
     /**
-     * 
-     * @param x 
+     * setter for x position
+     * @param x new x position
      */
     public void setX(int x) {
         this.x = x;
     }
 
     /**
-     * 
-     * @return 
+     * getter for y position
+     * @return the current y position of the object
      */
     public int getY() {
         return y;
     }
 
     /**
-     * 
-     * @param y 
+     * setter for y positon
+     * @param y new y position
      */
     public void setY(int y) {
         this.y = y;
@@ -83,8 +86,8 @@ abstract class GameObject implements Collideable{
     
 
     /**
-     * 
-     * @return 
+     * returns bounding rectangle for collision detection
+     * @return bounding rectangle of the object
      */
     @Override
     public Rectangle getBounds() {
@@ -92,7 +95,7 @@ abstract class GameObject implements Collideable{
     }
 
     /**
-     * 
+     * currently unused collision handler
      */
     @Override
     public void collisionHandler() {

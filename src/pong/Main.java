@@ -11,7 +11,7 @@ import javax.swing.SwingUtilities;
  * using an object oriented approach
  *
  * @author d.peters
- * @version 2.5
+ * @version 2.6
  * @since 12.10.2016
  */
 public class Main {
@@ -39,7 +39,7 @@ public class Main {
     GameKeyBindings gameKeyBindings = new GameKeyBindings(panel, panel.getPlayers());
 
     /**
-     * This is the default constructor It initializes all the components
+     * This is the default constructor
      */
     public Main() {
     }
@@ -53,13 +53,16 @@ public class Main {
         window.setVisible(true);
     }
     
+    /**
+     * starts the game loop
+     */
     public void start(){
         loop = new RunGame(panel);
         loop.runLoop();
     }
 
     /**
-     *
+     * starts the event dispatch thread and starts the game
      * @param args the command line arguments
      */
     public static void main(String[] args) {

@@ -3,17 +3,10 @@ package interfaces;
 import java.awt.Rectangle;
 
 /**
- *
+ * interface for objects which can collide with other objects
  * @author d.peters
  */
 public interface Collideable {
-    /**
-     * 
-     * @return 
-     */
     public Rectangle getBounds();
-    /**
-     * 
-     */
     public void collisionHandler();
 }
