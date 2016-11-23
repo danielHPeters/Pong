@@ -8,11 +8,11 @@ import pong.gameObjcects.Player;
 
 public class GameArea extends JPanel {
 
-    private boolean gameOver = false;
-    private int dimension;
-    private int victoryCond = 6; // Score required for victoryCond
-    private Player pl1, pl2;
-    public ArrayList<Player> players = new ArrayList<>();
+    private boolean gameOver;
+    private final int dimension;
+    private int victoryCond; // Score required for victoryCond
+    private final Player pl1, pl2;
+    public ArrayList<Player> players;
     public Ball ball;
 
     /**
@@ -20,7 +20,15 @@ public class GameArea extends JPanel {
      * @param dim
      */
     public GameArea(int dim) {
-        initialize(dim);
+        this.victoryCond = 6;
+        this.gameOver = false;
+        this.dimension = dim;
+        this.pl1 = new Player(2 * 5, dimension / 2);
+        this.pl2 = new Player(dimension - 4 * 5, dimension / 2);
+        this.players  = new ArrayList<>();
+        this.players.add(pl1);
+        this.players.add(pl2);
+        this.ball = new Ball(dimension / 2, dimension / 2);
     }
 
     /**
@@ -29,14 +37,6 @@ public class GameArea extends JPanel {
      */
     public boolean isGameOver() {
         return gameOver;
-    }
-
-    /**
-     * setter for gameOver boolean
-     * @param gameOver new game state
-     */
-    public void setGameOver(boolean gameOver) {
-        this.gameOver = gameOver;
     }
 
     /**
@@ -72,25 +72,15 @@ public class GameArea extends JPanel {
     }
 
     /**
-     * initializes the dimensions of this object and adds all the game objects
-     * @param dim the initial game dimensions
-     */
-    private void initialize(int dim) {
-        this.dimension = dim;
-        pl1 = new Player(2 * 5, dimension / 2);
-        pl2 = new Player(dimension - 4 * 5, dimension / 2);
-        players.add(pl1);
-        players.add(pl2);
-        ball = new Ball(dimension / 2, dimension / 2);
-    }
-
-    /**
      * draws the ball object
      * @param g the graphics object of paintcomponent method
      */
     public void drawBall(Graphics g) {
         g.setColor(Color.black);
-        g.fillOval(ball.getX(), ball.getY(), ball.getSize(), ball.getSize());
+        g.fillOval(
+                this.ball.getX(), this.ball.getY(),
+                this.ball.getSize(), this.ball.getSize()
+        );
     }
 
     /**
@@ -131,30 +121,30 @@ public class GameArea extends JPanel {
      * this method updates all the components on the game area
      */
     public void update() {
-        players.forEach((pl) -> {
+        this.players.forEach((pl) -> {
             // move player
             pl.moveVert(this.getHeight());
             // check for collision with ball
-            if (ball.collision(pl)) {
-                ball.changeHorDir();
+            if (this.ball.collision(pl)) {
+                this.ball.changeHorDir();
             }
             // if a player reaches the victoryCond condition, the game will end
-            if (pl.hasWon(victoryCond)) {
-                gameOver = true;
+            if (pl.hasWon(this.victoryCond)) {
+                this.gameOver = true;
             }
         });
         
         // move the ball
-        ball.move(this.getWidth(), this.getHeight());
+        this.ball.move(this.getWidth(), this.getHeight());
 
         // check if the ball hit the right border
-        if (ball.getX() > (this.getWidth() - ball.getSize())) {
-            players.get(0).incrementScore();
+        if (this.ball.getX() > (this.getWidth() - this.ball.getSize())) {
+            this.players.get(0).incrementScore();
         }
 
         // check if the ball hit the left border
-        if (ball.getX() == 0) {
-            players.get(1).incrementScore();
+        if (this.ball.getX() == 0) {
+            this.players.get(1).incrementScore();
         }
     }
 }
