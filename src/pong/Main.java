@@ -16,7 +16,7 @@ import javax.swing.SwingUtilities;
  */
 public class Main {
 
-    private final int dimension = 500;
+    private int dimension;
 
     /**
      * the game loop
@@ -51,6 +51,7 @@ public class Main {
         this.window.pack();
         this.loop = new RunGame(panel);
         this.executer = new Thread(this.loop);
+        this.dimension = 500;
     }
 
     /**
