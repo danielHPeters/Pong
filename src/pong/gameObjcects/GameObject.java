@@ -93,12 +93,4 @@ abstract class GameObject implements Collideable{
     public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }
-
-    /**
-     * currently unused collision handler
-     */
-    @Override
-    public void collisionHandler() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

@@ -1,5 +1,7 @@
 package pong.gameObjcects;
 
+import interfaces.Collideable;
+
 /**
  * Definition of the player object
  *
@@ -80,5 +82,25 @@ public class Player extends MovableObject {
             isWinner = true;
         }
         return isWinner;
+    }
+
+    @Override
+    public void move() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void move(int panelWidth, int panelHeight) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean collision(Collideable collObj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void collisionHandler() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

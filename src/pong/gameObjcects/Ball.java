@@ -1,13 +1,17 @@
 package pong.gameObjcects;
 
+import interfaces.Collideable;
+
 /**
  * this class describes a ball object, its movement functions etc.
+ *
  * @author d.peters
  */
 public class Ball extends MovableObject {
-    
+
     /**
      * Default constructor setting position, speed, width, height
+     *
      * @param xPos initial x position
      * @param yPos initial y position
      */
@@ -23,6 +27,7 @@ public class Ball extends MovableObject {
 
     /**
      * getter for the site of ball
+     *
      * @return current size
      */
     public int getSize() {
@@ -31,18 +36,26 @@ public class Ball extends MovableObject {
 
     /**
      * setter for the site of ball (width and height)
+     *
      * @param size new size
      */
     public void setSize(int size) {
         this.width = size;
         this.height = size;
     }
+    
+    @Override
+    public void move() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     /**
      * move the ball
+     *
      * @param panelWidth width of the panel
      * @param panelHeight height of the panel
      */
+    @Override
     public void move(int panelWidth, int panelHeight) {
         moveHor(panelWidth);
         moveVert(panelHeight);
@@ -50,9 +63,10 @@ public class Ball extends MovableObject {
 
     /**
      * move in the horizontal direction
+     *
      * @param panelWidth width of the game area
      */
-    public void moveHor(int panelWidth) {
+    private void moveHor(int panelWidth) {
         if (this.right) {
             moveRight();
             if (this.x >= (panelWidth - this.getSize())) {
@@ -68,9 +82,10 @@ public class Ball extends MovableObject {
 
     /**
      * Move in the vertical direcction
+     *
      * @param panelHeight height of the game area (used for moving down)
      */
-    public void moveVert(int panelHeight) {
+    private void moveVert(int panelHeight) {
         if (this.up) {
             moveUp();
             if (this.y <= 0) {
@@ -96,15 +111,22 @@ public class Ball extends MovableObject {
     }
 
     /**
-     * checks for collision with player objects
-     * @param pl player object
-     * @return boolean which tells if there was a collision with the player object
+     * checks for collision with other objects
+     *
+     * @param collObj collideable Object
+     * @return boolean which tells if there was a collision with an object
      */
-    public boolean collision(Player pl) {
+    @Override
+    public boolean collision(Collideable collObj) {
         boolean coll = false;
-        if (pl.getBounds().intersects(this.getBounds())) {
+        if (collObj.getBounds().intersects(this.getBounds())) {
             coll = true;
         }
         return coll;
+    }
+
+    @Override
+    public void collisionHandler() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
