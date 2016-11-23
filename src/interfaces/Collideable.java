@@ -8,5 +8,6 @@ import java.awt.Rectangle;
  */
 public interface Collideable {
     public Rectangle getBounds();
+    public boolean collision(Collideable collObj);
     public void collisionHandler();
 }
