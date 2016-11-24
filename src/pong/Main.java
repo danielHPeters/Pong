@@ -1,10 +1,14 @@
 package pong;
 
 import java.awt.BorderLayout;
-import pong.configuration.GameKeyBindings;
-import pong.uiElements.GameArea;
+import java.util.ArrayList;
+import pong.configuration.KeyBindings;
+import pong.uiElements.Painter;
 import pong.uiElements.GameWindow;
 import javax.swing.SwingUtilities;
+import pong.configuration.Actions;
+import pong.gameObjcects.Ball;
+import pong.gameObjcects.Player;
 
 /**
  * Starter class of the pong game this is a simple remake of the classic pong
@@ -16,7 +20,7 @@ import javax.swing.SwingUtilities;
  */
 public class Main {
 
-    private int dimension;
+    private final int dimension;
 
     /**
      * the game loop
@@ -24,6 +28,8 @@ public class Main {
     private final RunGame loop;
 
     private final Thread executer;
+    
+    private final GameLogic logic;
 
     /**
      * the game window
@@ -31,27 +37,43 @@ public class Main {
     private final GameWindow window;
 
     /**
-     * the drawing panel containing the game loop and objects
+     * the drawing painter containing the game loop and objects
      */
-    private final GameArea panel;
+    private final Painter painter;
 
     /**
      * initialize the keybindings of the game
      */
-    GameKeyBindings gameKeyBindings;
+    private final KeyBindings keyBindings;
+
+    private final Actions actions;
+
+    private final Ball ball;
+
+    private final Player pl1, pl2;
+
+    public ArrayList<Player> players;
 
     /**
      * This is the default constructor
      */
     public Main() {
-        this.window = new GameWindow(dimension);
-        this.panel = new GameArea(dimension);
-        this.gameKeyBindings = new GameKeyBindings(panel, panel.getPlayers());
-        this.window.add(panel, BorderLayout.CENTER);
-        this.window.pack();
-        this.loop = new RunGame(panel);
-        this.executer = new Thread(this.loop);
         this.dimension = 500;
+        this.pl1 = new Player(2 * 5, dimension / 2);
+        this.pl2 = new Player(dimension - 4 * 5, dimension / 2);
+        this.players = new ArrayList<>();
+        this.players.add(pl1);
+        this.players.add(pl2);
+        this.ball = new Ball(dimension / 2, dimension / 2);
+        this.window = new GameWindow(dimension);
+        this.painter = new Painter(dimension, players, ball);
+        this.actions = new Actions();
+        this.keyBindings = new KeyBindings(painter, players, actions);
+        this.window.add(painter, BorderLayout.CENTER);
+        this.window.pack();
+        this.logic = new GameLogic(players, ball, painter);
+        this.loop = new RunGame(painter, logic);
+        this.executer = new Thread(this.loop);
     }
 
     /**
