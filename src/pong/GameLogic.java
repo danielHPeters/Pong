@@ -15,19 +15,19 @@ import pong.uiElements.Painter;
  * @author d.peters
  */
 public class GameLogic {
+
     private final int victoryCond; // Score required for victoryCond
     private final ArrayList<Player> players;
     private final Ball ball;
     private final Painter painter;
-    
-    
-    public GameLogic(ArrayList<Player> players, Ball ball, Painter painter){
+
+    public GameLogic(ArrayList<Player> players, Ball ball, Painter painter) {
         this.players = players;
         this.ball = ball;
         this.painter = painter;
         this.victoryCond = 6;
     }
-    
+
     /**
      * this method updates all the components on the painter area
      */
@@ -44,7 +44,7 @@ public class GameLogic {
                 painter.setGameOver(true);
             }
         });
-        
+
         // move the ball
         this.ball.move(painter.getWidth(), painter.getHeight());
 

@@ -52,6 +52,5 @@ public class Settings {
     public void setObjectsVelocity(int objectsVelocity) {
         this.objectsVelocity = objectsVelocity;
     }
-    
-    
+
 }

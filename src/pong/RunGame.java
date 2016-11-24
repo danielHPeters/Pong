@@ -3,10 +3,12 @@ package pong;
 import pong.uiElements.Painter;
 
 /**
- * this class contains the painter loop, which controls painter speed, framerate etc.
+ * this class contains the painter loop, which controls painter speed, framerate
+ * etc.
+ *
  * @author d.peters
  */
-public class RunGame implements Runnable{
+public class RunGame implements Runnable {
 
     private boolean playing;
     private int gameSpeed; // The lower, the faster the painter
@@ -14,10 +16,11 @@ public class RunGame implements Runnable{
     private final GameLogic logic;
 
     /**
-     * default constructor which fetches the Painter objecct and sets the painter
- to playing mode
-     * @param game 
-     * @param logic 
+     * default constructor which fetches the Painter objecct and sets the
+     * painter to playing mode
+     *
+     * @param game
+     * @param logic
      */
     public RunGame(Painter game, GameLogic logic) {
         this.painter = game;
@@ -27,6 +30,7 @@ public class RunGame implements Runnable{
 
     /**
      * setter for the painter speed / thread delay
+     *
      * @param gameSpeed new painter speed
      */
     public void setGameSpeed(int gameSpeed) {

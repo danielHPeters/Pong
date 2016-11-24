@@ -4,6 +4,7 @@ import interfaces.Moveable;
 
 /**
  * abstract class which defines movable game objects
+ *
  * @author d.peters
  */
 abstract class MovableObject extends GameObject implements Moveable {
@@ -12,7 +13,7 @@ abstract class MovableObject extends GameObject implements Moveable {
      * movement speed of the object
      */
     protected int speed;
-    
+
     /**
      * booleans telling the object to move in certain directions
      */
@@ -20,22 +21,25 @@ abstract class MovableObject extends GameObject implements Moveable {
 
     /**
      * getter for the object speed
+     *
      * @return the current object speed
      */
     public int getSpeed() {
         return speed;
     }
-    
+
     /**
      * setter for the object speed
+     *
      * @param speed new object speed
      */
-    public void setSpeed(int speed){
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
-    
+
     /**
      * setter for up
+     *
      * @param up new status for up
      */
     public void setUp(boolean up) {
@@ -44,6 +48,7 @@ abstract class MovableObject extends GameObject implements Moveable {
 
     /**
      * setter for down
+     *
      * @param down new status for down
      */
     public void setDown(boolean down) {
@@ -52,6 +57,7 @@ abstract class MovableObject extends GameObject implements Moveable {
 
     /**
      * setter for left
+     *
      * @param left new status for left
      */
     public void setLeft(boolean left) {
@@ -60,12 +66,13 @@ abstract class MovableObject extends GameObject implements Moveable {
 
     /**
      * setter for right
+     *
      * @param right new status for right
      */
     public void setRight(boolean right) {
         this.right = right;
     }
-    
+
     /**
      * move object up with its own speed
      */

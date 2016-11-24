@@ -6,20 +6,23 @@ import javax.swing.JFrame;
 
 /**
  * the window of the game which contains the GameArea
+ *
  * @author d.peters
  */
-public class GameWindow extends JFrame{
-    
+public class GameWindow extends JFrame {
+
     /**
      * default constructor
+     *
      * @param dim initial dimension of the window
      */
-    public GameWindow(int dim){
+    public GameWindow(int dim) {
         initWindow(dim);
     }
-    
+
     /**
      * initializes the game window
+     *
      * @param dim initial dimension of the window
      */
     private void initWindow(int dim) {

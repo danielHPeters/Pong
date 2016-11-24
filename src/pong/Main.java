@@ -28,7 +28,7 @@ public class Main {
     private final RunGame loop;
 
     private final Thread executer;
-    
+
     private final GameLogic logic;
 
     /**

@@ -15,10 +15,12 @@ import pong.gameObjcects.Player;
  * @author d.peters
  */
 public class Actions {
+
     /**
      * this method creates the methods for the up actions
+     *
      * @param player the player object
-     * @param needsToMoveUp boolean which is true for key pressed and for for 
+     * @param needsToMoveUp boolean which is true for key pressed and for for
      * key released
      * @return the abstract action
      */
@@ -34,8 +36,9 @@ public class Actions {
 
     /**
      * this method creates the methods for the down actions
+     *
      * @param player the player object
-     * @param needsToMoveDown boolean which is true for key pressed and for for 
+     * @param needsToMoveDown boolean which is true for key pressed and for for
      * key released
      * @return the abstract action
      */
