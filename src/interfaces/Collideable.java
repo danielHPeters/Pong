@@ -9,9 +9,21 @@ import java.awt.Rectangle;
  */
 public interface Collideable {
 
+    /**
+     * 
+     * @return 
+     */
     public Rectangle getBounds();
 
+    /**
+     * 
+     * @param collObj
+     * @return 
+     */
     public boolean collision(Collideable collObj);
 
+    /**
+     * 
+     */
     public void collisionHandler();
 }

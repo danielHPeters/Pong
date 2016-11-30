@@ -7,15 +7,35 @@ package interfaces;
  */
 public interface Moveable {
 
+    /**
+     * 
+     */
     public void move();
 
-    public void move(int panelWidth, int panelHeight);
+    /**
+     * 
+     * @param width
+     * @param height 
+     */
+    public void move(int width, int height);
 
+    /**
+     * 
+     */
     public void moveUp();
 
+    /**
+     * 
+     */
     public void moveDown();
 
+    /**
+     * 
+     */
     public void moveLeft();
 
+    /**
+     * 
+     */
     public void moveRight();
 }

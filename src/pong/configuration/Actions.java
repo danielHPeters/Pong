@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pong.configuration;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import pong.gameObjcects.Player;
+import pong.uiElements.GameWindow;
 
 /**
  *
@@ -43,12 +39,27 @@ public class Actions {
      * @return the abstract action
      */
     public Action downAction(Player player, boolean needsToMoveDown) {
+
         Action downAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 player.setDown(needsToMoveDown);
             }
         };
+
         return downAction;
     }
+    
+    public Action escAction(GameWindow window, Thread gameThread){
+
+        Action esc = new AbstractAction(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                window.dispose();
+            }
+        };
+        
+        return esc;
+    }
+    
 }

@@ -1,5 +1,7 @@
 package pong;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pong.uiElements.Painter;
 
 /**
@@ -11,21 +13,31 @@ import pong.uiElements.Painter;
 public class RunGame implements Runnable {
 
     private boolean playing;
+
+    private boolean paused;
+
     private int gameSpeed; // The lower, the faster the painter
+
     private final Painter painter;
+
     private final GameLogic logic;
 
     /**
      * default constructor which fetches the Painter objecct and sets the
      * painter to playing mode
      *
-     * @param game
+     * @param painter
      * @param logic
      */
-    public RunGame(Painter game, GameLogic logic) {
-        this.painter = game;
+    public RunGame(Painter painter, GameLogic logic) {
+        this.painter = painter;
         this.logic = logic;
         this.gameSpeed = 18;
+        this.paused = false;
+    }
+
+    public void setPaused(boolean paused) {
+        this.paused = paused;
     }
 
     /**
@@ -39,17 +51,23 @@ public class RunGame implements Runnable {
 
     @Override
     public void run() {
-        this.playing = true;
-        while (playing && !painter.isGameOver()) {
-            // Move painter objects repaint
-            this.logic.update();
-            this.painter.repaint();
-            // Delay loop to avoid instant painter over
-            try {
-                Thread.sleep(this.gameSpeed);
-            } catch (InterruptedException ex) {
 
+        this.playing = true;
+
+        while (playing && !painter.isGameOver()) {
+
+            if (!paused) {
+                // Move painter objects repaint
+                this.logic.update();
+                this.painter.repaint();
             }
+
+            try {
+                Thread.sleep(gameSpeed);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(RunGame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
     }
 }

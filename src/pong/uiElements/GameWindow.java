@@ -10,14 +10,17 @@ import javax.swing.JFrame;
  * @author d.peters
  */
 public class GameWindow extends JFrame {
+    
+    private int dimension;
 
     /**
      * default constructor
      *
-     * @param dim initial dimension of the window
+     * @param dimension initial dimension of the window
      */
-    public GameWindow(int dim) {
-        initWindow(dim);
+    public GameWindow(int dimension) {
+        this.dimension = dimension;
+        initWindow();
     }
 
     /**
@@ -25,12 +28,20 @@ public class GameWindow extends JFrame {
      *
      * @param dim initial dimension of the window
      */
-    private void initWindow(int dim) {
+    private void initWindow() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setLocation(312, 184);
-        this.setMinimumSize(new Dimension(dim, dim));
+        this.setMinimumSize(new Dimension(this.dimension, this.dimension));
         this.setTitle("Pong");
         this.setLayout(new BorderLayout());
+    }
+    
+    /**
+     * 
+     * @param dimension
+     */
+    public void setDimension(int dimension){
+        this.dimension = dimension;
     }
 }

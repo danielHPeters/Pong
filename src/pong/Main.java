@@ -2,6 +2,7 @@ package pong;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
+import javax.swing.JToggleButton;
 import pong.configuration.KeyBindings;
 import pong.uiElements.Painter;
 import pong.uiElements.GameWindow;
@@ -20,6 +21,9 @@ import pong.gameObjcects.Player;
  */
 public class Main {
 
+    /**
+     * 
+     */
     private final int dimension;
 
     /**
@@ -27,8 +31,14 @@ public class Main {
      */
     private final RunGame loop;
 
+    /**
+     * 
+     */
     private final Thread executer;
 
+    /**
+     * 
+     */
     private final GameLogic logic;
 
     /**
@@ -40,18 +50,40 @@ public class Main {
      * the drawing painter containing the game loop and objects
      */
     private final Painter painter;
+    
+    /**
+     * 
+     */
+    private final ButtonActions btnActions;
+    
+    /**
+     * 
+     */
+    private final JToggleButton pauseButton;
 
     /**
      * initialize the keybindings of the game
      */
     private final KeyBindings keyBindings;
 
+    /**
+     * 
+     */
     private final Actions actions;
 
+    /**
+     * 
+     */
     private final Ball ball;
 
+    /**
+     * 
+     */
     private final Player pl1, pl2;
 
+    /**
+     * 
+     */
     public ArrayList<Player> players;
 
     /**
@@ -69,11 +101,15 @@ public class Main {
         this.painter = new Painter(dimension, players, ball);
         this.actions = new Actions();
         this.keyBindings = new KeyBindings(painter, players, actions);
-        this.window.add(painter, BorderLayout.CENTER);
-        this.window.pack();
         this.logic = new GameLogic(players, ball, painter);
         this.loop = new RunGame(painter, logic);
-        this.executer = new Thread(this.loop);
+        this.executer = new Thread(loop);
+        this.btnActions = new ButtonActions(loop);
+        this.pauseButton = new JToggleButton("Pause");
+        this.pauseButton.addItemListener(btnActions.pauseListener());
+        this.window.add(painter, BorderLayout.CENTER);
+        this.window.add(pauseButton, BorderLayout.SOUTH);
+        this.window.pack();
     }
 
     /**

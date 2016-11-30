@@ -44,6 +44,9 @@ public class Ball extends MovableObject {
         this.height = size;
     }
 
+    /**
+     * 
+     */
     @Override
     public void move() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -125,6 +128,9 @@ public class Ball extends MovableObject {
         return coll;
     }
 
+    /**
+     * 
+     */
     @Override
     public void collisionHandler() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
