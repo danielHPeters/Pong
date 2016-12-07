@@ -1,7 +1,5 @@
 package pong;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pong.uiElements.Painter;
 
 /**
@@ -12,14 +10,29 @@ import pong.uiElements.Painter;
  */
 public class RunGame implements Runnable {
 
+    /**
+     * 
+     */
     private boolean playing;
 
+    /**
+     * 
+     */
     private boolean paused;
 
+    /**
+     * 
+     */
     private int gameSpeed; // The lower, the faster the painter
 
+    /**
+     * 
+     */
     private final Painter painter;
 
+    /**
+     * 
+     */
     private final GameLogic logic;
 
     /**
@@ -48,7 +61,17 @@ public class RunGame implements Runnable {
     public void setGameSpeed(int gameSpeed) {
         this.gameSpeed = gameSpeed;
     }
+    
+    public void restartGame(){
+        this.logic.reseGameObjects();
+        this.logic.resetScores();
+        this.painter.setGameOver(false);
+        this.painter.repaint();
+    }
 
+    /**
+     * 
+     */
     @Override
     public void run() {
 
@@ -65,7 +88,9 @@ public class RunGame implements Runnable {
             try {
                 Thread.sleep(gameSpeed);
             } catch (InterruptedException ex) {
-                Logger.getLogger(RunGame.class.getName()).log(Level.SEVERE, null, ex);
+                this.playing = false;
+                this.restartGame();
+                this.run();
             }
 
         }

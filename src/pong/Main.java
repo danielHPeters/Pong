@@ -2,6 +2,7 @@ package pong;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JToggleButton;
 import pong.configuration.KeyBindings;
 import pong.uiElements.Painter;
@@ -22,7 +23,7 @@ import pong.gameObjcects.Player;
 public class Main {
 
     /**
-     * 
+     *
      */
     private final int dimension;
 
@@ -32,12 +33,12 @@ public class Main {
     private final RunGame loop;
 
     /**
-     * 
+     *
      */
     private final Thread executer;
 
     /**
-     * 
+     *
      */
     private final GameLogic logic;
 
@@ -50,16 +51,21 @@ public class Main {
      * the drawing painter containing the game loop and objects
      */
     private final Painter painter;
-    
+
     /**
-     * 
+     *
      */
     private final ButtonActions btnActions;
-    
+
     /**
-     * 
+     *
      */
     private final JToggleButton pauseButton;
+
+    /**
+     *
+     */
+    private final JButton restartButton;
 
     /**
      * initialize the keybindings of the game
@@ -67,22 +73,22 @@ public class Main {
     private final KeyBindings keyBindings;
 
     /**
-     * 
+     *
      */
     private final Actions actions;
 
     /**
-     * 
+     *
      */
     private final Ball ball;
 
     /**
-     * 
+     *
      */
     private final Player pl1, pl2;
 
     /**
-     * 
+     *
      */
     public ArrayList<Player> players;
 
@@ -104,11 +110,14 @@ public class Main {
         this.logic = new GameLogic(players, ball, painter);
         this.loop = new RunGame(painter, logic);
         this.executer = new Thread(loop);
-        this.btnActions = new ButtonActions(loop);
+        this.btnActions = new ButtonActions(loop, executer);
         this.pauseButton = new JToggleButton("Pause");
         this.pauseButton.addItemListener(btnActions.pauseListener());
+        this.restartButton = new JButton("Restart");
+        this.restartButton.addActionListener(btnActions.restartListener());
         this.window.add(painter, BorderLayout.CENTER);
         this.window.add(pauseButton, BorderLayout.SOUTH);
+        this.window.add(restartButton, BorderLayout.NORTH);
         this.window.pack();
     }
 

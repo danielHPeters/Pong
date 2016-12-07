@@ -38,4 +38,6 @@ public interface Moveable {
      * 
      */
     public void moveRight();
+    
+    public void resetPosition();
 }

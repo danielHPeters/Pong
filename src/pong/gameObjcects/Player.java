@@ -25,6 +25,8 @@ public class Player extends MovableObject {
         this.down = false;
         this.x = posX;
         this.y = posY;
+        this.initialX = posX;
+        this.initialY = posY;
         this.speed = 10;
         this.width = 5;
         this.height = 40;
@@ -53,6 +55,10 @@ public class Player extends MovableObject {
      */
     public void incrementScore() {
         this.score += 1;
+    }
+    
+    public void resetScore(){
+        this.score = 0;
     }
 
     /**

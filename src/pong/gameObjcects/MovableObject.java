@@ -13,6 +13,16 @@ abstract class MovableObject extends GameObject implements Moveable {
      * movement speed of the object
      */
     protected int speed;
+    
+    /**
+     * 
+     */
+    protected int initialX;
+    
+    /**
+     * 
+     */
+    protected int initialY;
 
     /**
      * booleans telling the object to move in certain directions
@@ -103,5 +113,13 @@ abstract class MovableObject extends GameObject implements Moveable {
     @Override
     public void moveRight() {
         this.x += speed;
+    }
+    
+    /**
+     * 
+     */
+    public void resetPosition(){
+        this.x = initialX;
+        this.y = initialY;
     }
 }

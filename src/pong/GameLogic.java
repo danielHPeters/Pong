@@ -17,10 +17,10 @@ public class GameLogic {
     private final Painter painter;
 
     /**
-     * 
+     *
      * @param players
      * @param ball
-     * @param painter 
+     * @param painter
      */
     public GameLogic(ArrayList<Player> players, Ball ball, Painter painter) {
         this.players = players;
@@ -33,13 +33,17 @@ public class GameLogic {
      * this method updates all the components on the painter area
      */
     public void update() {
-        this.players.forEach((pl) -> {
+        this.players.forEach((pl)
+                -> {
             // move player
+
             pl.moveVert(painter.getHeight());
+
             // check for collision with ball
             if (this.ball.collision(pl)) {
                 this.ball.changeHorDir();
             }
+
             // if a player reaches the victoryCond condition, the painter will end
             if (pl.hasWon(this.victoryCond)) {
                 painter.setGameOver(true);
@@ -52,12 +56,23 @@ public class GameLogic {
         // check if the ball hit the right border
         if (this.ball.getX() > (painter.getWidth() - this.ball.getSize())) {
             this.players.get(0).incrementScore();
+            reseGameObjects();
         }
 
         // check if the ball hit the left border
         if (this.ball.getX() == 0) {
             this.players.get(1).incrementScore();
+            reseGameObjects();
         }
     }
+
+    public void reseGameObjects() {
+        this.ball.resetPosition();
+        this.players.forEach(player->player.resetPosition());
+    }
     
+    public void resetScores(){
+        this.players.forEach(player->player.resetScore());
+    }
+
 }
