@@ -11,17 +11,15 @@ import java.awt.event.ItemListener;
  */
 public class ButtonActions {
 
-    RunGame loop;
+    private final RunGame loop;
     Thread executer;
 
     /**
      *
      * @param loop
-     * @param executer
      */
-    public ButtonActions(RunGame loop, Thread executer) {
+    public ButtonActions(RunGame loop) {
         this.loop = loop;
-        this.executer = executer;
     }
 
     /**
@@ -32,11 +30,7 @@ public class ButtonActions {
 
         ItemListener listener = (ItemEvent e) -> {
 
-            if (e.getStateChange() == ItemEvent.SELECTED) {
-                loop.setPaused(true);
-            } else if (e.getStateChange() == ItemEvent.DESELECTED) {
-                loop.setPaused(false);
-            }
+            loop.pauseToggle();
 
         };
 
@@ -50,9 +44,10 @@ public class ButtonActions {
     public ActionListener restartListener() {
 
         ActionListener listener = (ActionEvent e) -> {
-            this.executer.interrupt();
+            this.loop.restartGame();
         };
 
         return listener;
     }
+
 }

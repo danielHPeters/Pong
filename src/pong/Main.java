@@ -3,8 +3,12 @@ package pong;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JButton;
+import javax.swing.JMenuBar;
 import javax.swing.JToggleButton;
+import javax.swing.JToolBar;
 import pong.configuration.KeyBindings;
 import pong.uiElements.Painter;
 import pong.uiElements.GameWindow;
@@ -30,9 +34,9 @@ public class Main {
      *
      */
     private final int width;
-    
+
     /**
-     * 
+     *
      */
     private final int height;
 
@@ -44,7 +48,7 @@ public class Main {
     /**
      *
      */
-    private final Thread executer;
+    private final ScheduledThreadPoolExecutor executor;
 
     /**
      *
@@ -77,6 +81,11 @@ public class Main {
     private final JButton restartButton;
 
     /**
+     *
+     */
+    private JMenuBar actionBar;
+
+    /**
      * initialize the keybindings of the game
      */
     private final KeyBindings keyBindings;
@@ -85,9 +94,9 @@ public class Main {
      *
      */
     private final KeyBoardActions actions;
-    
+
     /**
-     * 
+     *
      */
     private final GameArea area;
 
@@ -110,30 +119,40 @@ public class Main {
      * This is the default constructor
      */
     public Main() {
+        this.width = 800;
         this.height = 600;
-        this.width = 500;
-        this.pl1 = new Player(2 * 5, height / 2);
-        this.pl2 = new Player(width - 4 * 5, height / 2);
-        this.area = new GameArea(width, height - 95);
+        this.area = new GameArea(width - 10, height - 80);
+        this.pl1 = new Player(2 * 5, area.getHeight() / 2);
+        this.pl2 = new Player(width - 4 * 5, area.getHeight() / 2);
         this.players = new ArrayList<>();
         this.players.add(pl1);
         this.players.add(pl2);
         this.ball = new Ball(width / 2, height / 2);
         this.window = new GameWindow(width, height);
-        this.painter = new Painter(width, players, ball);
+        this.painter = new Painter(width, height, area, players, ball);
         this.actions = new KeyBoardActions();
-        this.keyBindings = new KeyBindings(painter, players, actions);
         this.logic = new GameLogic(area, players, ball, painter);
         this.loop = new RunGame(painter, logic);
-        this.executer = new Thread(loop);
-        this.btnActions = new ButtonActions(loop, executer);
+        this.executor = new ScheduledThreadPoolExecutor(3);
+        this.executor.scheduleAtFixedRate(loop, 0L, 100L, TimeUnit.MILLISECONDS);
+        this.keyBindings = new KeyBindings(window, painter, executor, loop, players, actions);
+
+        this.actionBar = new JMenuBar();
+        this.actionBar.setFocusable(false);
+
+        this.btnActions = new ButtonActions(loop);
         this.pauseButton = new JToggleButton("Pause");
         this.pauseButton.addItemListener(btnActions.pauseListener());
+
         this.restartButton = new JButton("Restart");
         this.restartButton.addActionListener(btnActions.restartListener());
+        this.restartButton.setFocusable(false);
+
+        this.actionBar.add(pauseButton);
+        this.actionBar.add(restartButton);
+
         this.window.add(painter, BorderLayout.CENTER);
-        this.window.add(pauseButton, BorderLayout.SOUTH);
-        this.window.add(restartButton, BorderLayout.NORTH);
+        this.window.add(actionBar, BorderLayout.NORTH);
         this.window.pack();
     }
 
@@ -142,7 +161,6 @@ public class Main {
      */
     public void start() {
         this.window.setVisible(true);
-        this.executer.start();
     }
 
     /**

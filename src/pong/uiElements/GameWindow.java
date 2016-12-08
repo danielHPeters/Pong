@@ -34,9 +34,8 @@ public class GameWindow extends JFrame {
      */
     private void initWindow() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(false);
         this.setLocation(312, 184);
-        this.setMinimumSize(new Dimension(this.width, this.height));
+        this.setMinimumSize(new Dimension(this.width + 20, this.height + 20));
         this.setTitle("Pong");
         this.setLayout(new BorderLayout());
     }

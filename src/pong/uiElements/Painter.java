@@ -4,25 +4,37 @@ import java.awt.*;
 import java.util.List;
 import javax.swing.*;
 import pong.gameObjcects.Ball;
+import pong.gameObjcects.GameArea;
 import pong.gameObjcects.Player;
 
 public class Painter extends JPanel {
 
     private boolean gameOver;
-    private final int dimension;
+    
+    private final int width;
+    
+    private final int height;
+    
+    private final GameArea area;
+    
     private final List<Player> players;
+    
     private final Ball ball;
 
     /**
      * the default constructor
      *
-     * @param dim
+     * @param width
+     * @param height
+     * @param area
      * @param players
      * @param ball
      */
-    public Painter(int dim, List<Player> players, Ball ball) {
+    public Painter(int width, int height, GameArea area,  List<Player> players, Ball ball) {
         this.gameOver = false;
-        this.dimension = dim;
+        this.width = width;
+        this.height = height;
+        this.area = area;
         this.players = players;
         this.ball = ball;
     }
@@ -76,9 +88,9 @@ public class Painter extends JPanel {
     public void drawTexts(Graphics g) {
         //Draw scores
         g.drawString("Player 1: " + players.get(0).getScore(), 25, 10);
-        g.drawString("Player 2: " + players.get(1).getScore(), dimension - 100, 10);
+        g.drawString("Player 2: " + players.get(1).getScore(), width - 100, 10);
         if (gameOver) {
-            g.drawString("Game Over", dimension / 2 - 20, dimension / 2);
+            g.drawString("Game Over", width / 2 - 20, height / 2 - 20);
         }
     }
 
@@ -88,6 +100,7 @@ public class Painter extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        g.drawRect(area.getX(), area.getY(), area.getWidth(), area.getHeight());
         drawBall(g);
         drawPlayers(g);
         drawTexts(g);

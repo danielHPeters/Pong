@@ -47,10 +47,21 @@ public class RunGame implements Runnable {
         this.logic = logic;
         this.gameSpeed = 18;
         this.paused = false;
+        this.playing = true;
     }
-
-    public void setPaused(boolean paused) {
-        this.paused = paused;
+    
+    /**
+     * 
+     */
+    public void pauseToggle(){
+        this.paused = !paused;
+    }
+    
+    /**
+     * 
+     */
+    public void end(){
+        this.playing = false;
     }
 
     /**
@@ -66,7 +77,7 @@ public class RunGame implements Runnable {
         this.logic.reseGameObjects();
         this.logic.resetScores();
         this.painter.setGameOver(false);
-        this.painter.repaint();
+        this.playing = true;
     }
 
     /**
@@ -74,8 +85,6 @@ public class RunGame implements Runnable {
      */
     @Override
     public void run() {
-
-        this.playing = true;
 
         while (playing && !painter.isGameOver()) {
 
@@ -89,8 +98,6 @@ public class RunGame implements Runnable {
                 Thread.sleep(gameSpeed);
             } catch (InterruptedException ex) {
                 this.playing = false;
-                this.restartGame();
-                this.run();
             }
 
         }

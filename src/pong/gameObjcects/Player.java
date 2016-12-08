@@ -67,14 +67,13 @@ public class Player extends MovableObject {
     /**
      * Check for keys pressed and moveVert according to key (Workaround for
      * input lag)d
-     * @param panelHeight Height of the Panel to see if out of bounds when
-     * moving down
+     * @param areaHeight
      */
-    public void moveVert(int panelHeight) {
-        if (this.up && this.y > 0) {
+    public void moveVert(int areaHeight) {
+        if (this.up && this.y + - 10 >= 0) {
             this.moveUp();
         }
-        if (this.down && this.y < panelHeight - this.height) {
+        if (this.down && this.y < areaHeight - this.height) {
             this.moveDown();
         }
     }

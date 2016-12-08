@@ -1,9 +1,13 @@
 package pong.configuration;
 
+import com.sun.glass.events.KeyEvent;
 import enums.Direction;
 import pong.gameObjcects.Player;
 import java.util.List;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import javax.swing.*;
+import pong.RunGame;
+import pong.uiElements.GameWindow;
 
 /**
  * Keyboard configuration of the Game
@@ -12,22 +16,39 @@ import javax.swing.*;
  */
 public class KeyBindings {
 
-    private final KeyBoardActions actions;
+    private final GameWindow window;
+    
     private final JPanel panel;
+    
+    private final ScheduledThreadPoolExecutor executor;
+    
+    private final RunGame loop;
+    
+    private final KeyBoardActions actions;
+    
     List<Player> players;
 
     /**
      * default constructor which initializes the keyboard configs
      *
+     * @param window
      * @param panel the game area object
+     * @param executor
+     * @param loop
      * @param players the ArrayList with all player objects
      * @param actions
      */
-    public KeyBindings(JPanel panel, List<Player> players, KeyBoardActions actions) {
-        this.actions = actions;
+    public KeyBindings(GameWindow window, JPanel panel,
+            ScheduledThreadPoolExecutor executor, RunGame loop,
+            List<Player> players, KeyBoardActions actions) {
+        this.executor = executor;
+        this.window = window;
         this.panel = panel;
+        this.loop = loop;
+        this.actions = actions;
         this.players = players;
         initialize();
+
     }
 
     /**
@@ -44,6 +65,12 @@ public class KeyBindings {
         for(Direction dir : Direction.values()){
             iMap.put(dir.getKeyStroke(), dir.getText());
         }
+        
+        iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "ESC pressed");
+        aMap.put("ESC pressed", actions.escAction(window, loop, executor));
+        
+        iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_R, 0), "R pressed");
+        aMap.put("R pressed", actions.restartAction(loop));
         
         /* W key */
         // put the action functions to the map

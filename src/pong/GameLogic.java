@@ -64,7 +64,7 @@ public class GameLogic {
 
         if (this.ball.collision(area)) {
 
-            if (ball.getY() <= 0 || ball.getY() >= (area.getWidth() - ball.getSize())) {
+            if (ball.getY() <= + 10 || ball.getY() >= (area.getHeight() - ball.getSize())) {
                 ball.changeVertDir();
             }
 
