@@ -10,21 +10,21 @@ import pong.uiElements.GameWindow;
  *
  * @author d.peters
  */
-public class Actions {
+public class KeyBoardActions {
 
     /**
      * this method creates the methods for the up actions
      *
      * @param player the player object
-     * @param needsToMoveUp boolean which is true for key pressed and for for
+     * @param toggleUp boolean which is true for key pressed and for for
      * key released
      * @return the abstract action
      */
-    public Action upAction(Player player, boolean needsToMoveUp) {
+    public Action upAction(Player player, boolean toggleUp) {
         Action upAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                player.setUp(needsToMoveUp);
+                player.setUp(toggleUp);
             }
         };
         return upAction;
@@ -34,16 +34,16 @@ public class Actions {
      * this method creates the methods for the down actions
      *
      * @param player the player object
-     * @param needsToMoveDown boolean which is true for key pressed and for for
+     * @param ToggleDown boolean which is true for key pressed and for for
      * key released
      * @return the abstract action
      */
-    public Action downAction(Player player, boolean needsToMoveDown) {
+    public Action downAction(Player player, boolean ToggleDown) {
 
         Action downAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                player.setDown(needsToMoveDown);
+                player.setDown(ToggleDown);
             }
         };
 

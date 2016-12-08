@@ -13,7 +13,7 @@ abstract class GameObject implements Collideable {
     /**
      * Dimensions of the object
      */
-    int width, height;
+    protected int width, height;
 
     /**
      * Position markers of the object

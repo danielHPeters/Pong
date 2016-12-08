@@ -14,13 +14,6 @@ public interface Moveable {
 
     /**
      * 
-     * @param width
-     * @param height 
-     */
-    public void move(int width, int height);
-
-    /**
-     * 
      */
     public void moveUp();
 

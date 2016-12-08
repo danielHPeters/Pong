@@ -15,12 +15,12 @@ abstract class MovableObject extends GameObject implements Moveable {
     protected int speed;
     
     /**
-     * 
+     * Initial x position (Used to reset the object to start position)
      */
     protected int initialX;
     
     /**
-     * 
+     * Initial y position (Used to reset the object to start position)
      */
     protected int initialY;
 
@@ -116,8 +116,9 @@ abstract class MovableObject extends GameObject implements Moveable {
     }
     
     /**
-     * 
+     * Resets the object to its original coordinates
      */
+    @Override
     public void resetPosition(){
         this.x = initialX;
         this.y = initialY;

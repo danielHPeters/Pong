@@ -1,7 +1,7 @@
 package pong.uiElements;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 import pong.gameObjcects.Ball;
 import pong.gameObjcects.Player;
@@ -10,7 +10,7 @@ public class Painter extends JPanel {
 
     private boolean gameOver;
     private final int dimension;
-    private final ArrayList<Player> players;
+    private final List<Player> players;
     private final Ball ball;
 
     /**
@@ -20,7 +20,7 @@ public class Painter extends JPanel {
      * @param players
      * @param ball
      */
-    public Painter(int dim, ArrayList<Player> players, Ball ball) {
+    public Painter(int dim, List<Player> players, Ball ball) {
         this.gameOver = false;
         this.dimension = dim;
         this.players = players;

@@ -2,14 +2,18 @@ package pong;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JToggleButton;
 import pong.configuration.KeyBindings;
 import pong.uiElements.Painter;
 import pong.uiElements.GameWindow;
 import javax.swing.SwingUtilities;
-import pong.configuration.Actions;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import pong.configuration.KeyBoardActions;
 import pong.gameObjcects.Ball;
+import pong.gameObjcects.GameArea;
 import pong.gameObjcects.Player;
 
 /**
@@ -25,7 +29,12 @@ public class Main {
     /**
      *
      */
-    private final int dimension;
+    private final int width;
+    
+    /**
+     * 
+     */
+    private final int height;
 
     /**
      * the game loop
@@ -75,7 +84,12 @@ public class Main {
     /**
      *
      */
-    private final Actions actions;
+    private final KeyBoardActions actions;
+    
+    /**
+     * 
+     */
+    private final GameArea area;
 
     /**
      *
@@ -90,24 +104,26 @@ public class Main {
     /**
      *
      */
-    public ArrayList<Player> players;
+    public List<Player> players;
 
     /**
      * This is the default constructor
      */
     public Main() {
-        this.dimension = 500;
-        this.pl1 = new Player(2 * 5, dimension / 2);
-        this.pl2 = new Player(dimension - 4 * 5, dimension / 2);
+        this.height = 600;
+        this.width = 500;
+        this.pl1 = new Player(2 * 5, height / 2);
+        this.pl2 = new Player(width - 4 * 5, height / 2);
+        this.area = new GameArea(width, height - 95);
         this.players = new ArrayList<>();
         this.players.add(pl1);
         this.players.add(pl2);
-        this.ball = new Ball(dimension / 2, dimension / 2);
-        this.window = new GameWindow(dimension);
-        this.painter = new Painter(dimension, players, ball);
-        this.actions = new Actions();
+        this.ball = new Ball(width / 2, height / 2);
+        this.window = new GameWindow(width, height);
+        this.painter = new Painter(width, players, ball);
+        this.actions = new KeyBoardActions();
         this.keyBindings = new KeyBindings(painter, players, actions);
-        this.logic = new GameLogic(players, ball, painter);
+        this.logic = new GameLogic(area, players, ball, painter);
         this.loop = new RunGame(painter, logic);
         this.executer = new Thread(loop);
         this.btnActions = new ButtonActions(loop, executer);
@@ -135,9 +151,23 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
         SwingUtilities.invokeLater(() -> {
+
+            try {
+
+                UIManager.setLookAndFeel(
+                        "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+
+            } catch (ClassNotFoundException | InstantiationException
+                    | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            }
+
             Main pong = new Main();
+            SwingUtilities.updateComponentTreeUI(pong.window);
             pong.start();
+
         });
+
     }
 }

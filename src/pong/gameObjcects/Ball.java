@@ -47,23 +47,13 @@ public class Ball extends MovableObject {
     }
 
     /**
-     * 
+     * move the ball
+     *
      */
     @Override
     public void move() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     * move the ball
-     *
-     * @param panelWidth width of the panel
-     * @param panelHeight height of the panel
-     */
-    @Override
-    public void move(int panelWidth, int panelHeight) {
-        moveHor(panelWidth);
-        moveVert(panelHeight);
+        moveHor();
+        moveVert();
     }
 
     /**
@@ -71,17 +61,11 @@ public class Ball extends MovableObject {
      *
      * @param panelWidth width of the game area
      */
-    private void moveHor(int panelWidth) {
+    private void moveHor() {
         if (this.right) {
             moveRight();
-            if (this.x >= (panelWidth - this.getSize())) {
-                this.right = false;
-            }
         } else {
             moveLeft();
-            if (this.x <= 0) {
-                this.right = true;
-            }
         }
     }
 
@@ -90,29 +74,26 @@ public class Ball extends MovableObject {
      *
      * @param panelHeight height of the game area (used for moving down)
      */
-    private void moveVert(int panelHeight) {
+    private void moveVert() {
         if (this.up) {
             moveUp();
-            if (this.y <= 0) {
-                this.up = false;
-            }
         } else {
             moveDown();
-            if (this.y >= (panelHeight - this.getSize())) {
-                this.up = true;
-            }
         }
+    }
+    
+    /**
+     * 
+     */
+    public void changeVertDir(){
+        this.up = !this.up;
     }
 
     /**
      * changes vertical direction to the opposite direction
      */
     public void changeHorDir() {
-        if (this.right) {
-            this.right = false;
-        } else {
-            this.right = true;
-        }
+        this.right = !this.right;
     }
 
     /**

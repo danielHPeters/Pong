@@ -57,6 +57,9 @@ public class Player extends MovableObject {
         this.score += 1;
     }
     
+    /**
+     * 
+     */
     public void resetScore(){
         this.score = 0;
     }
@@ -92,11 +95,6 @@ public class Player extends MovableObject {
 
     @Override
     public void move() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void move(int panelWidth, int panelHeight) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
