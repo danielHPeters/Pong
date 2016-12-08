@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JButton;
 import javax.swing.JMenuBar;
 import javax.swing.JToggleButton;
-import javax.swing.JToolBar;
 import pong.configuration.KeyBindings;
 import pong.uiElements.Painter;
 import pong.uiElements.GameWindow;
