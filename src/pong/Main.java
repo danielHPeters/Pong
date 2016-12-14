@@ -1,5 +1,6 @@
 package pong;
 
+import pong.audio.BackgroundMusicPlayer;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -183,8 +184,9 @@ public class Main {
             Main pong = new Main();
             SwingUtilities.updateComponentTreeUI(pong.window);
             pong.start();
-
         });
+        BackgroundMusicPlayer player = new BackgroundMusicPlayer();
+        player.playAllClips();
 
     }
 }
