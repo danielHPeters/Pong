@@ -73,6 +73,9 @@ public class RunGame implements Runnable {
         this.gameSpeed = gameSpeed;
     }
     
+    /**
+     * 
+     */
     public void restartGame(){
         this.logic.reseGameObjects();
         this.logic.resetScores();

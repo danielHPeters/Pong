@@ -11,8 +11,14 @@ import javax.swing.JFrame;
  */
 public class GameWindow extends JFrame {
     
+    /**
+     * 
+     */
     private final int width;
     
+    /**
+     * 
+     */
     private final int height;
 
     /**

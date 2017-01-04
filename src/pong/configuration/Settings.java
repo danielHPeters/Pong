@@ -6,9 +6,24 @@ package pong.configuration;
  */
 public class Settings {
 
+    /**
+     * 
+     */
     private int dimension;
+    
+    /**
+     * 
+     */
     private int victoryCondition;
+    
+    /**
+     * 
+     */
     private int gameSpeed;
+    
+    /**
+     * 
+     */
     private int objectsVelocity;
 
     /**

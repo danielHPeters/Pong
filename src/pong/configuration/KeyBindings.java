@@ -16,17 +16,35 @@ import pong.uiElements.GameWindow;
  */
 public class KeyBindings {
 
+    /**
+     * 
+     */
     private final GameWindow window;
     
+    /**
+     * 
+     */
     private final JPanel panel;
     
+    /**
+     * 
+     */
     private final ScheduledThreadPoolExecutor executor;
     
+    /**
+     * 
+     */
     private final RunGame loop;
     
+    /**
+     * 
+     */
     private final KeyBoardActions actions;
     
-    List<Player> players;
+    /**
+     * 
+     */
+    private final List<Player> players;
 
     /**
      * default constructor which initializes the keyboard configs

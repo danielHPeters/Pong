@@ -9,16 +9,34 @@ import pong.gameObjcects.Player;
 
 public class Painter extends JPanel {
 
+    /**
+     * 
+     */
     private boolean gameOver;
     
+    /**
+     * 
+     */
     private final int width;
     
+    /**
+     * 
+     */
     private final int height;
     
+    /**
+     * 
+     */
     private final GameArea area;
     
+    /**
+     * 
+     */
     private final List<Player> players;
     
+    /**
+     * 
+     */
     private final Ball ball;
 
     /**

@@ -12,7 +12,6 @@ import java.awt.event.ItemListener;
 public class ButtonActions {
 
     private final RunGame loop;
-    Thread executer;
 
     /**
      *
@@ -30,7 +29,7 @@ public class ButtonActions {
 
         ItemListener listener = (ItemEvent e) -> {
 
-            loop.pauseToggle();
+            this.loop.pauseToggle();
 
         };
 

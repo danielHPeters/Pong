@@ -17,12 +17,24 @@ public class GameLogic {
      */
     private final int victoryCond;
 
+    /**
+     * 
+     */
     private final GameArea area;
 
+    /**
+     * 
+     */
     private final List<Player> players;
 
+    /**
+     * 
+     */
     private final Ball ball;
 
+    /**
+     * Reference to the Painter Object
+     */
     private final Painter painter;
 
     /**
@@ -86,11 +98,17 @@ public class GameLogic {
         }
     }
 
+    /**
+     * 
+     */
     public void reseGameObjects() {
         this.ball.resetPosition();
         this.players.forEach(player -> player.resetPosition());
     }
 
+    /**
+     * 
+     */
     public void resetScores() {
         this.players.forEach(player -> player.resetScore());
     }
