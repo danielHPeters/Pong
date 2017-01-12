@@ -185,8 +185,8 @@ public class Main {
             SwingUtilities.updateComponentTreeUI(pong.window);
             pong.start();
         });
-        BackgroundMusicPlayer player = new BackgroundMusicPlayer();
-        player.playAllClips();
+        //BackgroundMusicPlayer player = new BackgroundMusicPlayer();
+        //player.playAllClips();
 
     }
 }
