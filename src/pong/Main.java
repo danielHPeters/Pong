@@ -119,6 +119,7 @@ public class Main {
      * This is the default constructor
      */
     public Main() {
+        
         this.width = 800;
         this.height = 600;
         this.area = new GameArea(width - 10, height - 80);
@@ -154,6 +155,7 @@ public class Main {
         this.window.add(painter, BorderLayout.CENTER);
         this.window.add(actionBar, BorderLayout.NORTH);
         this.window.pack();
+        
     }
 
     /**
