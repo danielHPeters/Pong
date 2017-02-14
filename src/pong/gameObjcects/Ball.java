@@ -1,6 +1,6 @@
 package pong.gameObjcects;
 
-import interfaces.Collideable;
+import pong.interfaces.Collideable;
 
 /**
  * this class describes a ball object, its movement functions etc.

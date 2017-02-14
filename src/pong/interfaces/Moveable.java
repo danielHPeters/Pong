@@ -1,4 +1,4 @@
-package interfaces;
+package pong.interfaces;
 
 /**
  * interface for movable objects

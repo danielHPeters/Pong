@@ -1,4 +1,4 @@
-package interfaces;
+package pong.interfaces;
 
 import java.awt.Rectangle;
 

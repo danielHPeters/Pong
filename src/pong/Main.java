@@ -2,8 +2,6 @@ package pong;
 
 import pong.audio.BackgroundMusicPlayer;
 import java.awt.BorderLayout;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JButton;
@@ -16,9 +14,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import pong.configuration.KeyBoardActions;
-import pong.gameObjcects.Ball;
-import pong.gameObjcects.GameArea;
-import pong.gameObjcects.Player;
 
 /**
  * Starter class of the pong game this is a simple remake of the classic pong
@@ -84,6 +79,11 @@ public class Main {
      *
      */
     private JMenuBar actionBar;
+    
+    /**
+     * 
+     */
+    private GameState game;
 
     /**
      * initialize the keybindings of the game
@@ -96,47 +96,21 @@ public class Main {
     private final KeyBoardActions actions;
 
     /**
-     *
-     */
-    private final GameArea area;
-
-    /**
-     *
-     */
-    private final Ball ball;
-
-    /**
-     *
-     */
-    private final Player pl1, pl2;
-
-    /**
-     *
-     */
-    public List<Player> players;
-
-    /**
      * This is the default constructor
      */
     public Main() {
         
         this.width = 800;
         this.height = 600;
-        this.area = new GameArea(width - 10, height - 80);
-        this.pl1 = new Player(2 * 5, area.getHeight() / 2);
-        this.pl2 = new Player(width - 4 * 5, area.getHeight() / 2);
-        this.players = new ArrayList<>();
-        this.players.add(pl1);
-        this.players.add(pl2);
-        this.ball = new Ball(width / 2, height / 2);
+        this.game = new GameState(width, height);
         this.window = new GameWindow(width, height);
-        this.painter = new Painter(width, height, area, players, ball);
+        this.painter = new Painter(width, height, game.getArea(), game.getPlayers(), game.getBall());
         this.actions = new KeyBoardActions();
-        this.logic = new GameLogic(area, players, ball, painter);
+        this.logic = new GameLogic(game.getArea(), game.getPlayers(), game.getBall(), painter);
         this.loop = new RunGame(painter, logic);
         this.executor = new ScheduledThreadPoolExecutor(3);
         this.executor.scheduleAtFixedRate(loop, 0L, 100L, TimeUnit.MILLISECONDS);
-        this.keyBindings = new KeyBindings(window, painter, executor, loop, players, actions);
+        this.keyBindings = new KeyBindings(window, painter, executor, loop, game.getPlayers(), actions);
 
         this.actionBar = new JMenuBar();
         this.actionBar.setFocusable(false);

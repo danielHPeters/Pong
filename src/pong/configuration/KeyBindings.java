@@ -1,7 +1,7 @@
 package pong.configuration;
 
 import com.sun.glass.events.KeyEvent;
-import enums.Direction;
+import pong.enums.Direction;
 import pong.gameObjcects.Player;
 import java.util.List;
 import java.util.concurrent.ScheduledThreadPoolExecutor;

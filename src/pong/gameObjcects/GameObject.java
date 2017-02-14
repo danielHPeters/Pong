@@ -1,6 +1,6 @@
 package pong.gameObjcects;
 
-import interfaces.Collideable;
+import pong.interfaces.Collideable;
 import java.awt.Rectangle;
 
 /**

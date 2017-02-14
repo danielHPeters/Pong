@@ -1,6 +1,6 @@
 package pong.gameObjcects;
 
-import interfaces.Moveable;
+import pong.interfaces.Moveable;
 
 /**
  * abstract class which defines movable game objects

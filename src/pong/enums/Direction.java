@@ -1,4 +1,4 @@
-package enums;
+package pong.enums;
 
 import java.awt.event.KeyEvent;
 import javax.swing.KeyStroke;
