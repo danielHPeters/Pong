@@ -50,12 +50,12 @@ public class GameState {
     public GameState(Settings config) {
         this.config = config;
         this.area = new GameArea(config.getWidth() - 10, config.getHeight() - 80);
-        Player pl1 = new Player(2 * 5, area.getHeight() / 2, config.getObjectsVelocity());
-        Player pl2 = new Player(config.getWidth() - 4 * 5, area.getHeight() / 2, config.getObjectsVelocity());
+        Player pl1 = new Player(2 * 5, area.getHeight() / 2, config.getPlayerVelocity());
+        Player pl2 = new Player(config.getWidth() - 4 * 5, area.getHeight() / 2, config.getPlayerVelocity());
         this.players = new ArrayList<>();
         this.players.add(pl1);
         this.players.add(pl2);
-        this.ball = new Ball(config.getWidth() / 2, config.getHeight() / 2, config.getObjectsVelocity());
+        this.ball = new Ball(config.getWidth() / 2, config.getHeight() / 2, config.getBallVelocity());
         this.playing = true;
         this.paused = false;
     }

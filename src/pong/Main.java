@@ -65,7 +65,7 @@ public class Main {
      */
     public Main() {
 
-        this.config = new Settings(800, 600, 6, 18, 5);
+        this.config = new Settings(800, 600, 6, 18, 5, 10);
         this.game = new GameState(config);
         this.actions = new KeyBoardActions();
         this.logic = new GameLogic(game);
@@ -75,6 +75,21 @@ public class Main {
         this.executor.scheduleAtFixedRate(loop, 0L, 100L, TimeUnit.MILLISECONDS);
         this.keyBindings = new KeyBindings(ui.getWindow(), ui.getPainter(), executor, game, actions);
 
+    }
+
+    /**
+     * Set look and feel of the ui to nimbus.
+     */
+    public void setLandF() {
+        try {
+
+            UIManager.setLookAndFeel(
+                    "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+
+        } catch (ClassNotFoundException | InstantiationException
+                | IllegalAccessException | UnsupportedLookAndFeelException e) {
+        }
+        SwingUtilities.updateComponentTreeUI(this.ui.getWindow());
     }
 
     /**
@@ -93,18 +108,10 @@ public class Main {
 
         SwingUtilities.invokeLater(() -> {
 
-            try {
-
-                UIManager.setLookAndFeel(
-                        "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-
-            } catch (ClassNotFoundException | InstantiationException
-                    | IllegalAccessException | UnsupportedLookAndFeelException e) {
-            }
-
             Main pong = new Main();
-            SwingUtilities.updateComponentTreeUI(pong.ui.getWindow());
+            pong.setLandF();
             pong.start();
+
         });
         //BackgroundMusicPlayer player = new BackgroundMusicPlayer();
         //player.playAllClips();

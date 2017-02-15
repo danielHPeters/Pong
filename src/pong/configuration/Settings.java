@@ -29,25 +29,32 @@ public class Settings {
     /**
      * 
      */
-    private int objectsVelocity;
+    private int ballVelocity;
+    
+    /**
+     * 
+     */
+    private int playerVelocity;
 
     /**
      * 
      * @param width
      * @param height
      * @param victoryCondition
-     * @param gameSpeed
-     * @param objectsVelocity 
+     * @param gameSpeed 
+     * @param ballVelocity 
+     * @param playerVelocity 
      */
     public Settings(
             int width, int height, int victoryCondition, int gameSpeed,
-            int objectsVelocity
+            int ballVelocity, int playerVelocity
     ) {
         this.width = width;
         this.height = height;
         this.victoryCondition = victoryCondition;
         this.gameSpeed = gameSpeed;
-        this.objectsVelocity = objectsVelocity;
+        this.ballVelocity = ballVelocity;
+        this.playerVelocity = playerVelocity;
     }
 
     /**
@@ -119,16 +126,33 @@ public class Settings {
      * 
      * @return 
      */
-    public int getObjectsVelocity() {
-        return objectsVelocity;
+    public int getBallVelocity() {
+        return ballVelocity;
     }
 
     /**
      * 
-     * @param objectsVelocity 
+     * @param ballVelocity 
      */
-    public void setObjectsVelocity(int objectsVelocity) {
-        this.objectsVelocity = objectsVelocity;
+    public void setBallVelocity(int ballVelocity) {
+        this.ballVelocity = ballVelocity;
     }
+
+    /**
+     * 
+     * @return 
+     */
+    public int getPlayerVelocity() {
+        return playerVelocity;
+    }
+
+    /**
+     * 
+     * @param playerVelocity 
+     */
+    public void setPlayerVelocity(int playerVelocity) {
+        this.playerVelocity = playerVelocity;
+    }
+    
 
 }
