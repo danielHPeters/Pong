@@ -9,6 +9,7 @@ import javax.swing.*;
 import pong.GameState;
 import pong.RunGame;
 import pong.uiElements.GameWindow;
+import pong.uiElements.PongUi;
 
 /**
  * Keyboard configuration of the Game
@@ -17,41 +18,32 @@ import pong.uiElements.GameWindow;
  */
 public class KeyBindings {
 
+    private final PongUi ui;
+
     /**
-     * 
-     */
-    private final GameWindow window;
-    
-    /**
-     * 
-     */
-    private final JPanel panel;
-    
-    /**
-     * 
+     *
      */
     private final ScheduledThreadPoolExecutor executor;
-    
+
     /**
-     * 
+     *
      */
     private final KeyBoardActions actions;
-    
+
     private final GameState game;
 
     /**
      * default constructor which initializes the keyboard configs
      *
-     * @param window
-     * @param panel the game area object
+     * @param ui
      * @param executor
+     * @param game
      * @param actions
      */
-    public KeyBindings(GameWindow window, JPanel panel,
-            ScheduledThreadPoolExecutor executor, GameState game, KeyBoardActions actions) {
+    public KeyBindings(PongUi ui, ScheduledThreadPoolExecutor executor,
+            GameState game, KeyBoardActions actions) {
         this.executor = executor;
-        this.window = window;
-        this.panel = panel;
+        this.ui = ui;
         this.actions = actions;
         this.game = game;
         initialize();
@@ -65,19 +57,19 @@ public class KeyBindings {
      */
     private void initialize() {
         // Get the input map of the GamePanel
-        InputMap iMap = this.panel.getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
-        ActionMap aMap = this.panel.getActionMap();
-        
-        for(Direction dir : Direction.values()){
+        InputMap iMap = this.ui.getPainter().getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap aMap = this.ui.getPainter().getActionMap();
+
+        for (Direction dir : Direction.values()) {
             iMap.put(dir.getKeyStroke(), dir.getText());
         }
-        
+
         iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "ESC pressed");
-        aMap.put("ESC pressed", actions.escAction(window, game, executor));
-        
+        aMap.put("ESC pressed", actions.escAction(this.ui.getWindow(), game, executor));
+
         iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_R, 0), "R pressed");
         aMap.put("R pressed", actions.restartAction(game));
-        
+
         /* W key */
         // put the action functions to the map
         aMap.put("W pressed", this.actions.upAction(this.game.getPlayers().get(0), true));
@@ -98,5 +90,3 @@ public class KeyBindings {
     }
 
 }
-
-

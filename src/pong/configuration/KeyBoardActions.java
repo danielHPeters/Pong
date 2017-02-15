@@ -4,10 +4,9 @@ import java.awt.event.ActionEvent;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JFrame;
 import pong.GameState;
-import pong.RunGame;
 import pong.models.Player;
-import pong.uiElements.GameWindow;
 
 /**
  *
@@ -64,14 +63,13 @@ public class KeyBoardActions {
      * @param executor
      * @return
      */
-    public Action escAction(GameWindow window, GameState game,
+    public Action escAction(JFrame window, GameState game,
             ScheduledThreadPoolExecutor executor) {
 
         Action esc = new AbstractAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Exiting game. Thanks for Playing!");
                 game.setPlaying(false);
                 executor.shutdown();
                 window.dispose();

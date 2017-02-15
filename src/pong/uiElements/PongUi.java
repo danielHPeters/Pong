@@ -2,6 +2,7 @@ package pong.uiElements;
 
 import java.awt.BorderLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
@@ -18,7 +19,7 @@ public class PongUi {
     /**
      * the game window
      */
-    private final GameWindow window;
+    private final JFrame window;
 
     /**
      * the drawing painter containing the game loop and objects
@@ -85,7 +86,7 @@ public class PongUi {
      * 
      * @return 
      */
-    public GameWindow getWindow() {
+    public JFrame getWindow() {
         return window;
     }
     

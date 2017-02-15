@@ -73,7 +73,7 @@ public class Main {
         this.loop = new RunGame(ui.getPainter(), logic);
         this.executor = new ScheduledThreadPoolExecutor(3);
         this.executor.scheduleAtFixedRate(loop, 0L, 100L, TimeUnit.MILLISECONDS);
-        this.keyBindings = new KeyBindings(ui.getWindow(), ui.getPainter(), executor, game, actions);
+        this.keyBindings = new KeyBindings(ui, executor, game, actions);
 
     }
 
