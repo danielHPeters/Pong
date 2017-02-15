@@ -1,77 +1,27 @@
 package pong.uiElements;
 
 import java.awt.*;
-import java.util.List;
 import javax.swing.*;
-import pong.gameObjcects.Ball;
-import pong.gameObjcects.GameArea;
-import pong.gameObjcects.Player;
+import pong.GameState;
+import pong.configuration.Settings;
 
 public class Painter extends JPanel {
 
-    /**
-     * 
-     */
-    private boolean gameOver;
-    
-    /**
-     * 
-     */
-    private final int width;
-    
-    /**
-     * 
-     */
-    private final int height;
-    
-    /**
-     * 
-     */
-    private final GameArea area;
-    
-    /**
-     * 
-     */
-    private final List<Player> players;
-    
-    /**
-     * 
-     */
-    private final Ball ball;
-
-    /**
-     * the default constructor
-     *
-     * @param width
-     * @param height
-     * @param area
-     * @param players
-     * @param ball
-     */
-    public Painter(int width, int height, GameArea area,  List<Player> players, Ball ball) {
-        this.gameOver = false;
-        this.width = width;
-        this.height = height;
-        this.area = area;
-        this.players = players;
-        this.ball = ball;
-    }
-
-    /**
-     * getter for gameOver boolean (check if the game stopped)
-     *
-     * @return boolean which tells if the game is over
-     */
-    public boolean isGameOver() {
-        return gameOver;
-    }
+    private Settings config;
 
     /**
      *
-     * @param gameOver
      */
-    public void setGameOver(boolean gameOver) {
-        this.gameOver = gameOver;
+    private final GameState game;
+
+    /**
+     * 
+     * @param config
+     * @param game 
+     */
+    public Painter(Settings config, GameState game) {
+        this.config = config;
+        this.game = game;
     }
 
     /**
@@ -82,8 +32,8 @@ public class Painter extends JPanel {
     public void drawBall(Graphics g) {
         g.setColor(Color.black);
         g.fillOval(
-                this.ball.getX(), this.ball.getY(),
-                this.ball.getSize(), this.ball.getSize()
+                this.game.getBall().getX(), this.game.getBall().getY(),
+                this.game.getBall().getSize(), this.game.getBall().getSize()
         );
     }
 
@@ -93,7 +43,7 @@ public class Painter extends JPanel {
      * @param g the graphics object of paintcomponent method
      */
     public void drawPlayers(Graphics g) {
-        players.forEach((pl) -> {
+        this.game.getPlayers().forEach((pl) -> {
             g.fillRect(pl.getX(), pl.getY(), pl.getWidth(), pl.getHeight());
         });
     }
@@ -105,10 +55,16 @@ public class Painter extends JPanel {
      */
     public void drawTexts(Graphics g) {
         //Draw scores
-        g.drawString("Player 1: " + players.get(0).getScore(), 25, 10);
-        g.drawString("Player 2: " + players.get(1).getScore(), width - 100, 10);
-        if (gameOver) {
-            g.drawString("Game Over", width / 2 - 20, height / 2 - 20);
+        g.drawString(
+                "Player 1: " + this.game.getPlayers().get(0).getScore(),
+                25, 10
+        );
+        g.drawString(
+                "Player 2: " + this.game.getPlayers().get(1).getScore(),
+                this.config.getWidth() - 100, 10
+        );
+        if (!this.game.isPlaying()) {
+            g.drawString("Game Over", this.config.getWidth() / 2 - 20, this.config.getHeight() / 2 - 20);
         }
     }
 
@@ -118,7 +74,12 @@ public class Painter extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawRect(area.getX(), area.getY(), area.getWidth(), area.getHeight());
+        g.drawRect(
+                this.game.getArea().getX(),
+                this.game.getArea().getY(),
+                this.game.getArea().getWidth(),
+                this.game.getArea().getHeight()
+        );
         drawBall(g);
         drawPlayers(g);
         drawTexts(g);

@@ -1,6 +1,6 @@
 package pong;
 
-import pong.uiElements.Painter;
+import javax.swing.JPanel;
 
 /**
  * this class contains the painter loop, which controls painter speed, framerate
@@ -13,22 +13,7 @@ public class RunGame implements Runnable {
     /**
      * 
      */
-    private boolean playing;
-
-    /**
-     * 
-     */
-    private boolean paused;
-
-    /**
-     * 
-     */
-    private int gameSpeed; // The lower, the faster the painter
-
-    /**
-     * 
-     */
-    private final Painter painter;
+    private final JPanel painter;
 
     /**
      * 
@@ -42,45 +27,9 @@ public class RunGame implements Runnable {
      * @param painter
      * @param logic
      */
-    public RunGame(Painter painter, GameLogic logic) {
+    public RunGame(JPanel painter, GameLogic logic) {
         this.painter = painter;
         this.logic = logic;
-        this.gameSpeed = 18;
-        this.paused = false;
-        this.playing = true;
-    }
-    
-    /**
-     * 
-     */
-    public void pauseToggle(){
-        this.paused = !paused;
-    }
-    
-    /**
-     * 
-     */
-    public void end(){
-        this.playing = false;
-    }
-
-    /**
-     * setter for the painter speed / thread delay
-     *
-     * @param gameSpeed new painter speed
-     */
-    public void setGameSpeed(int gameSpeed) {
-        this.gameSpeed = gameSpeed;
-    }
-    
-    /**
-     * 
-     */
-    public void restartGame(){
-        this.logic.reseGameObjects();
-        this.logic.resetScores();
-        this.painter.setGameOver(false);
-        this.playing = true;
     }
 
     /**
@@ -89,18 +38,18 @@ public class RunGame implements Runnable {
     @Override
     public void run() {
 
-        while (playing && !painter.isGameOver()) {
+        while (this.logic.getGame().isPlaying()) {
 
-            if (!paused) {
+            if (!logic.getGame().isPaused()) {
                 // Move painter objects repaint
                 this.logic.update();
                 this.painter.repaint();
             }
 
             try {
-                Thread.sleep(gameSpeed);
+                Thread.sleep(this.logic.getGame().getConfig().getGameSpeed());
             } catch (InterruptedException ex) {
-                this.playing = false;
+                this.logic.getGame().setPlaying(false);
             }
 
         }

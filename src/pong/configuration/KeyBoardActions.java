@@ -4,8 +4,9 @@ import java.awt.event.ActionEvent;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import pong.GameState;
 import pong.RunGame;
-import pong.gameObjcects.Player;
+import pong.models.Player;
 import pong.uiElements.GameWindow;
 
 /**
@@ -59,11 +60,11 @@ public class KeyBoardActions {
     /**
      *
      * @param window
-     * @param loop
+     * @param game
      * @param executor
      * @return
      */
-    public Action escAction(GameWindow window, RunGame loop,
+    public Action escAction(GameWindow window, GameState game,
             ScheduledThreadPoolExecutor executor) {
 
         Action esc = new AbstractAction() {
@@ -71,7 +72,7 @@ public class KeyBoardActions {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Exiting game. Thanks for Playing!");
-                loop.end();
+                game.setPlaying(false);
                 executor.shutdown();
                 window.dispose();
             }
@@ -83,16 +84,16 @@ public class KeyBoardActions {
 
     /**
      *
-     * @param loop
+     * @param game
      * @return
      */
-    public Action restartAction(RunGame loop) {
+    public Action restartAction(GameState game) {
 
         Action restart = new AbstractAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                loop.restartGame();
+                game.restart();
             }
 
         };

@@ -1,19 +1,14 @@
 package pong;
 
-import pong.audio.BackgroundMusicPlayer;
-import java.awt.BorderLayout;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import javax.swing.JButton;
-import javax.swing.JMenuBar;
-import javax.swing.JToggleButton;
 import pong.configuration.KeyBindings;
-import pong.uiElements.Painter;
-import pong.uiElements.GameWindow;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import pong.configuration.KeyBoardActions;
+import pong.configuration.Settings;
+import pong.uiElements.PongUi;
 
 /**
  * Starter class of the pong game this is a simple remake of the classic pong
@@ -28,12 +23,7 @@ public class Main {
     /**
      *
      */
-    private final int width;
-
-    /**
-     *
-     */
-    private final int height;
+    private Settings config;
 
     /**
      * the game loop
@@ -48,42 +38,17 @@ public class Main {
     /**
      *
      */
+    private GameState game;
+
+    /**
+     *
+     */
     private final GameLogic logic;
 
     /**
-     * the game window
-     */
-    private final GameWindow window;
-
-    /**
-     * the drawing painter containing the game loop and objects
-     */
-    private final Painter painter;
-
-    /**
      *
      */
-    private final ButtonActions btnActions;
-
-    /**
-     *
-     */
-    private final JToggleButton pauseButton;
-
-    /**
-     *
-     */
-    private final JButton restartButton;
-
-    /**
-     *
-     */
-    private JMenuBar actionBar;
-    
-    /**
-     * 
-     */
-    private GameState game;
+    private final PongUi ui;
 
     /**
      * initialize the keybindings of the game
@@ -99,44 +64,24 @@ public class Main {
      * This is the default constructor
      */
     public Main() {
-        
-        this.width = 800;
-        this.height = 600;
-        this.game = new GameState(width, height);
-        this.window = new GameWindow(width, height);
-        this.painter = new Painter(width, height, game.getArea(), game.getPlayers(), game.getBall());
+
+        this.config = new Settings(800, 600, 6, 18, 5);
+        this.game = new GameState(config);
         this.actions = new KeyBoardActions();
-        this.logic = new GameLogic(game.getArea(), game.getPlayers(), game.getBall(), painter);
-        this.loop = new RunGame(painter, logic);
+        this.logic = new GameLogic(game);
+        this.ui = new PongUi(config, game);
+        this.loop = new RunGame(ui.getPainter(), logic);
         this.executor = new ScheduledThreadPoolExecutor(3);
         this.executor.scheduleAtFixedRate(loop, 0L, 100L, TimeUnit.MILLISECONDS);
-        this.keyBindings = new KeyBindings(window, painter, executor, loop, game.getPlayers(), actions);
+        this.keyBindings = new KeyBindings(ui.getWindow(), ui.getPainter(), executor, game, actions);
 
-        this.actionBar = new JMenuBar();
-        this.actionBar.setFocusable(false);
-
-        this.btnActions = new ButtonActions(loop);
-        this.pauseButton = new JToggleButton("Pause");
-        this.pauseButton.addItemListener(btnActions.pauseListener());
-
-        this.restartButton = new JButton("Restart");
-        this.restartButton.addActionListener(btnActions.restartListener());
-        this.restartButton.setFocusable(false);
-
-        this.actionBar.add(pauseButton);
-        this.actionBar.add(restartButton);
-
-        this.window.add(painter, BorderLayout.CENTER);
-        this.window.add(actionBar, BorderLayout.NORTH);
-        this.window.pack();
-        
     }
 
     /**
      * starts the game loop
      */
     public void start() {
-        this.window.setVisible(true);
+        this.ui.getWindow().setVisible(true);
     }
 
     /**
@@ -158,7 +103,7 @@ public class Main {
             }
 
             Main pong = new Main();
-            SwingUtilities.updateComponentTreeUI(pong.window);
+            SwingUtilities.updateComponentTreeUI(pong.ui.getWindow());
             pong.start();
         });
         //BackgroundMusicPlayer player = new BackgroundMusicPlayer();

@@ -11,14 +11,14 @@ import java.awt.event.ItemListener;
  */
 public class ButtonActions {
 
-    private final RunGame loop;
+    private final GameState game;
 
     /**
      *
-     * @param loop
+     * @param game
      */
-    public ButtonActions(RunGame loop) {
-        this.loop = loop;
+    public ButtonActions(GameState game) {
+        this.game = game;
     }
 
     /**
@@ -29,7 +29,7 @@ public class ButtonActions {
 
         ItemListener listener = (ItemEvent e) -> {
 
-            this.loop.pauseToggle();
+            this.game.pauseToggle();
 
         };
 
@@ -43,7 +43,7 @@ public class ButtonActions {
     public ActionListener restartListener() {
 
         ActionListener listener = (ActionEvent e) -> {
-            this.loop.restartGame();
+            this.game.restart();
         };
 
         return listener;

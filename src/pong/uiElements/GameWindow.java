@@ -3,6 +3,7 @@ package pong.uiElements;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JFrame;
+import pong.configuration.Settings;
 
 /**
  * the window of the game which contains the GameArea
@@ -11,25 +12,14 @@ import javax.swing.JFrame;
  */
 public class GameWindow extends JFrame {
     
-    /**
-     * 
-     */
-    private final int width;
-    
-    /**
-     * 
-     */
-    private final int height;
+    private final Settings config;
 
     /**
-     * default constructor
-     *
-     * @param width
-     * @param height
+     * 
+     * @param config 
      */
-    public GameWindow(int width, int height) {
-        this.width = width;
-        this.height = height;
+    public GameWindow(Settings config) {
+        this.config = config;
         initWindow();
     }
 
@@ -41,7 +31,7 @@ public class GameWindow extends JFrame {
     private void initWindow() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocation(312, 184);
-        this.setMinimumSize(new Dimension(this.width + 20, this.height + 20));
+        this.setMinimumSize(new Dimension(this.config.getWidth() + 20, this.config.getHeight() + 20));
         this.setTitle("Pong");
         this.setLayout(new BorderLayout());
     }

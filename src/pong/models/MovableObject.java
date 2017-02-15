@@ -1,4 +1,4 @@
-package pong.gameObjcects;
+package pong.models;
 
 import pong.interfaces.Moveable;
 

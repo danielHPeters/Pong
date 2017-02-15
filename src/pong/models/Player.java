@@ -1,4 +1,4 @@
-package pong.gameObjcects;
+package pong.models;
 
 import pong.interfaces.Collideable;
 
@@ -20,14 +20,14 @@ public class Player extends MovableObject {
      * @param posX X position on gamearea
      * @param posY Y position on gamearea
      */
-    public Player(int posX, int posY) {
+    public Player(int posX, int posY, int speed) {
         this.up = false;
         this.down = false;
         this.x = posX;
         this.y = posY;
         this.initialX = posX;
         this.initialY = posY;
-        this.speed = 10;
+        this.speed = speed;
         this.width = 5;
         this.height = 40;
     }

@@ -3,10 +3,11 @@ package pong.uiElements;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JMenuBar;
+import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import pong.ButtonActions;
 import pong.GameState;
-import pong.RunGame;
+import pong.configuration.Settings;
 
 /**
  *
@@ -22,7 +23,7 @@ public class PongUi {
     /**
      * the drawing painter containing the game loop and objects
      */
-    private final Painter painter;
+    private final JPanel painter;
 
     /**
      *
@@ -44,14 +45,19 @@ public class PongUi {
      */
     private JMenuBar actionBar;
 
-    public PongUi(GameState game, RunGame loop, int width, int height) {
+    /**
+     * 
+     * @param config
+     * @param game 
+     */
+    public PongUi(Settings config, GameState game) {
 
-        this.window = new GameWindow(width, height);
-        this.painter = new Painter(width, height, game.getArea(), game.getPlayers(), game.getBall());
+        this.window = new GameWindow(config);
+        this.painter = new Painter(config, game);
         this.actionBar = new JMenuBar();
         this.actionBar.setFocusable(false);
 
-        this.btnActions = new ButtonActions(loop);
+        this.btnActions = new ButtonActions(game);
         this.pauseButton = new JToggleButton("Pause");
         this.pauseButton.addItemListener(btnActions.pauseListener());
 
@@ -66,5 +72,22 @@ public class PongUi {
         this.window.add(actionBar, BorderLayout.NORTH);
         this.window.pack();
     }
+
+    /**
+     * 
+     * @return 
+     */
+    public JPanel getPainter() {
+        return painter;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public GameWindow getWindow() {
+        return window;
+    }
+    
 
 }

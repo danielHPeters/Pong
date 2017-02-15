@@ -1,4 +1,4 @@
-package pong.gameObjcects;
+package pong.models;
 
 import pong.interfaces.Collideable;
 
@@ -14,15 +14,16 @@ public class Ball extends MovableObject {
      *
      * @param xPos initial x position
      * @param yPos initial y position
+     * @param speed
      */
-    public Ball(int xPos, int yPos) {
+    public Ball(int xPos, int yPos, int speed) {
         this.up = true;
         this.right = false;
         this.x = xPos;
         this.y = yPos;
         this.initialX = xPos;
         this.initialY = yPos;
-        this.speed = 5;
+        this.speed = speed;
         this.width = 8;
         this.height = 8;
     }

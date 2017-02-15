@@ -1,55 +1,22 @@
 package pong;
 
-import java.util.List;
-import pong.gameObjcects.Ball;
-import pong.gameObjcects.GameArea;
-import pong.gameObjcects.Player;
-import pong.uiElements.Painter;
-
 /**
  *
  * @author d.peters
  */
 public class GameLogic {
-
-    /**
-     * Score required for victory
-     */
-    private final int victoryCond;
-
+    
     /**
      * 
      */
-    private final GameArea area;
+    private GameState game;
 
     /**
      * 
+     * @param game 
      */
-    private final List<Player> players;
-
-    /**
-     * 
-     */
-    private final Ball ball;
-
-    /**
-     * Reference to the Painter Object
-     */
-    private final Painter painter;
-
-    /**
-     *
-     * @param area
-     * @param players
-     * @param ball
-     * @param painter
-     */
-    public GameLogic(GameArea area, List<Player> players, Ball ball, Painter painter) {
-        this.area = area;
-        this.players = players;
-        this.ball = ball;
-        this.painter = painter;
-        this.victoryCond = 6;
+    public GameLogic(GameState game) {
+        this.game = game;
     }
 
     /**
@@ -57,60 +24,56 @@ public class GameLogic {
      */
     public void update() {
 
-        this.players.forEach((pl) -> {
+        this.game.getPlayers().forEach((pl) -> {
 
             // move player
-            pl.moveVert(area.getHeight());
+            pl.moveVert(this.game.getArea().getHeight());
 
             // check for collision with ball
-            if (this.ball.collision(pl)) {
-                this.ball.changeHorDir();
+            if (this.game.getBall().collision(pl)) {
+                this.game.getBall().changeHorDir();
             }
 
             // if a player reaches the victoryCond condition, the painter will end
-            if (pl.hasWon(this.victoryCond)) {
-                painter.setGameOver(true);
+            if (pl.hasWon(this.game.getConfig().getVictoryCondition())) {
+                game.setPlaying(false);
             }
 
         });
 
-        if (this.ball.collision(area)) {
+        if (this.game.getBall().collision(this.game.getArea())) {
 
-            if (ball.getY() <= + 10 || ball.getY() >= (area.getHeight() - ball.getSize())) {
-                ball.changeVertDir();
+            if (this.game.getBall().getY() <= + 10 || this.game.getBall().getY() >= (this.game.getArea().getHeight() - this.game.getBall().getSize())) {
+                this.game.getBall().changeVertDir();
             }
 
         }
 
         // move the ball
-        this.ball.move();
+        this.game.getBall().move();
 
         // check if the ball hit the right border
-        if (this.ball.getX() > (area.getWidth() - this.ball.getSize())) {
-            this.players.get(0).incrementScore();
-            reseGameObjects();
+        if (this.game.getBall().getX() > (this.game.getArea().getWidth() - this.game.getBall().getSize())) {
+            this.game.getPlayers().get(0).incrementScore();
+            this.game.resetGameObjects();
         }
 
         // check if the ball hit the left border
-        if (this.ball.getX() == 0) {
-            this.players.get(1).incrementScore();
-            reseGameObjects();
+        if (this.game.getBall().getX() == 0) {
+            this.game.getPlayers().get(1).incrementScore();
+            this.game.resetGameObjects();
         }
     }
 
-    /**
-     * 
-     */
-    public void reseGameObjects() {
-        this.ball.resetPosition();
-        this.players.forEach(player -> player.resetPosition());
-    }
+    
 
     /**
      * 
+     * @return 
      */
-    public void resetScores() {
-        this.players.forEach(player -> player.resetScore());
+    public GameState getGame() {
+        return game;
     }
+    
 
 }

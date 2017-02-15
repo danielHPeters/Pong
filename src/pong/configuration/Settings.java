@@ -9,7 +9,12 @@ public class Settings {
     /**
      * 
      */
-    private int dimension;
+    private int width;
+    
+    /**
+     * 
+     */
+    private int height;
     
     /**
      * 
@@ -28,16 +33,18 @@ public class Settings {
 
     /**
      * 
-     * @param dimension
+     * @param width
+     * @param height
      * @param victoryCondition
      * @param gameSpeed
      * @param objectsVelocity 
      */
     public Settings(
-            int dimension, int victoryCondition, int gameSpeed,
+            int width, int height, int victoryCondition, int gameSpeed,
             int objectsVelocity
     ) {
-        this.dimension = dimension;
+        this.width = width;
+        this.height = height;
         this.victoryCondition = victoryCondition;
         this.gameSpeed = gameSpeed;
         this.objectsVelocity = objectsVelocity;
@@ -47,17 +54,34 @@ public class Settings {
      * 
      * @return 
      */
-    public int getDimension() {
-        return dimension;
+    public int getWidth() {
+        return width;
     }
 
     /**
      * 
-     * @param dimension 
+     * @param width 
      */
-    public void setDimension(int dimension) {
-        this.dimension = dimension;
+    public void setWidth(int width) {
+        this.width = width;
     }
+
+    /**
+     * 
+     * @return 
+     */
+    public int getHeight() {
+        return height;
+    }
+
+    /**
+     * 
+     * @param height 
+     */
+    public void setHeight(int height) {
+        this.height = height;
+    }
+    
 
     /**
      * 
