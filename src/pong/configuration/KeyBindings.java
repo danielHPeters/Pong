@@ -2,13 +2,12 @@ package pong.configuration;
 
 import com.sun.glass.events.KeyEvent;
 import pong.enums.Direction;
-import pong.models.Player;
-import java.util.List;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
-import javax.swing.*;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import pong.GameState;
-import pong.RunGame;
-import pong.uiElements.GameWindow;
 import pong.uiElements.PongUi;
 
 /**
@@ -30,6 +29,9 @@ public class KeyBindings {
      */
     private final KeyBoardActions actions;
 
+    /**
+     * State of the game and game objects;
+     */
     private final GameState game;
 
     /**

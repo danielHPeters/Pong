@@ -65,14 +65,21 @@ public class Main {
      */
     public Main() {
 
+        // Initialize game objects and logic
         this.config = new Settings(800, 600, 6, 18, 5, 10);
         this.game = new GameState(config);
-        this.actions = new KeyBoardActions();
         this.logic = new GameLogic(game);
+        
+        // Initialize the ui
         this.ui = new PongUi(config, game);
+        
+        // Initialize the loop / game engine
         this.loop = new RunGame(ui.getPainter(), logic);
         this.executor = new ScheduledThreadPoolExecutor(3);
         this.executor.scheduleAtFixedRate(loop, 0L, 100L, TimeUnit.MILLISECONDS);
+        
+        // Configure keyboard controls
+        this.actions = new KeyBoardActions();
         this.keyBindings = new KeyBindings(ui, executor, game, actions);
 
     }
