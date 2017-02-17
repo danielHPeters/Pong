@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2017 Daniel
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package pong;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -69,15 +85,15 @@ public class Main {
         this.config = new Settings(800, 600, 6, 18, 5, 10);
         this.game = new GameState(config);
         this.logic = new GameLogic(game);
-        
+
         // Initialize the ui
         this.ui = new PongUi(config, game);
-        
+
         // Initialize the loop / game engine
         this.loop = new RunGame(ui.getPainter(), logic);
         this.executor = new ScheduledThreadPoolExecutor(3);
         this.executor.scheduleAtFixedRate(loop, 0L, 100L, TimeUnit.MILLISECONDS);
-        
+
         // Configure keyboard controls
         this.actions = new KeyBoardActions();
         this.keyBindings = new KeyBindings(ui, executor, game, actions);
