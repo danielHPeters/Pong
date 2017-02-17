@@ -21,7 +21,7 @@ import javax.swing.KeyStroke;
 
 /**
  *
- * @author d.peters
+ * @author Daniel
  */
 public enum Direction {
     UP("UP pressed", KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, false)),

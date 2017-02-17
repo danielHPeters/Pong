@@ -24,7 +24,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import pong.configuration.KeyBoardActions;
 import pong.configuration.Settings;
-import pong.uiElements.PongUi;
+import pong.ui.PongUi;
 
 /**
  * Starter class of the pong game this is a simple remake of the classic pong

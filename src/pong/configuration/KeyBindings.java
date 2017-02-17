@@ -24,7 +24,7 @@ import javax.swing.InputMap;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import pong.GameState;
-import pong.uiElements.PongUi;
+import pong.ui.PongUi;
 
 /**
  * Keyboard configuration of the Game
