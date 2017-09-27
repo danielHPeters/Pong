@@ -21,11 +21,12 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JFrame;
+
 import pong.GameState;
+import pong.interfaces.IWindow;
 import pong.models.Player;
 
 /**
- *
  * @author d.peters
  */
 public class KeyBoardActions {
@@ -33,12 +34,13 @@ public class KeyBoardActions {
     /**
      * this method creates the methods for the up actions
      *
-     * @param player the player object
+     * @param player   the player object
      * @param toggleUp boolean which is true for key pressed and for for key
-     * released
+     *                 released
      * @return the abstract action
      */
     public Action upAction(Player player, boolean toggleUp) {
+
         Action upAction = new AbstractAction() {
 
             @Override
@@ -53,9 +55,8 @@ public class KeyBoardActions {
     /**
      * this method creates the methods for the down actions
      *
-     * @param player the player object
-     * @param ToggleDown boolean which is true for key pressed and for for key
-     * released
+     * @param player     the player object
+     * @param ToggleDown boolean which is true for key pressed and for for key released
      * @return the abstract action
      */
     public Action downAction(Player player, boolean ToggleDown) {
@@ -73,14 +74,13 @@ public class KeyBoardActions {
     }
 
     /**
-     *
      * @param window
      * @param game
      * @param executor
      * @return
      */
-    public Action escAction(JFrame window, GameState game,
-            ScheduledThreadPoolExecutor executor) {
+    public Action escAction(IWindow window, GameState game,
+                            ScheduledThreadPoolExecutor executor) {
 
         Action esc = new AbstractAction() {
 
@@ -88,7 +88,7 @@ public class KeyBoardActions {
             public void actionPerformed(ActionEvent e) {
                 game.setPlaying(false);
                 executor.shutdown();
-                window.dispose();
+                window.close();
             }
 
         };
@@ -97,7 +97,6 @@ public class KeyBoardActions {
     }
 
     /**
-     *
      * @param game
      * @return
      */

@@ -28,8 +28,8 @@ public class Ball extends MovableObject {
     /**
      * Default constructor setting position, speed, width, height
      *
-     * @param xPos initial x position
-     * @param yPos initial y position
+     * @param xPos  initial x position
+     * @param yPos  initial y position
      * @param speed
      */
     public Ball(int xPos, int yPos, int speed) {
@@ -65,44 +65,27 @@ public class Ball extends MovableObject {
 
     /**
      * move the ball
-     *
      */
     @Override
     public void move() {
-        moveHor();
-        moveVert();
-    }
 
-    /**
-     * move in the horizontal direction
-     *
-     * @param panelWidth width of the game area
-     */
-    private void moveHor() {
         if (this.right) {
             moveRight();
         } else {
             moveLeft();
         }
-    }
 
-    /**
-     * Move in the vertical direcction
-     *
-     * @param panelHeight height of the game area (used for moving down)
-     */
-    private void moveVert() {
         if (this.up) {
             moveUp();
         } else {
             moveDown();
         }
     }
-    
+
     /**
-     * 
+     *
      */
-    public void changeVertDir(){
+    public void toggleUp() {
         this.up = !this.up;
     }
 
@@ -129,7 +112,7 @@ public class Ball extends MovableObject {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public void collisionHandler() {

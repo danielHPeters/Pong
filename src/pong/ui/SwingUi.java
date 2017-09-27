@@ -17,30 +17,29 @@
 package pong.ui;
 
 import java.awt.BorderLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.JToggleButton;
+import javax.swing.*;
+
 import pong.ButtonActions;
 import pong.GameState;
 import pong.configuration.Settings;
+import pong.interfaces.ICanvas;
+import pong.interfaces.IUi;
+import pong.interfaces.IWindow;
 
 /**
- *
  * @author Daniel
  */
-public class PongUi {
+public class SwingUi implements IUi {
 
     /**
      * the game window
      */
-    private final JFrame window;
+    private JFrame window;
 
     /**
-     * the drawing painter containing the game loop and objects
+     * the drawing canvas containing the game loop and objects
      */
-    private final JPanel painter;
+    private final ICanvas canvas;
 
     /**
      *
@@ -63,14 +62,13 @@ public class PongUi {
     private JMenuBar actionBar;
 
     /**
-     * 
      * @param config
-     * @param game 
+     * @param game
      */
-    public PongUi(Settings config, GameState game) {
+    public SwingUi(Settings config, GameState game) {
 
-        this.window = new GameWindow(config);
-        this.painter = new Painter(config, game);
+        this.window = new SwingWindow(config);
+        this.canvas = new SwingCanvas(config, game);
         this.actionBar = new JMenuBar();
         this.actionBar.setFocusable(false);
 
@@ -85,26 +83,24 @@ public class PongUi {
         this.actionBar.add(pauseButton);
         this.actionBar.add(restartButton);
 
-        this.window.add(painter, BorderLayout.CENTER);
+        this.window.add((JPanel) canvas, BorderLayout.CENTER);
         this.window.add(actionBar, BorderLayout.NORTH);
         this.window.pack();
     }
 
     /**
-     * 
-     * @return 
+     * @return
      */
-    public JPanel getPainter() {
-        return painter;
+    @Override
+    public ICanvas getCanvas() {
+        return canvas;
     }
 
     /**
-     * 
-     * @return 
+     * @return
      */
-    public JFrame getWindow() {
-        return window;
+    @Override
+    public IWindow getWindow() {
+        return (IWindow) window;
     }
-    
-
 }

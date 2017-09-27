@@ -29,12 +29,12 @@ abstract class MovableObject extends GameObject implements Moveable {
      * movement speed of the object
      */
     protected int speed;
-    
+
     /**
      * Initial x position (Used to reset the object to start position)
      */
     protected int initialX;
-    
+
     /**
      * Initial y position (Used to reset the object to start position)
      */
@@ -130,7 +130,7 @@ abstract class MovableObject extends GameObject implements Moveable {
     public void moveRight() {
         this.x += speed;
     }
-    
+
     /**
      * Resets the object to its original coordinates
      */

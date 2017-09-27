@@ -16,33 +16,34 @@
  */
 package pong.ui;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import javax.swing.JFrame;
+import java.awt.*;
+import javax.swing.*;
+
 import pong.configuration.Settings;
+import pong.interfaces.IWindow;
 
 /**
  * the window of the game which contains the GameArea
  *
  * @author d.peters
  */
-public class GameWindow extends JFrame {
-    
+public class SwingWindow extends JFrame implements IWindow {
+
+    /**
+     *
+     */
     private final Settings config;
 
     /**
-     * 
-     * @param config 
+     * @param config
      */
-    public GameWindow(Settings config) {
+    public SwingWindow(Settings config) {
         this.config = config;
         initWindow();
     }
 
     /**
      * initializes the game window
-     *
-     * @param dim initial dimension of the window
      */
     private void initWindow() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,5 +51,31 @@ public class GameWindow extends JFrame {
         this.setMinimumSize(new Dimension(this.config.getWidth() + 20, this.config.getHeight() + 20));
         this.setTitle("Pong");
         this.setLayout(new BorderLayout());
+        this.setLandF();
+    }
+
+    /**
+     * Set look and feel of the ui to nimbus.
+     */
+    public void setLandF() {
+        try {
+
+            UIManager.setLookAndFeel(
+                    "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+
+        } catch (ClassNotFoundException | InstantiationException
+                | IllegalAccessException | UnsupportedLookAndFeelException e) {
+        }
+        SwingUtilities.updateComponentTreeUI(this);
+    }
+
+    @Override
+    public void display() {
+        setVisible(true);
+    }
+
+    @Override
+    public void close() {
+        dispose();
     }
 }

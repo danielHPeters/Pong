@@ -18,13 +18,13 @@ package pong.configuration;
 
 import com.sun.glass.events.KeyEvent;
 import pong.enums.Direction;
+
 import java.util.concurrent.ScheduledThreadPoolExecutor;
-import javax.swing.ActionMap;
-import javax.swing.InputMap;
-import javax.swing.JPanel;
-import javax.swing.KeyStroke;
+import javax.swing.*;
+
 import pong.GameState;
-import pong.ui.PongUi;
+import pong.interfaces.IUi;
+import pong.ui.SwingUi;
 
 /**
  * Keyboard configuration of the Game
@@ -33,7 +33,7 @@ import pong.ui.PongUi;
  */
 public class KeyBindings {
 
-    private final PongUi ui;
+    private final IUi ui;
 
     /**
      *
@@ -58,8 +58,8 @@ public class KeyBindings {
      * @param game
      * @param actions
      */
-    public KeyBindings(PongUi ui, ScheduledThreadPoolExecutor executor,
-            GameState game, KeyBoardActions actions) {
+    public KeyBindings(IUi ui, ScheduledThreadPoolExecutor executor,
+                       GameState game, KeyBoardActions actions) {
         this.executor = executor;
         this.ui = ui;
         this.actions = actions;
@@ -69,14 +69,11 @@ public class KeyBindings {
 
     /**
      * initialization method which binds keys to action methods
-     *
-     * @param panel the game area object
-     * @param players ArrayList with all player objects
      */
     private void initialize() {
         // Get the input map of the GamePanel
-        InputMap iMap = this.ui.getPainter().getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
-        ActionMap aMap = this.ui.getPainter().getActionMap();
+        InputMap iMap = ((JPanel) this.ui.getCanvas()).getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap aMap = ((JPanel) this.ui.getCanvas()).getActionMap();
 
         for (Direction dir : Direction.values()) {
             iMap.put(dir.getKeyStroke(), dir.getText());

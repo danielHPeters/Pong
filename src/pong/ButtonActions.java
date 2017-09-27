@@ -22,7 +22,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 /**
- *
  * @author d.peters
  */
 public class ButtonActions {
@@ -30,7 +29,6 @@ public class ButtonActions {
     private final GameState game;
 
     /**
-     *
      * @param game
      */
     public ButtonActions(GameState game) {
@@ -38,31 +36,19 @@ public class ButtonActions {
     }
 
     /**
-     *
      * @return
      */
     public ItemListener pauseListener() {
 
-        ItemListener listener = (ItemEvent e) -> {
-
-            this.game.pauseToggle();
-
-        };
-
-        return listener;
+        return e -> this.game.restart();
     }
 
     /**
-     *
      * @return
      */
     public ActionListener restartListener() {
 
-        ActionListener listener = (ActionEvent e) -> {
-            this.game.restart();
-        };
-
-        return listener;
+        return e -> this.game.restart();
     }
 
 }

@@ -18,10 +18,12 @@ package pong.ui;
 
 import java.awt.*;
 import javax.swing.*;
+
 import pong.GameState;
 import pong.configuration.Settings;
+import pong.interfaces.ICanvas;
 
-public class Painter extends JPanel {
+public class SwingCanvas extends JPanel implements ICanvas {
 
     private Settings config;
 
@@ -31,11 +33,10 @@ public class Painter extends JPanel {
     private final GameState game;
 
     /**
-     * 
      * @param config
-     * @param game 
+     * @param game
      */
-    public Painter(Settings config, GameState game) {
+    public SwingCanvas(Settings config, GameState game) {
         this.config = config;
         this.game = game;
     }
@@ -59,13 +60,11 @@ public class Painter extends JPanel {
      * @param g the graphics object of paintcomponent method
      */
     public void drawPlayers(Graphics g) {
-        this.game.getPlayers().forEach((pl) -> {
-            g.fillRect(pl.getX(), pl.getY(), pl.getWidth(), pl.getHeight());
-        });
+        this.game.getPlayers().forEach((pl) -> g.fillRect(pl.getX(), pl.getY(), pl.getWidth(), pl.getHeight()));
     }
 
     /**
-     * draws all texts on the Painter
+     * draws all texts on the SwingCanvas
      *
      * @param g the graphics object of paintcomponent method
      */
@@ -89,6 +88,7 @@ public class Painter extends JPanel {
      */
     @Override
     public void paintComponent(Graphics g) {
+
         super.paintComponent(g);
         g.drawRect(
                 this.game.getArea().getX(),
@@ -99,6 +99,11 @@ public class Painter extends JPanel {
         drawBall(g);
         drawPlayers(g);
         drawTexts(g);
+    }
+
+    @Override
+    public void draw(){
+        repaint();
     }
 
 }

@@ -30,13 +30,17 @@ public class Player extends MovableObject {
      */
     private int score = 0;
 
+    private final GameArea area;
+
     /**
      * default constructor.
      * initializes the players x and y position as well ad the  width and height
+     *
      * @param posX X position on gamearea
      * @param posY Y position on gamearea
+     * @param area
      */
-    public Player(int posX, int posY, int speed) {
+    public Player(int posX, int posY, int speed, GameArea area) {
         this.up = false;
         this.down = false;
         this.x = posX;
@@ -46,6 +50,7 @@ public class Player extends MovableObject {
         this.speed = speed;
         this.width = 5;
         this.height = 40;
+        this.area = area;
     }
 
     /**
@@ -72,26 +77,21 @@ public class Player extends MovableObject {
     public void incrementScore() {
         this.score += 1;
     }
-    
+
     /**
-     * 
+     *
      */
-    public void resetScore(){
+    public void resetScore() {
         this.score = 0;
     }
 
     /**
      * Check for keys pressed and moveVert according to key (Workaround for
      * input lag)d
-     * @param areaHeight
      */
-    public void moveVert(int areaHeight) {
-        if (this.up && this.y + - 10 >= 0) {
-            this.moveUp();
-        }
-        if (this.down && this.y < areaHeight - this.height) {
-            this.moveDown();
-        }
+    public void moveVert() {
+
+
     }
 
     /**
@@ -110,7 +110,14 @@ public class Player extends MovableObject {
 
     @Override
     public void move() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        if (this.up && this.y + -10 >= 0) {
+            this.moveUp();
+        }
+
+        if (this.down && this.y < this.area.getHeight() - this.height) {
+            this.moveDown();
+        }
     }
 
     @Override

@@ -18,13 +18,15 @@ package pong;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
 import pong.configuration.KeyBindings;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+
+import javax.swing.*;
+
 import pong.configuration.KeyBoardActions;
 import pong.configuration.Settings;
-import pong.ui.PongUi;
+import pong.interfaces.IUi;
+import pong.ui.SwingUi;
 
 /**
  * Starter class of the pong game this is a simple remake of the classic pong
@@ -44,7 +46,7 @@ public class Main {
     /**
      * the game loop
      */
-    private final RunGame loop;
+    private final GameLoop loop;
 
     /**
      *
@@ -64,7 +66,7 @@ public class Main {
     /**
      *
      */
-    private final PongUi ui;
+    private final IUi ui;
 
     /**
      * initialize the keybindings of the game
@@ -87,10 +89,10 @@ public class Main {
         this.logic = new GameLogic(game);
 
         // Initialize the ui
-        this.ui = new PongUi(config, game);
+        this.ui = new SwingUi(config, game);
 
         // Initialize the loop / game engine
-        this.loop = new RunGame(ui.getPainter(), logic);
+        this.loop = new GameLoop(ui.getCanvas(), logic);
         this.executor = new ScheduledThreadPoolExecutor(3);
         this.executor.scheduleAtFixedRate(loop, 0L, 100L, TimeUnit.MILLISECONDS);
 
@@ -101,25 +103,10 @@ public class Main {
     }
 
     /**
-     * Set look and feel of the ui to nimbus.
-     */
-    public void setLandF() {
-        try {
-
-            UIManager.setLookAndFeel(
-                    "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-
-        } catch (ClassNotFoundException | InstantiationException
-                | IllegalAccessException | UnsupportedLookAndFeelException e) {
-        }
-        SwingUtilities.updateComponentTreeUI(this.ui.getWindow());
-    }
-
-    /**
      * starts the game loop
      */
     public void start() {
-        this.ui.getWindow().setVisible(true);
+        this.ui.getWindow().display();
     }
 
     /**
@@ -132,7 +119,6 @@ public class Main {
         SwingUtilities.invokeLater(() -> {
 
             Main pong = new Main();
-            pong.setLandF();
             pong.start();
 
         });

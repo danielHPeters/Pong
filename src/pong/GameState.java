@@ -18,13 +18,13 @@ package pong;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import pong.configuration.Settings;
 import pong.models.Ball;
 import pong.models.GameArea;
 import pong.models.Player;
 
 /**
- *
  * @author Daniel
  */
 public class GameState {
@@ -60,48 +60,43 @@ public class GameState {
     private final List<Player> players;
 
     /**
-     *
      * @param config
      */
     public GameState(Settings config) {
         this.config = config;
         this.area = new GameArea(config.getWidth() - 10, config.getHeight() - 80);
-        Player pl1 = new Player(2 * 5, area.getHeight() / 2, config.getPlayerVelocity());
-        Player pl2 = new Player(config.getWidth() - 4 * 5, area.getHeight() / 2, config.getPlayerVelocity());
+        Player pl1 = new Player(2 * 5, area.getHeight() / 2, config.getPlayerSpeed(), area);
+        Player pl2 = new Player(config.getWidth() - 4 * 5, area.getHeight() / 2, config.getPlayerSpeed(), area);
         this.players = new ArrayList<>();
         this.players.add(pl1);
         this.players.add(pl2);
-        this.ball = new Ball(config.getWidth() / 2, config.getHeight() / 2, config.getBallVelocity());
+        this.ball = new Ball(config.getWidth() / 2, config.getHeight() / 2, config.getBallSpeed());
         this.playing = true;
         this.paused = false;
     }
 
     /**
-     * 
-     * @return 
+     * @return
      */
     public List<Player> getPlayers() {
         return players;
     }
 
     /**
-     * 
-     * @return 
+     * @return
      */
     public GameArea getArea() {
         return area;
     }
 
     /**
-     * 
-     * @return 
+     * @return
      */
     public Ball getBall() {
         return ball;
     }
 
     /**
-     *
      * @return
      */
     public boolean isPlaying() {
@@ -109,7 +104,6 @@ public class GameState {
     }
 
     /**
-     *
      * @param playing
      */
     public void setPlaying(boolean playing) {
@@ -124,16 +118,14 @@ public class GameState {
     }
 
     /**
-     * 
-     * @return 
+     * @return
      */
     public boolean isPaused() {
         return paused;
     }
 
     /**
-     * 
-     * @return 
+     * @return
      */
     public Settings getConfig() {
         return config;

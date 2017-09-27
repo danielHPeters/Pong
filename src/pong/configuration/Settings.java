@@ -17,7 +17,6 @@
 package pong.configuration;
 
 /**
- *
  * @author d.peters
  */
 public class Settings {
@@ -45,36 +44,34 @@ public class Settings {
     /**
      *
      */
-    private int ballVelocity;
+    private int ballSpeed;
 
     /**
      *
      */
-    private int playerVelocity;
+    private int playerSpeed;
 
     /**
-     *
      * @param width
      * @param height
      * @param victoryCondition
      * @param gameSpeed
-     * @param ballVelocity
-     * @param playerVelocity
+     * @param ballSpeed
+     * @param playerSpeed
      */
     public Settings(
             int width, int height, int victoryCondition, int gameSpeed,
-            int ballVelocity, int playerVelocity
+            int ballSpeed, int playerSpeed
     ) {
         this.width = width;
         this.height = height;
         this.victoryCondition = victoryCondition;
         this.gameSpeed = gameSpeed;
-        this.ballVelocity = ballVelocity;
-        this.playerVelocity = playerVelocity;
+        this.ballSpeed = ballSpeed;
+        this.playerSpeed = playerSpeed;
     }
 
     /**
-     *
      * @return
      */
     public int getWidth() {
@@ -82,7 +79,6 @@ public class Settings {
     }
 
     /**
-     *
      * @param width
      */
     public void setWidth(int width) {
@@ -90,7 +86,6 @@ public class Settings {
     }
 
     /**
-     *
      * @return
      */
     public int getHeight() {
@@ -98,7 +93,6 @@ public class Settings {
     }
 
     /**
-     *
      * @param height
      */
     public void setHeight(int height) {
@@ -106,7 +100,6 @@ public class Settings {
     }
 
     /**
-     *
      * @return
      */
     public int getVictoryCondition() {
@@ -114,7 +107,6 @@ public class Settings {
     }
 
     /**
-     *
      * @param victoryCondition
      */
     public void setVictoryCondition(int victoryCondition) {
@@ -122,7 +114,6 @@ public class Settings {
     }
 
     /**
-     *
      * @return
      */
     public int getGameSpeed() {
@@ -130,7 +121,6 @@ public class Settings {
     }
 
     /**
-     *
      * @param gameSpeed
      */
     public void setGameSpeed(int gameSpeed) {
@@ -138,35 +128,31 @@ public class Settings {
     }
 
     /**
-     *
      * @return
      */
-    public int getBallVelocity() {
-        return ballVelocity;
+    public int getBallSpeed() {
+        return ballSpeed;
     }
 
     /**
-     *
-     * @param ballVelocity
+     * @param ballSpeed
      */
-    public void setBallVelocity(int ballVelocity) {
-        this.ballVelocity = ballVelocity;
+    public void setBallSpeed(int ballSpeed) {
+        this.ballSpeed = ballSpeed;
     }
 
     /**
-     *
      * @return
      */
-    public int getPlayerVelocity() {
-        return playerVelocity;
+    public int getPlayerSpeed() {
+        return playerSpeed;
     }
 
     /**
-     *
-     * @param playerVelocity
+     * @param playerSpeed
      */
-    public void setPlayerVelocity(int playerVelocity) {
-        this.playerVelocity = playerVelocity;
+    public void setPlayerSpeed(int playerSpeed) {
+        this.playerSpeed = playerSpeed;
     }
 
 }

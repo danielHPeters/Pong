@@ -17,22 +17,20 @@
 package pong;
 
 /**
- *
  * @author d.peters
  */
 public class GameLogic {
-    
-    /**
-     * 
-     */
-    private GameState game;
 
     /**
-     * 
-     * @param game 
+     *
      */
-    public GameLogic(GameState game) {
-        this.game = game;
+    private GameState state;
+
+    /**
+     * @param state
+     */
+    public GameLogic(GameState state) {
+        this.state = state;
     }
 
     /**
@@ -40,56 +38,54 @@ public class GameLogic {
      */
     public void update() {
 
-        this.game.getPlayers().forEach((pl) -> {
+        this.state.getPlayers().forEach((pl) -> {
 
             // move player
-            pl.moveVert(this.game.getArea().getHeight());
+            pl.move();
 
             // check for collision with ball
-            if (this.game.getBall().collision(pl)) {
-                this.game.getBall().changeHorDir();
+            if (this.state.getBall().collision(pl)) {
+                this.state.getBall().changeHorDir();
             }
 
             // if a player reaches the victoryCond condition, the painter will end
-            if (pl.hasWon(this.game.getConfig().getVictoryCondition())) {
-                game.setPlaying(false);
+            if (pl.hasWon(this.state.getConfig().getVictoryCondition())) {
+                state.setPlaying(false);
             }
 
         });
 
-        if (this.game.getBall().collision(this.game.getArea())) {
+        if (this.state.getBall().collision(this.state.getArea())) {
 
-            if (this.game.getBall().getY() <= + 10 || this.game.getBall().getY() >= (this.game.getArea().getHeight() - this.game.getBall().getSize())) {
-                this.game.getBall().changeVertDir();
+            if (this.state.getBall().getY() <= +10 || this.state.getBall().getY() >= (this.state.getArea().getHeight() - this.state.getBall().getSize())) {
+                this.state.getBall().toggleUp();
             }
 
         }
 
         // move the ball
-        this.game.getBall().move();
+        this.state.getBall().move();
 
         // check if the ball hit the right border
-        if (this.game.getBall().getX() > (this.game.getArea().getWidth() - this.game.getBall().getSize())) {
-            this.game.getPlayers().get(0).incrementScore();
-            this.game.resetGameObjects();
+        if (this.state.getBall().getX() > (this.state.getArea().getWidth() - this.state.getBall().getSize())) {
+            this.state.getPlayers().get(0).incrementScore();
+            this.state.resetGameObjects();
         }
 
         // check if the ball hit the left border
-        if (this.game.getBall().getX() == 0) {
-            this.game.getPlayers().get(1).incrementScore();
-            this.game.resetGameObjects();
+        if (this.state.getBall().getX() == 0) {
+            this.state.getPlayers().get(1).incrementScore();
+            this.state.resetGameObjects();
         }
     }
 
-    
 
     /**
-     * 
-     * @return 
+     * @return
      */
-    public GameState getGame() {
-        return game;
+    public GameState getState() {
+        return state;
     }
-    
+
 
 }
