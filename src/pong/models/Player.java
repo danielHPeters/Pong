@@ -41,6 +41,9 @@ public class Player extends MovableObject {
      * @param area
      */
     public Player(int posX, int posY, int speed, GameArea area) {
+
+        this.startLocation = new Vector2I(posX, posY);
+        this.location = new Vector2I(posX, posY);
         this.up = false;
         this.down = false;
         this.x = posX;
@@ -111,7 +114,7 @@ public class Player extends MovableObject {
     @Override
     public void move() {
 
-        if (this.up && this.y + -10 >= 0) {
+        if (this.up && this.y -10 >= 0) {
             this.moveUp();
         }
 

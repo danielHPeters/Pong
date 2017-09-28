@@ -29,19 +29,23 @@ import pong.ui.SwingUi;
 /**
  * Keyboard configuration of the Game
  *
- * @author d.peters
+ * @author Daniel Peters
+ * @version 1.0
  */
 public class KeyBindings {
 
+    /**
+     * Reference to the main UI
+     */
     private final IUi ui;
 
     /**
-     *
+     * Thread executor which restarts main thread after pause
      */
     private final ScheduledThreadPoolExecutor executor;
 
     /**
-     *
+     * Actions executed on specific keyboard events
      */
     private final KeyBoardActions actions;
 

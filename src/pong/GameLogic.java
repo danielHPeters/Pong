@@ -45,7 +45,7 @@ public class GameLogic {
 
             // check for collision with ball
             if (this.state.getBall().collision(pl)) {
-                this.state.getBall().changeHorDir();
+                this.state.getBall().getVelocity().mult(-1);
             }
 
             // if a player reaches the victoryCond condition, the painter will end
@@ -57,23 +57,25 @@ public class GameLogic {
 
         if (this.state.getBall().collision(this.state.getArea())) {
 
-            if (this.state.getBall().getY() <= +10 || this.state.getBall().getY() >= (this.state.getArea().getHeight() - this.state.getBall().getSize())) {
-                this.state.getBall().toggleUp();
+            if (this.state.getBall().getLocation().getY() == 0 || this.state.getBall().getLocation().getY() < (this.state.getArea().getHeight() - this.state.getBall().getSize())) {
+                this.state.getBall().getAcceleration().mult(-1);
             }
 
         }
 
-        // move the ball
         this.state.getBall().move();
 
+        // move the ball
+
+
         // check if the ball hit the right border
-        if (this.state.getBall().getX() > (this.state.getArea().getWidth() - this.state.getBall().getSize())) {
+        if (this.state.getBall().getLocation().getX() > (this.state.getArea().getWidth() - this.state.getBall().getSize())) {
             this.state.getPlayers().get(0).incrementScore();
             this.state.resetGameObjects();
         }
 
         // check if the ball hit the left border
-        if (this.state.getBall().getX() == 0) {
+        if (this.state.getBall().getLocation().getX() == 0) {
             this.state.getPlayers().get(1).incrementScore();
             this.state.resetGameObjects();
         }

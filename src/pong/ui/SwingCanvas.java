@@ -49,7 +49,7 @@ public class SwingCanvas extends JPanel implements ICanvas {
     public void drawBall(Graphics g) {
         g.setColor(Color.black);
         g.fillOval(
-                this.game.getBall().getX(), this.game.getBall().getY(),
+                this.game.getBall().getLocation().getX(), this.game.getBall().getLocation().getY(),
                 this.game.getBall().getSize(), this.game.getBall().getSize()
         );
     }

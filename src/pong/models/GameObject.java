@@ -17,6 +17,8 @@
 package pong.models;
 
 import pong.interfaces.Collideable;
+import pong.interfaces.IVector2I;
+
 import java.awt.Rectangle;
 
 /**

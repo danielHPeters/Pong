@@ -18,6 +18,8 @@ package pong.models;
 
 import pong.interfaces.Collideable;
 
+import java.awt.*;
+
 /**
  * this class describes a ball object, its movement functions etc.
  *
@@ -35,6 +37,11 @@ public class Ball extends MovableObject {
     public Ball(int xPos, int yPos, int speed) {
         this.up = true;
         this.right = false;
+        this.location = new Vector2I(xPos, yPos);
+        this.startLocation = new Vector2I(xPos, yPos);
+        this.velocity = new Vector2I(0, 0);
+        this.acceleration = new Vector2I(2,-1);
+        this.maxSpeed = 5;
         this.x = xPos;
         this.y = yPos;
         this.initialX = xPos;
@@ -69,7 +76,10 @@ public class Ball extends MovableObject {
     @Override
     public void move() {
 
-        if (this.right) {
+        this.velocity.add(this.acceleration);
+        this.velocity.limit(maxSpeed);
+        this.location.add(this.velocity);
+        /*if (this.right) {
             moveRight();
         } else {
             moveLeft();
@@ -79,7 +89,7 @@ public class Ball extends MovableObject {
             moveUp();
         } else {
             moveDown();
-        }
+        }*/
     }
 
     /**
@@ -117,5 +127,10 @@ public class Ball extends MovableObject {
     @Override
     public void collisionHandler() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return new Rectangle(location.getX(), location.getY(), width, height);
     }
 }

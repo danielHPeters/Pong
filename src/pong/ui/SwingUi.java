@@ -27,7 +27,8 @@ import pong.interfaces.IUi;
 import pong.interfaces.IWindow;
 
 /**
- * @author Daniel
+ * @author Daniel Peters
+ * @version 1.0
  */
 public class SwingUi implements IUi {
 

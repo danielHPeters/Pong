@@ -16,6 +16,7 @@
  */
 package pong.models;
 
+import pong.interfaces.IVector2I;
 import pong.interfaces.Moveable;
 
 /**
@@ -39,6 +40,16 @@ abstract class MovableObject extends GameObject implements Moveable {
      * Initial y position (Used to reset the object to start position)
      */
     protected int initialY;
+
+    protected int maxSpeed;
+
+    protected IVector2I startLocation;
+
+    protected IVector2I location;
+
+    protected IVector2I velocity;
+
+    protected IVector2I acceleration;
 
     /**
      * booleans telling the object to move in certain directions
@@ -136,7 +147,29 @@ abstract class MovableObject extends GameObject implements Moveable {
      */
     @Override
     public void resetPosition(){
+        this.location.set(this.startLocation);
+        this.velocity = new Vector2I(0,0);
         this.x = initialX;
         this.y = initialY;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public IVector2I getLocation() {
+        return location;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public IVector2I getVelocity() {
+        return velocity;
+    }
+
+    public IVector2I getAcceleration() {
+        return acceleration;
     }
 }

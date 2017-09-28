@@ -27,7 +27,8 @@ import pong.interfaces.IWindow;
 import pong.models.Player;
 
 /**
- * @author d.peters
+ * @author Daniel Peters
+ * @version 1.0
  */
 public class KeyBoardActions {
 
@@ -79,8 +80,7 @@ public class KeyBoardActions {
      * @param executor
      * @return
      */
-    public Action escAction(IWindow window, GameState game,
-                            ScheduledThreadPoolExecutor executor) {
+    public Action escAction(IWindow window, GameState game, ScheduledThreadPoolExecutor executor) {
 
         Action esc = new AbstractAction() {
 

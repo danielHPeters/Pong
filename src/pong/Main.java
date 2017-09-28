@@ -46,12 +46,12 @@ public class Main {
     /**
      * the game loop
      */
-    private final GameLoop loop;
+    private GameLoop loop;
 
     /**
      *
      */
-    private final ScheduledThreadPoolExecutor executor;
+    private ScheduledThreadPoolExecutor executor;
 
     /**
      *
@@ -61,52 +61,56 @@ public class Main {
     /**
      *
      */
-    private final GameLogic logic;
+    private GameLogic logic;
 
     /**
      *
      */
-    private final IUi ui;
+    private IUi ui;
 
     /**
      * initialize the keybindings of the game
      */
-    private final KeyBindings keyBindings;
+    private KeyBindings keyBindings;
 
     /**
      *
      */
-    private final KeyBoardActions actions;
+    private KeyBoardActions actions;
 
     /**
      * This is the default constructor
      */
     public Main() {
 
-        // Initialize game objects and logic
-        this.config = new Settings(800, 600, 6, 18, 5, 10);
-        this.game = new GameState(config);
-        this.logic = new GameLogic(game);
 
-        // Initialize the ui
-        this.ui = new SwingUi(config, game);
-
-        // Initialize the loop / game engine
-        this.loop = new GameLoop(ui.getCanvas(), logic);
-        this.executor = new ScheduledThreadPoolExecutor(3);
-        this.executor.scheduleAtFixedRate(loop, 0L, 100L, TimeUnit.MILLISECONDS);
-
-        // Configure keyboard controls
-        this.actions = new KeyBoardActions();
-        this.keyBindings = new KeyBindings(ui, executor, game, actions);
 
     }
 
     /**
      * starts the game loop
      */
-    public void start() {
-        this.ui.getWindow().display();
+    public static void start() {
+
+        Main application = new Main();
+
+        // Initialize game objects and logic
+        application.config = new Settings(800, 600, 6, 18, 5, 10);
+        application.game = new GameState(application.config);
+        application.logic = new GameLogic(application.game);
+
+        // Initialize the ui
+        application.ui = new SwingUi(application.config, application.game);
+
+        // Initialize the loop / game engine
+        application.loop = new GameLoop(application.ui.getCanvas(), application.logic);
+        application.executor = new ScheduledThreadPoolExecutor(3);
+        application.executor.scheduleAtFixedRate(application.loop, 0L, 100L, TimeUnit.MILLISECONDS);
+
+        // Configure keyboard controls
+        application.actions = new KeyBoardActions();
+        application.keyBindings = new KeyBindings(application.ui, application.executor, application.game, application.actions);
+        application.ui.getWindow().display();
     }
 
     /**
@@ -116,12 +120,7 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        SwingUtilities.invokeLater(() -> {
-
-            Main pong = new Main();
-            pong.start();
-
-        });
+        SwingUtilities.invokeLater(Main::start);
         //BackgroundMusicPlayer player = new BackgroundMusicPlayer();
         //player.playAllClips();
 
