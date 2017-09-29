@@ -95,7 +95,7 @@ public class Main {
         Main application = new Main();
 
         // Initialize game objects and logic
-        application.config = new Settings(800, 600, 6, 18, 5, 10);
+        application.config = new Settings(800, 600, 6, 18, 5, 5);
         application.game = new GameState(application.config);
         application.logic = new GameLogic(application.game);
 

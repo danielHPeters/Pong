@@ -38,6 +38,8 @@ public class GameLogic {
      */
     public void update() {
 
+        this.state.getBall().move();
+
         this.state.getPlayers().forEach((pl) -> {
 
             // move player
@@ -45,7 +47,7 @@ public class GameLogic {
 
             // check for collision with ball
             if (this.state.getBall().collision(pl)) {
-                this.state.getBall().getVelocity().mult(-1);
+                this.state.getBall().getVelocity().setX(-this.state.getBall().getVelocity().getX());
             }
 
             // if a player reaches the victoryCond condition, the painter will end
@@ -57,13 +59,11 @@ public class GameLogic {
 
         if (this.state.getBall().collision(this.state.getArea())) {
 
-            if (this.state.getBall().getLocation().getY() == 0 || this.state.getBall().getLocation().getY() < (this.state.getArea().getHeight() - this.state.getBall().getSize())) {
-                this.state.getBall().getAcceleration().mult(-1);
+            if (this.state.getBall().getLocation().getY() == 0 || this.state.getBall().getLocation().getY() > (this.state.getArea().getHeight() - this.state.getBall().getSize())) {
+                this.state.getBall().getVelocity().setY(-this.state.getBall().getVelocity().getY());
             }
 
         }
-
-        this.state.getBall().move();
 
         // move the ball
 

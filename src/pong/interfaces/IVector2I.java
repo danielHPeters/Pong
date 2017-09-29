@@ -14,9 +14,21 @@ public interface IVector2I {
 
     /**
      *
+     * @param x
+     */
+    public void setX(int x);
+
+    /**
+     *
      * @return
      */
     public int getY();
+
+    /**
+     *
+     * @return
+     */
+    public void setY(int y);
 
     /**
      *
@@ -59,8 +71,17 @@ public interface IVector2I {
      */
     public void limit(int max);
 
+    /**
+     *
+     * @param x
+     * @param y
+     */
     public void set(int x, int y);
 
+    /**
+     *
+     * @param vector
+     */
     public void set(IVector2I vector);
 
 

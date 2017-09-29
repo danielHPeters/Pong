@@ -30,12 +30,22 @@ public class Vector2I implements IVector2I {
         return this.x;
     }
 
+    @Override
+    public void setX(int x) {
+        this.x = x;
+    }
+
     /**
      * @return
      */
     @Override
     public int getY() {
         return this.y;
+    }
+
+    @Override
+    public void setY(int y) {
+        this.y = y;
     }
 
     /**

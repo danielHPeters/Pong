@@ -59,10 +59,9 @@ public class GameLoop implements Runnable {
      */
     @Override
     public void run() {
-
         while (this.logic.getState().isPlaying()) {
 
-            long time = System.currentTimeMillis();
+            long time = System.nanoTime();
 
             if (!logic.getState().isPaused()) {
                 // Move canvas objects repaint
@@ -71,7 +70,7 @@ public class GameLoop implements Runnable {
             }
 
             //  delay for each frame  -   time it took for one frame
-            time = (1000l / this.fps) - (System.currentTimeMillis() - time);
+            time = (time - System.nanoTime() + (1000000000l / this.fps) ) / 1000000l;
             if (time > 0) {
                 try {
                     Thread.sleep(time);

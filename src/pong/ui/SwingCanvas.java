@@ -37,6 +37,7 @@ public class SwingCanvas extends JPanel implements ICanvas {
      * @param game
      */
     public SwingCanvas(Settings config, GameState game) {
+        //super(true);
         this.config = config;
         this.game = game;
     }
@@ -102,7 +103,7 @@ public class SwingCanvas extends JPanel implements ICanvas {
     }
 
     @Override
-    public void draw(){
+    public void draw() {
         repaint();
     }
 

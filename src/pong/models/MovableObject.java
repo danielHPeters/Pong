@@ -148,7 +148,7 @@ abstract class MovableObject extends GameObject implements Moveable {
     @Override
     public void resetPosition(){
         this.location.set(this.startLocation);
-        this.velocity = new Vector2I(0,0);
+        this.velocity = new Vector2I(1,1);
         this.x = initialX;
         this.y = initialY;
     }

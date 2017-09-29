@@ -39,8 +39,8 @@ public class Ball extends MovableObject {
         this.right = false;
         this.location = new Vector2I(xPos, yPos);
         this.startLocation = new Vector2I(xPos, yPos);
-        this.velocity = new Vector2I(0, 0);
-        this.acceleration = new Vector2I(2,-1);
+        this.velocity = new Vector2I(2, 1);
+        this.acceleration = new Vector2I(1, 1);
         this.maxSpeed = 5;
         this.x = xPos;
         this.y = yPos;
@@ -76,34 +76,7 @@ public class Ball extends MovableObject {
     @Override
     public void move() {
 
-        this.velocity.add(this.acceleration);
-        this.velocity.limit(maxSpeed);
         this.location.add(this.velocity);
-        /*if (this.right) {
-            moveRight();
-        } else {
-            moveLeft();
-        }
-
-        if (this.up) {
-            moveUp();
-        } else {
-            moveDown();
-        }*/
-    }
-
-    /**
-     *
-     */
-    public void toggleUp() {
-        this.up = !this.up;
-    }
-
-    /**
-     * changes vertical direction to the opposite direction
-     */
-    public void changeHorDir() {
-        this.right = !this.right;
     }
 
     /**
