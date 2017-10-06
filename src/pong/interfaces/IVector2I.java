@@ -1,88 +1,35 @@
 package pong.interfaces;
 
 /**
+ * Interface for 2D integer vectors.
+ *
  * @author Daniel Peters
  * @version 1.0
  */
 public interface IVector2I {
+  int getX();
 
-    /**
-     *
-     * @return
-     */
-    public int getX();
+  void setX(int x);
 
-    /**
-     *
-     * @param x
-     */
-    public void setX(int x);
+  int getY();
 
-    /**
-     *
-     * @return
-     */
-    public int getY();
+  void setY(int y);
 
-    /**
-     *
-     * @return
-     */
-    public void setY(int y);
+  void add(IVector2I vector);
 
-    /**
-     *
-     * @param vector
-     */
-    public void add(IVector2I vector);
+  void sub(IVector2I vector);
 
-    /**
-     *
-     * @param vector
-     */
-    public void sub(IVector2I vector);
+  void multiply(int scalar);
 
-    /**
-     *
-     * @param scalar
-     */
-    public void mult(int scalar);
+  void div(int scalar);
 
-    /**
-     *
-     * @param scalar
-     */
-    public void div(int scalar);
+  int mag();
 
-    /**
-     *
-     * @return
-     */
-    public int mag();
+  void normalize();
 
-    /**
-     *
-     */
-    public void normalize();
+  void limit(int max);
 
-    /**
-     *
-     * @param max
-     */
-    public void limit(int max);
+  void set(int x, int y);
 
-    /**
-     *
-     * @param x
-     * @param y
-     */
-    public void set(int x, int y);
-
-    /**
-     *
-     * @param vector
-     */
-    public void set(IVector2I vector);
-
-
+  void set(IVector2I vector);
 }

@@ -1,14 +1,15 @@
 package pong.interfaces;
 
 /**
+ * Interface for application windows.
+ *
  * @author Daniel Peters
  * @version 1.0
  */
 public interface IWindow {
+  void display();
 
-    public void display();
+  void hide();
 
-    public void hide();
-
-    public void close();
+  void close();
 }

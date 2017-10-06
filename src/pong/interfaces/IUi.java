@@ -1,8 +1,12 @@
 package pong.interfaces;
 
+/**
+ * Interface for graphical user interfaces.
+ *
+ * @author Daniel Peters
+ */
 public interface IUi {
+  ICanvas getCanvas();
 
-    public ICanvas getCanvas();
-
-    public IWindow getWindow();
+  IWindow getWindow();
 }
