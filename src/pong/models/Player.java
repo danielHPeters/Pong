@@ -1,6 +1,6 @@
 package pong.models;
 
-import pong.interfaces.CollideAble;
+import pong.interfaces.ICollideAble;
 
 /**
  * Definition of the player object.
@@ -30,25 +30,14 @@ public class Player extends MovableObject {
     this.area = area;
   }
 
-  /**
-   * Getter for the player score.
-   *
-   * @return the current score
-   */
   public int getScore() {
     return score;
   }
 
-  /**
-   * Add +1 to score counter of the player.
-   */
   public void incrementScore() {
     this.score += 1;
   }
 
-  /**
-   * Reset the players score.
-   */
   public void resetScore() {
     this.score = 0;
   }
@@ -79,7 +68,7 @@ public class Player extends MovableObject {
   }
 
   @Override
-  public boolean collision(CollideAble collObj) {
+  public boolean collision(ICollideAble collObj) {
     throw new UnsupportedOperationException("Not supported yet.");
   }
 

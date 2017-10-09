@@ -2,7 +2,7 @@ package pong.models;
 
 import java.awt.Rectangle;
 
-import pong.interfaces.CollideAble;
+import pong.interfaces.ICollideAble;
 import pong.interfaces.IVector2I;
 
 /**
@@ -11,7 +11,7 @@ import pong.interfaces.IVector2I;
  * @author Daniel Peters
  * @version 1.0
  */
-abstract class GameObject implements CollideAble {
+abstract class GameObject implements ICollideAble {
   protected IVector2I location;
   protected int width;
   protected int height;

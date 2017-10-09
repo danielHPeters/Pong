@@ -2,7 +2,7 @@ package pong.models;
 
 import java.awt.Rectangle;
 
-import pong.interfaces.CollideAble;
+import pong.interfaces.ICollideAble;
 
 /**
  * Describes a ball object, its movement functions etc.
@@ -61,11 +61,11 @@ public class Ball extends MovableObject {
   /**
    * Checks for collision with other objects.
    *
-   * @param collObj CollideAble Object
+   * @param collObj ICollideAble Object
    * @return boolean which tells if there was a collision with an object
    */
   @Override
-  public boolean collision(CollideAble collObj) {
+  public boolean collision(ICollideAble collObj) {
     boolean coll = false;
     if (collObj.getBounds().intersects(this.getBounds())) {
       coll = true;

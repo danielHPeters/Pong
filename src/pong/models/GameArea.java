@@ -1,6 +1,6 @@
 package pong.models;
 
-import pong.interfaces.CollideAble;
+import pong.interfaces.ICollideAble;
 
 /**
  * Game area to used to check if game objects are out of bounds.
@@ -21,7 +21,7 @@ public class GameArea extends GameObject {
   }
 
   @Override
-  public boolean collision(CollideAble collObj) {
+  public boolean collision(ICollideAble collObj) {
     throw new UnsupportedOperationException("Not supported yet.");
   }
 

@@ -1,4 +1,4 @@
-package pong.ui;
+package pong.ui.swing;
 
 import java.awt.BorderLayout;
 import javax.swing.JButton;
@@ -7,10 +7,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
-import pong.ButtonActions;
-import pong.GameState;
 import pong.configuration.Settings;
 import pong.interfaces.ICanvas;
+import pong.interfaces.IGameState;
 import pong.interfaces.IUi;
 import pong.interfaces.IWindow;
 
@@ -23,7 +22,7 @@ import pong.interfaces.IWindow;
 public class SwingUi implements IUi {
   private JFrame window;
   private final ICanvas canvas;
-  private final ButtonActions btnActions;
+  private final SwingButtonActions btnActions;
   private final JToggleButton pauseButton;
   private final JButton restartButton;
   private JMenuBar actionBar;
@@ -34,12 +33,12 @@ public class SwingUi implements IUi {
    * @param config default settings
    * @param game   game state
    */
-  public SwingUi(Settings config, GameState game) {
+  public SwingUi(Settings config, IGameState game) {
     window = new SwingWindow(config);
     canvas = new SwingCanvas(config, game);
     actionBar = new JMenuBar();
     actionBar.setFocusable(false);
-    btnActions = new ButtonActions(game);
+    btnActions = new SwingButtonActions(game);
     pauseButton = new JToggleButton("Pause");
     pauseButton.addItemListener(btnActions.pauseListener());
     restartButton = new JButton("Restart");

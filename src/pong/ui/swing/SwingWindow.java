@@ -1,4 +1,4 @@
-package pong.ui;
+package pong.ui.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.WindowConstants;
 
 import pong.configuration.Settings;
 import pong.interfaces.IWindow;
@@ -24,7 +25,7 @@ public class SwingWindow extends JFrame implements IWindow {
    *
    * @param config default settings
    */
-  public SwingWindow(Settings config) {
+  SwingWindow(Settings config) {
     this.config = config;
     initWindow();
   }
@@ -33,7 +34,7 @@ public class SwingWindow extends JFrame implements IWindow {
    * Initializes the game window.
    */
   private void initWindow() {
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setLocation(312, 184);
     setMinimumSize(new Dimension(config.getWidth() + 20, config.getHeight() + 20));
     setTitle("Pong");

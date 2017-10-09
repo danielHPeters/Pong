@@ -7,10 +7,10 @@ import java.awt.Rectangle;
  *
  * @author d.peters
  */
-public interface CollideAble {
+public interface ICollideAble {
   Rectangle getBounds();
 
-  boolean collision(CollideAble collObj);
+  boolean collision(ICollideAble collObj);
 
   void collisionHandler();
 }

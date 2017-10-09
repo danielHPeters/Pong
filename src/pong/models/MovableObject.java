@@ -1,7 +1,7 @@
 package pong.models;
 
 import pong.interfaces.IVector2I;
-import pong.interfaces.Moveable;
+import pong.interfaces.IMoveAble;
 
 /**
  * Abstract class which defines movable game objects.
@@ -9,7 +9,7 @@ import pong.interfaces.Moveable;
  * @author Daniel Peters
  * @version 1.0
  */
-abstract class MovableObject extends GameObject implements Moveable {
+abstract class MovableObject extends GameObject implements IMoveAble {
   protected int speed;
   protected int maxSpeed;
   protected IVector2I startLocation;
@@ -20,10 +20,12 @@ abstract class MovableObject extends GameObject implements Moveable {
   protected boolean left;
   protected boolean right;
 
+  @Override
   public int getSpeed() {
     return speed;
   }
 
+  @Override
   public void setSpeed(int speed) {
     this.speed = speed;
   }

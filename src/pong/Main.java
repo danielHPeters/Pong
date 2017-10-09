@@ -1,14 +1,22 @@
 package pong;
 
+import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import javax.swing.SwingUtilities;
 
-import pong.configuration.KeyBindings;
-import pong.configuration.KeyBoardActions;
 import pong.configuration.Settings;
+import pong.game.Game;
+import pong.game.GameState;
+import pong.game.Loop;
+import pong.interfaces.IGame;
+import pong.interfaces.IGameState;
+import pong.interfaces.IKeyBindings;
+import pong.interfaces.IKeyboardActions;
 import pong.interfaces.IUi;
-import pong.ui.SwingUi;
+import pong.ui.swing.SwingKeyBindings;
+import pong.ui.swing.SwingKeyboardActions;
+import pong.ui.swing.SwingUi;
 
 /**
  * Starter class of the pong game. This is a simple remake of the classic pong
@@ -20,13 +28,13 @@ import pong.ui.SwingUi;
  */
 public class Main {
   private Settings config;
-  private GameLoop loop;
+  private Loop loop;
   private ScheduledThreadPoolExecutor executor;
-  private GameState game;
-  private GameLogic logic;
+  private IGameState game;
+  private IGame logic;
   private IUi ui;
-  private KeyBindings keyBindings;
-  private KeyBoardActions actions;
+  private IKeyBindings keyBindings;
+  private IKeyboardActions actions;
 
   /**
    * starts the game loop.
@@ -37,19 +45,19 @@ public class Main {
     // Initialize game objects and logic
     application.config = new Settings(800, 600, 6, 18, 5);
     application.game = new GameState(application.config);
-    application.logic = new GameLogic(application.game);
+    application.logic = new Game(application.game);
 
     // Initialize the ui
     application.ui = new SwingUi(application.config, application.game);
 
     // Initialize the loop / game engine
-    application.loop = new GameLoop(application.ui.getCanvas(), application.logic);
-    application.executor = new ScheduledThreadPoolExecutor(3);
+    application.loop = new Loop(application.ui.getCanvas(), application.logic);
+    application.executor = (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(3);
     application.executor.scheduleAtFixedRate(application.loop, 0L, 100L, TimeUnit.MILLISECONDS);
 
     // Configure keyboard controls
-    application.actions = new KeyBoardActions();
-    application.keyBindings = new KeyBindings(
+    application.actions = new SwingKeyboardActions();
+    application.keyBindings = new SwingKeyBindings(
         application.ui, application.executor, application.game, application.actions);
     application.ui.getWindow().display();
   }

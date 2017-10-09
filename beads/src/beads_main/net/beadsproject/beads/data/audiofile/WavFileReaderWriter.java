@@ -242,7 +242,7 @@ public class WavFileReaderWriter implements AudioFileReader, AudioFileWriter {
 			floatScale = 0.5 * ((1 << validBits) - 1);
 		}
 
-		// Finally, set the IO State
+		// Finally, set the IO GameState
 		bufferPointer = 0;
 		bytesRead = 0;
 		frameCounter = 0;
