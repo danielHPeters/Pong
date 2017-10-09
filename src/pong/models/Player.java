@@ -1,6 +1,7 @@
 package pong.models;
 
-import pong.interfaces.ICollideAble;
+import java.awt.Rectangle;
+import java.awt.Shape;
 
 /**
  * Definition of the player object.
@@ -68,12 +69,7 @@ public class Player extends MovableObject {
   }
 
   @Override
-  public boolean collision(ICollideAble collObj) {
-    throw new UnsupportedOperationException("Not supported yet.");
-  }
-
-  @Override
-  public void collisionHandler() {
-    throw new UnsupportedOperationException("Not supported yet.");
+  public Shape getBounds() {
+    return new Rectangle(location.getX(), location.getY(), width, height);
   }
 }

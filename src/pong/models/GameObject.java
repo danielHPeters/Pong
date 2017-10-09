@@ -1,8 +1,6 @@
 package pong.models;
 
-import java.awt.Rectangle;
-
-import pong.interfaces.ICollideAble;
+import pong.interfaces.CollideAble;
 import pong.interfaces.IVector2I;
 
 /**
@@ -11,11 +9,12 @@ import pong.interfaces.IVector2I;
  * @author Daniel Peters
  * @version 1.0
  */
-abstract class GameObject implements ICollideAble {
+abstract class GameObject implements CollideAble {
   protected IVector2I location;
   protected int width;
   protected int height;
 
+  @Override
   public IVector2I getLocation() {
     return location;
   }
@@ -28,8 +27,18 @@ abstract class GameObject implements ICollideAble {
     return height;
   }
 
+  /**
+   * Checks for collision with other objects.
+   *
+   * @param other CollideAble Object
+   * @return boolean which tells if there was a collision with an object
+   */
   @Override
-  public Rectangle getBounds() {
-    return new Rectangle(location.getX(), location.getY(), width, height);
+  public boolean collision(CollideAble other) {
+    boolean coll = false;
+    if (getBounds().getBounds2D().intersects(other.getBounds().getBounds2D())) {
+      coll = true;
+    }
+    return coll;
   }
 }

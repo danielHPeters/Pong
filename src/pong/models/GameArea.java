@@ -1,9 +1,10 @@
 package pong.models;
 
-import pong.interfaces.ICollideAble;
+import java.awt.Rectangle;
+import java.awt.Shape;
 
 /**
- * Game area to used to check if game objects are out of bounds.
+ * Game area to used to check if game objects are out of getBounds.
  *
  * @author Daniel Peters
  */
@@ -21,12 +22,7 @@ public class GameArea extends GameObject {
   }
 
   @Override
-  public boolean collision(ICollideAble collObj) {
-    throw new UnsupportedOperationException("Not supported yet.");
-  }
-
-  @Override
-  public void collisionHandler() {
-    throw new UnsupportedOperationException("Not supported yet.");
+  public Shape getBounds() {
+    return new Rectangle(location.getX(), location.getY(), width, height);
   }
 }

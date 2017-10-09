@@ -1,8 +1,7 @@
 package pong.models;
 
-import java.awt.Rectangle;
-
-import pong.interfaces.ICollideAble;
+import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
 
 /**
  * Describes a ball object, its movement functions etc.
@@ -58,28 +57,8 @@ public class Ball extends MovableObject {
     location.add(velocity);
   }
 
-  /**
-   * Checks for collision with other objects.
-   *
-   * @param collObj ICollideAble Object
-   * @return boolean which tells if there was a collision with an object
-   */
   @Override
-  public boolean collision(ICollideAble collObj) {
-    boolean coll = false;
-    if (collObj.getBounds().intersects(this.getBounds())) {
-      coll = true;
-    }
-    return coll;
-  }
-
-  @Override
-  public void collisionHandler() {
-    throw new UnsupportedOperationException("Not supported yet.");
-  }
-
-  @Override
-  public Rectangle getBounds() {
-    return new Rectangle(location.getX(), location.getY(), width, height);
+  public Shape getBounds() {
+    return new Ellipse2D.Double(location.getX(), location.getY(), width, height);
   }
 }
