@@ -1,93 +1,63 @@
-/*
- * Copyright (C) 2017 Daniel
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package pong;
 
 /**
- * @author d.peters
+ * Game logic data.
+ *
+ * @author Daniel Peters
+ * @version 1.0
  */
 public class GameLogic {
+  private GameState state;
 
-    /**
-     *
-     */
-    private GameState state;
+  public GameLogic(GameState state) {
+    this.state = state;
+  }
 
-    /**
-     * @param state
-     */
-    public GameLogic(GameState state) {
-        this.state = state;
+  /**
+   * This method updates all the components on the painter area.
+   */
+  public void update() {
+
+    state.getBall().move();
+    state.getPlayers().forEach(pl -> {
+      // move player
+      pl.move();
+
+      // check for collision with ball
+      if (state.getBall().collision(pl)) {
+        state.getBall().getVelocity().setX(-state.getBall().getVelocity().getX());
+      }
+
+      // if a player reaches the victoryCond condition, the painter will end
+      if (pl.hasWon(state.getConfig().getVictoryCondition())) {
+        state.setPlaying(false);
+      }
+    });
+
+    if (this.state.getBall().collision(state.getArea())) {
+      if (state.getBall().getLocation().getY() == 0
+          || state.getBall().getLocation().getY()
+          > (state.getArea().getHeight() - state.getBall().getSize())) {
+        state.getBall().getVelocity().setY(-state.getBall().getVelocity().getY());
+      }
+
     }
 
-    /**
-     * this method updates all the components on the painter area
-     */
-    public void update() {
-
-        this.state.getBall().move();
-
-        this.state.getPlayers().forEach((pl) -> {
-
-            // move player
-            pl.move();
-
-            // check for collision with ball
-            if (this.state.getBall().collision(pl)) {
-                this.state.getBall().getVelocity().setX(-this.state.getBall().getVelocity().getX());
-            }
-
-            // if a player reaches the victoryCond condition, the painter will end
-            if (pl.hasWon(this.state.getConfig().getVictoryCondition())) {
-                state.setPlaying(false);
-            }
-
-        });
-
-        if (this.state.getBall().collision(this.state.getArea())) {
-
-            if (this.state.getBall().getLocation().getY() == 0 || this.state.getBall().getLocation().getY() > (this.state.getArea().getHeight() - this.state.getBall().getSize())) {
-                this.state.getBall().getVelocity().setY(-this.state.getBall().getVelocity().getY());
-            }
-
-        }
-
-        // move the ball
-
-
-        // check if the ball hit the right border
-        if (this.state.getBall().getLocation().getX() > (this.state.getArea().getWidth() - this.state.getBall().getSize())) {
-            this.state.getPlayers().get(0).incrementScore();
-            this.state.resetGameObjects();
-        }
-
-        // check if the ball hit the left border
-        if (this.state.getBall().getLocation().getX() == 0) {
-            this.state.getPlayers().get(1).incrementScore();
-            this.state.resetGameObjects();
-        }
+    // check if the ball hit the right border
+    if (state.getBall().getLocation().getX() > (
+        state.getArea().getWidth() - state.getBall().getSize())) {
+      state.getPlayers().get(0).incrementScore();
+      state.resetGameObjects();
     }
 
-
-    /**
-     * @return
-     */
-    public GameState getState() {
-        return state;
+    // check if the ball hit the left border
+    if (state.getBall().getLocation().getX() == 0) {
+      state.getPlayers().get(1).incrementScore();
+      state.resetGameObjects();
     }
+  }
 
-
+  public GameState getState() {
+    return state;
+  }
 }

@@ -10,15 +10,7 @@ import java.util.List;
  * @author Daniel Peters
  */
 public class DirectoryScanner {
-
-  /**
-   * The directory to be scanned.
-   */
   private final File directory;
-
-  /**
-   * List of files in the selected directory.
-   */
   private final String[] dirContents;
 
   /**
@@ -27,10 +19,8 @@ public class DirectoryScanner {
    * @param dir directory
    */
   public DirectoryScanner(String dir) {
-
-    this.directory = new File(dir);
-    this.dirContents = this.directory.list();
-
+    directory = new File(dir);
+    dirContents = directory.list();
   }
 
   /**
@@ -39,17 +29,13 @@ public class DirectoryScanner {
    * @return list of found audio files.
    */
   public List<AudioClip> getDirContents() {
-
     List<AudioClip> files = new ArrayList<>();
 
-    for (String fileName : this.dirContents) {
-
+    for (String fileName : dirContents) {
       if (!fileName.equals("desktop.ini")) {
         files.add(new AudioClip(fileName));
       }
-
     }
-
     return files;
   }
 }

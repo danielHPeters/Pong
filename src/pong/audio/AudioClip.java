@@ -4,12 +4,9 @@ package pong.audio;
  * Audio definition class.
  *
  * @author Daniel Peters
+ * @version 1.0
  */
 public class AudioClip implements Comparable<AudioClip> {
-
-  /**
-   * File location.
-   */
   private final String location;
 
   /**
@@ -21,10 +18,6 @@ public class AudioClip implements Comparable<AudioClip> {
     this.location = location;
   }
 
-  /**
-   * Get file location.
-   * @return file location
-   */
   public String getLocation() {
     return this.location;
   }

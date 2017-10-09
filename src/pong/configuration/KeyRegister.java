@@ -10,6 +10,5 @@ import java.util.Map;
  * @version 1.0
  */
 public final class KeyRegister {
-
   public static Map<String, Boolean> registry = new HashMap<>();
 }

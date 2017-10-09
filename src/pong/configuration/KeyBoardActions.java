@@ -16,7 +16,6 @@ import pong.models.Player;
  * @version 1.0
  */
 public class KeyBoardActions {
-
   /**
    * This method creates the methods for the up actions.
    *

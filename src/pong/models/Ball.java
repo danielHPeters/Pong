@@ -26,10 +26,6 @@ public class Ball extends MovableObject {
     this.velocity = new Vector2I(2, 1);
     this.acceleration = new Vector2I(1, 1);
     this.maxSpeed = 5;
-    this.x = x;
-    this.y = y;
-    this.initialX = x;
-    this.initialY = y;
     this.speed = speed;
     this.width = 8;
     this.height = 8;
@@ -50,8 +46,8 @@ public class Ball extends MovableObject {
    * @param size new size
    */
   public void setSize(int size) {
-    this.width = size;
-    this.height = size;
+    width = size;
+    height = size;
   }
 
   /**
@@ -59,8 +55,7 @@ public class Ball extends MovableObject {
    */
   @Override
   public void move() {
-
-    this.location.add(this.velocity);
+    location.add(velocity);
   }
 
   /**

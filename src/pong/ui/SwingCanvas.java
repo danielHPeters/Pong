@@ -1,23 +1,24 @@
 package pong.ui;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import javax.swing.JPanel;
 
 import pong.GameState;
 import pong.configuration.Settings;
 import pong.interfaces.ICanvas;
 
 public class SwingCanvas extends JPanel implements ICanvas {
-
   private Settings config;
   private final GameState game;
 
   /**
-   * @param config
-   * @param game
+   * Default constructor.
+   *
+   * @param config default setting
+   * @param game   game state
    */
   public SwingCanvas(Settings config, GameState game) {
-    //super(true);
     this.config = config;
     this.game = game;
   }
@@ -25,57 +26,59 @@ public class SwingCanvas extends JPanel implements ICanvas {
   /**
    * Draws the ball object.
    *
-   * @param g the graphics object of paintcomponent method
+   * @param g the graphics object of paintComponent method
    */
-  public void drawBall(Graphics g) {
-    g.setColor(Color.black);
+  private void drawBall(Graphics g) {
+    g.setColor(Color.BLACK);
     g.fillOval(
-        this.game.getBall().getLocation().getX(), this.game.getBall().getLocation().getY(),
-        this.game.getBall().getSize(), this.game.getBall().getSize()
+        game.getBall().getLocation().getX(),
+        game.getBall().getLocation().getY(),
+        game.getBall().getSize(),
+        game.getBall().getSize()
     );
   }
 
   /**
-   * draws all players
+   * Draws all players.
    *
-   * @param g the graphics object of paintcomponent method
+   * @param g the graphics object of paintComponent method
    */
-  public void drawPlayers(Graphics g) {
-    this.game.getPlayers().forEach((pl) -> g.fillRect(pl.getX(), pl.getY(), pl.getWidth(), pl.getHeight()));
+  private void drawPlayers(Graphics g) {
+    game.getPlayers().forEach(
+        pl -> g.fillRect(
+            pl.getLocation().getX(),
+            pl.getLocation().getY(),
+            pl.getWidth(),
+            pl.getHeight()
+        )
+    );
   }
 
   /**
-   * draws all texts on the SwingCanvas
+   * Draws all texts on the SwingCanvas.
    *
-   * @param g the graphics object of paintcomponent method
+   * @param g the graphics object of paintComponent method
    */
-  public void drawTexts(Graphics g) {
+  private void drawTexts(Graphics g) {
     //Draw scores
-    g.drawString(
-        "Player 1: " + this.game.getPlayers().get(0).getScore(),
-        25, 10
-    );
-    g.drawString(
-        "Player 2: " + this.game.getPlayers().get(1).getScore(),
-        this.config.getWidth() - 100, 10
-    );
+    g.drawString("Player 1: " + game.getPlayers().get(0).getScore(), 25, 10);
+    g.drawString("Player 2: " + game.getPlayers().get(1).getScore(), config.getWidth() - 100, 10);
     if (!this.game.isPlaying()) {
       g.drawString("Game Over", this.config.getWidth() / 2 - 20, this.config.getHeight() / 2 - 20);
     }
   }
 
   /**
-   * Main drawing method
+   * Main drawing method.
    */
   @Override
   public void paintComponent(Graphics g) {
-
     super.paintComponent(g);
     g.drawRect(
-        this.game.getArea().getX(),
-        this.game.getArea().getY(),
-        this.game.getArea().getWidth(),
-        this.game.getArea().getHeight()
+        game.getArea().getLocation().getX(),
+        game.getArea().getLocation().getY(),
+        game.getArea().getWidth(),
+        game.getArea().getHeight()
     );
     drawBall(g);
     drawPlayers(g);
@@ -86,5 +89,4 @@ public class SwingCanvas extends JPanel implements ICanvas {
   public void draw() {
     repaint();
   }
-
 }

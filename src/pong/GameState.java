@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2017 Daniel
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package pong;
 
 import java.util.ArrayList;
@@ -25,134 +9,85 @@ import pong.models.GameArea;
 import pong.models.Player;
 
 /**
- * @author Daniel
+ * Game state holding game objects information.
+ *
+ * @author Daniel Peters
+ * @version 1.0
  */
 public class GameState {
+  private boolean playing;
+  private boolean paused;
+  private final GameArea area;
+  private final Ball ball;
+  private final Settings config;
+  private final List<Player> players;
 
-    /**
-     *
-     */
-    private boolean playing;
+  /**
+   * Creates a new initial game state.
+   *
+   * @param config default app settings
+   */
+  public GameState(Settings config) {
+    this.config = config;
+    this.area = new GameArea(config.getWidth() - 10, config.getHeight() - 80);
+    Player pl1 = new Player(2 * 5, area.getHeight() / 2, config.getPlayerSpeed(), area);
+    Player pl2 = new Player(
+        config.getWidth() - 4 * 5, area.getHeight() / 2, config.getPlayerSpeed(), area);
+    this.players = new ArrayList<>();
+    this.players.add(pl1);
+    this.players.add(pl2);
+    this.ball = new Ball(config.getWidth() / 2, config.getHeight() / 2, config.getBallSpeed());
+    this.playing = true;
+    this.paused = false;
+  }
 
-    /**
-     *
-     */
-    private boolean paused;
+  public List<Player> getPlayers() {
+    return players;
+  }
 
-    /**
-     *
-     */
-    private final GameArea area;
+  public GameArea getArea() {
+    return area;
+  }
 
-    /**
-     *
-     */
-    private final Ball ball;
+  public Ball getBall() {
+    return ball;
+  }
 
-    /**
-     *
-     */
-    private final Settings config;
+  public boolean isPlaying() {
+    return playing;
+  }
 
-    /**
-     *
-     */
-    private final List<Player> players;
+  public void setPlaying(boolean playing) {
+    this.playing = playing;
+  }
 
-    /**
-     * @param config
-     */
-    public GameState(Settings config) {
-        this.config = config;
-        this.area = new GameArea(config.getWidth() - 10, config.getHeight() - 80);
-        Player pl1 = new Player(2 * 5, area.getHeight() / 2, config.getPlayerSpeed(), area);
-        Player pl2 = new Player(config.getWidth() - 4 * 5, area.getHeight() / 2, config.getPlayerSpeed(), area);
-        this.players = new ArrayList<>();
-        this.players.add(pl1);
-        this.players.add(pl2);
-        this.ball = new Ball(config.getWidth() / 2, config.getHeight() / 2, config.getBallSpeed());
-        this.playing = true;
-        this.paused = false;
-    }
+  public void pauseToggle() {
+    paused = !paused;
+  }
 
-    /**
-     * @return
-     */
-    public List<Player> getPlayers() {
-        return players;
-    }
+  public boolean isPaused() {
+    return paused;
+  }
 
-    /**
-     * @return
-     */
-    public GameArea getArea() {
-        return area;
-    }
+  public Settings getConfig() {
+    return config;
+  }
 
-    /**
-     * @return
-     */
-    public Ball getBall() {
-        return ball;
-    }
+  public void resetGameObjects() {
+    ball.resetPosition();
+    players.forEach(player -> player.resetPosition());
+  }
 
-    /**
-     * @return
-     */
-    public boolean isPlaying() {
-        return playing;
-    }
+  private void resetScores() {
+    players.forEach(player -> player.resetScore());
+  }
 
-    /**
-     * @param playing
-     */
-    public void setPlaying(boolean playing) {
-        this.playing = playing;
-    }
-
-    /**
-     *
-     */
-    public void pauseToggle() {
-        this.paused = !paused;
-    }
-
-    /**
-     * @return
-     */
-    public boolean isPaused() {
-        return paused;
-    }
-
-    /**
-     * @return
-     */
-    public Settings getConfig() {
-        return config;
-    }
-
-    /**
-     *
-     */
-    public void resetGameObjects() {
-        this.getBall().resetPosition();
-        this.getPlayers().forEach(player -> player.resetPosition());
-    }
-
-    /**
-     *
-     */
-    public void resetScores() {
-        this.getPlayers().forEach(player -> player.resetScore());
-    }
-
-    /**
-     *
-     */
-    public void restart() {
-        resetGameObjects();
-        resetScores();
-        this.setPlaying(true);
-    }
-
+  /**
+   * Restart game.
+   */
+  public void restart() {
+    resetGameObjects();
+    resetScores();
+    setPlaying(true);
+  }
 }

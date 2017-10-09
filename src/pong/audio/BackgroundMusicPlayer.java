@@ -16,18 +16,11 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 /**
  * A music player which plays a list of wav files in the background.
  *
- * @author d.peters
+ * @author Daniel Peters
+ * @version 1.0
  */
 public class BackgroundMusicPlayer {
-
-  /**
-   * Directory scanner.
-   */
   private final DirectoryScanner dirScan;
-
-  /**
-   * List of audio files to be played.
-   */
   private final List<AudioClip> clips;
 
   /**
@@ -50,9 +43,7 @@ public class BackgroundMusicPlayer {
     LineListener listener;
 
     for (AudioClip clip1 : clips) {
-
       try {
-
         listener = (LineEvent event) -> {
           Type eventType = event.getType();
           if (eventType == Type.STOP || eventType == Type.CLOSE) {
@@ -72,22 +63,13 @@ public class BackgroundMusicPlayer {
         while (clip.getMicrosecondLength() != clip.getMicrosecondPosition()) {
           System.out.println("Playing audio");
         }
-
       } catch (LineUnavailableException ex) {
-
         System.out.println("Audios error.");
-
       } catch (UnsupportedAudioFileException ex) {
-
         System.out.println("Wrong audio type.");
-
       } catch (IOException ex) {
-
         System.out.println("File not found.");
-
       }
-
     }
-
   }
 }

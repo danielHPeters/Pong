@@ -15,8 +15,7 @@ public class GameArea extends GameObject {
    * @param height area height
    */
   public GameArea(int width, int height) {
-    this.x = 0;
-    this.y = 0;
+    this.location = new Vector2I(0, 0);
     this.width = width;
     this.height = height;
   }

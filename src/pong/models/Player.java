@@ -8,12 +8,7 @@ import pong.interfaces.CollideAble;
  * @author Daniel Peters
  */
 public class Player extends MovableObject {
-
-  /**
-   * Counter for player score.
-   */
   private int score = 0;
-
   private final GameArea area;
 
   /**
@@ -25,15 +20,10 @@ public class Player extends MovableObject {
    * @param area game area where all the other objects are contained
    */
   public Player(int posX, int posY, int speed, GameArea area) {
-
     this.startLocation = new Vector2I(posX, posY);
     this.location = new Vector2I(posX, posY);
     this.up = false;
     this.down = false;
-    this.x = posX;
-    this.y = posY;
-    this.initialX = posX;
-    this.initialY = posY;
     this.speed = speed;
     this.width = 5;
     this.height = 40;
@@ -79,13 +69,12 @@ public class Player extends MovableObject {
 
   @Override
   public void move() {
-
-    if (this.up && this.y - 10 >= 0) {
-      this.moveUp();
+    if (up && location.getY() - 10 >= 0) {
+      moveUp();
     }
 
-    if (this.down && this.y < this.area.getHeight() - this.height) {
-      this.moveDown();
+    if (down && location.getY() < area.getHeight() - height) {
+      moveDown();
     }
   }
 

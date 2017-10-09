@@ -6,15 +6,10 @@ package pong.configuration;
  * @author Daniel Peters
  */
 public class Settings {
-
   private int width;
-
   private int height;
-
   private int victoryCondition;
-
   private int ballSpeed;
-
   private int playerSpeed;
 
   /**

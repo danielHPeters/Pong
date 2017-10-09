@@ -19,34 +19,18 @@ import pong.interfaces.IUi;
  * @version 1.0
  */
 public class KeyBindings {
-
-  /**
-   * Reference to the main UI.
-   */
   private final IUi ui;
-
-  /**
-   * Thread executor which restarts main thread after pause.
-   */
   private final ScheduledThreadPoolExecutor executor;
-
-  /**
-   * Actions executed on specific keyboard events.
-   */
   private final KeyBoardActions actions;
-
-  /**
-   * State of the game and game objects.
-   */
   private final GameState game;
 
   /**
-   * default constructor which initializes the keyboard configs.
+   * Default constructor which initializes the keyboard configs.
    *
-   * @param ui user interface
+   * @param ui       user interface
    * @param executor scheduled thread pool executor
-   * @param game game state
-   * @param actions keyboard actions
+   * @param game     game state
+   * @param actions  keyboard actions
    */
   public KeyBindings(IUi ui, ScheduledThreadPoolExecutor executor,
                      GameState game, KeyBoardActions actions) {
@@ -61,7 +45,6 @@ public class KeyBindings {
    * Initialization method which binds keys to action methods.
    */
   private void initialize() {
-    // Get the input map of the GamePanel
     InputMap inMap = ((JPanel) this.ui.getCanvas()).getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
     ActionMap acMap = ((JPanel) this.ui.getCanvas()).getActionMap();
 
@@ -91,5 +74,4 @@ public class KeyBindings {
     acMap.put("DOWN pressed", this.actions.downAction(this.game.getPlayers().get(1), true));
     acMap.put("DOWN released", this.actions.downAction(this.game.getPlayers().get(1), false));
   }
-
 }

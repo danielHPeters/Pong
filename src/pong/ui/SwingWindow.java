@@ -1,81 +1,66 @@
-/*
- * Copyright (C) 2017 Daniel
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package pong.ui;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import pong.configuration.Settings;
 import pong.interfaces.IWindow;
 
 /**
- * the window of the game which contains the GameArea
+ * The main window of the game.
  *
- * @author d.peters
+ * @author Daniel Peters
+ * @version 1.0
  */
 public class SwingWindow extends JFrame implements IWindow {
+  private final Settings config;
 
-    /**
-     *
-     */
-    private final Settings config;
+  /**
+   * Default constructor. Initializes the main window.
+   *
+   * @param config default settings
+   */
+  public SwingWindow(Settings config) {
+    this.config = config;
+    initWindow();
+  }
 
-    /**
-     * @param config
-     */
-    public SwingWindow(Settings config) {
-        this.config = config;
-        initWindow();
+  /**
+   * Initializes the game window.
+   */
+  private void initWindow() {
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setLocation(312, 184);
+    setMinimumSize(new Dimension(config.getWidth() + 20, config.getHeight() + 20));
+    setTitle("Pong");
+    setLayout(new BorderLayout());
+    setLandF();
+  }
+
+  /**
+   * Set look and feel of the ui to nimbus.
+   */
+  private void setLandF() {
+    try {
+      UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+    } catch (ClassNotFoundException | InstantiationException
+        | IllegalAccessException | UnsupportedLookAndFeelException e) {
+      System.out.println("Failed to set look and feel.");
     }
+    SwingUtilities.updateComponentTreeUI(this);
+  }
 
-    /**
-     * initializes the game window
-     */
-    private void initWindow() {
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocation(312, 184);
-        this.setMinimumSize(new Dimension(this.config.getWidth() + 20, this.config.getHeight() + 20));
-        this.setTitle("Pong");
-        this.setLayout(new BorderLayout());
-        this.setLandF();
-    }
+  @Override
+  public void display() {
+    setVisible(true);
+  }
 
-    /**
-     * Set look and feel of the ui to nimbus.
-     */
-    public void setLandF() {
-        try {
-
-            UIManager.setLookAndFeel(
-                    "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-
-        } catch (ClassNotFoundException | InstantiationException
-                | IllegalAccessException | UnsupportedLookAndFeelException e) {
-        }
-        SwingUtilities.updateComponentTreeUI(this);
-    }
-
-    @Override
-    public void display() {
-        setVisible(true);
-    }
-
-    @Override
-    public void close() {
-        dispose();
-    }
+  @Override
+  public void close() {
+    dispose();
+  }
 }
