@@ -1,18 +1,15 @@
 package pong.ui.swing;
 
-import com.sun.glass.events.KeyEvent;
-
+import java.awt.event.KeyEvent;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
-import javax.swing.ActionMap;
-import javax.swing.InputMap;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 import pong.enums.Direction;
 import pong.interfaces.IGameState;
-import pong.interfaces.IKeyBindings;
 import pong.interfaces.IKeyboardActions;
 import pong.interfaces.IUi;
+import pong.interfaces.Keybindings;
 
 /**
  * Keyboard configuration of the Game.
@@ -20,7 +17,7 @@ import pong.interfaces.IUi;
  * @author Daniel Peters
  * @version 1.0
  */
-public class SwingKeyBindings implements IKeyBindings {
+public class SwingKeyBindings implements Keybindings {
   private final IUi ui;
   private final ScheduledThreadPoolExecutor executor;
   private final IKeyboardActions actions;
@@ -46,8 +43,8 @@ public class SwingKeyBindings implements IKeyBindings {
    * Initialization method which binds keys to action methods.
    */
   private void initialize() {
-    InputMap inMap = ((JPanel) ui.getCanvas()).getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
-    ActionMap acMap = ((JPanel) ui.getCanvas()).getActionMap();
+    var inMap = ((JPanel) ui.getCanvas()).getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
+    var acMap = ((JPanel) ui.getCanvas()).getActionMap();
 
     for (Direction dir : Direction.values()) {
       inMap.put(dir.getKeyStroke(), dir.getText());

@@ -4,6 +4,12 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import javax.swing.Action;
 import pong.models.Player;
 
+/**
+ * Keyboard actions interface.
+ *
+ * @author Daniel Peters
+ * @version 1.0
+ */
 public interface IKeyboardActions {
   Action upAction(Player player, boolean toggleUp);
 

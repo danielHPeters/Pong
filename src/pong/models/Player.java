@@ -18,7 +18,7 @@ public class Player extends MovableObject {
    *
    * @param posX X position on game area
    * @param posY Y position on game area
-   * @param area game area where all the other objects are contained
+   * @param area Game area where all the other objects are contained
    */
   public Player(int posX, int posY, int speed, GameArea area) {
     this.startLocation = new Vector2I(posX, posY);
@@ -46,15 +46,11 @@ public class Player extends MovableObject {
   /**
    * Check if the player has won the game.
    *
-   * @param victoryCondition the amount of scores required to win
-   * @return boolean which tells the game whether the player has won
+   * @param victoryCondition The amount of scores required to win
+   * @return Boolean which tells the game whether the player has won
    */
   public boolean hasWon(int victoryCondition) {
-    boolean isWinner = false;
-    if (this.score == victoryCondition) {
-      isWinner = true;
-    }
-    return isWinner;
+    return this.score == victoryCondition;
   }
 
   @Override

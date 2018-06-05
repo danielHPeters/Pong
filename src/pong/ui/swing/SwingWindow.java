@@ -23,7 +23,7 @@ public class SwingWindow extends JFrame implements IWindow {
   /**
    * Default constructor. Initializes the main window.
    *
-   * @param config default settings
+   * @param config Default settings
    */
   SwingWindow(Settings config) {
     this.config = config;

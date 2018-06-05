@@ -6,6 +6,12 @@ import pong.models.Ball;
 import pong.models.GameArea;
 import pong.models.Player;
 
+/**
+ * GameState interface.
+ *
+ * @author Daniel Peters
+ * @version 1.0
+ */
 public interface IGameState {
   List<Player> getPlayers();
 

@@ -11,9 +11,9 @@ import pong.game.GameState;
 import pong.game.Loop;
 import pong.interfaces.IGame;
 import pong.interfaces.IGameState;
-import pong.interfaces.IKeyBindings;
 import pong.interfaces.IKeyboardActions;
 import pong.interfaces.IUi;
+import pong.interfaces.Keybindings;
 import pong.ui.swing.SwingKeyBindings;
 import pong.ui.swing.SwingKeyboardActions;
 import pong.ui.swing.SwingUi;
@@ -33,14 +33,14 @@ public class Main {
   private IGameState game;
   private IGame logic;
   private IUi ui;
-  private IKeyBindings keyBindings;
+  private Keybindings keyBindings;
   private IKeyboardActions actions;
 
   /**
-   * starts the game loop.
+   * Starts the game loop.
    */
   private static void start() {
-    Main application = new Main();
+    var application = new Main();
 
     // Initialize game objects and logic
     application.config = new Settings(800, 600, 6, 18, 5);
@@ -65,11 +65,9 @@ public class Main {
   /**
    * Starts the event dispatch thread and starts the game.
    *
-   * @param args the command line arguments
+   * @param args The command line arguments
    */
   public static void main(String[] args) {
     SwingUtilities.invokeLater(Main::start);
-    // BackgroundMusicPlayer player = new BackgroundMusicPlayer();
-    // player.playAllClips();
   }
 }

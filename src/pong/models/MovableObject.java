@@ -1,7 +1,7 @@
 package pong.models;
 
 import pong.interfaces.IVector2I;
-import pong.interfaces.IMoveAble;
+import pong.interfaces.Movable;
 
 /**
  * Abstract class which defines movable game objects.
@@ -9,7 +9,7 @@ import pong.interfaces.IMoveAble;
  * @author Daniel Peters
  * @version 1.0
  */
-abstract class MovableObject extends GameObject implements IMoveAble {
+abstract class MovableObject extends GameObject implements Movable {
   protected int speed;
   protected int maxSpeed;
   protected IVector2I startLocation;

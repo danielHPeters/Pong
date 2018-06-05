@@ -74,9 +74,7 @@ public class Vector2I implements IVector2I {
 
   @Override
   public void normalize() {
-
-    int magnitude = mag();
-
+    var magnitude = mag();
     if (magnitude != 0d) {
       div(magnitude);
     }
@@ -84,9 +82,7 @@ public class Vector2I implements IVector2I {
 
   @Override
   public void limit(int max) {
-
     if (this.mag() > max) {
-
       this.normalize();
       this.multiply(max);
     }

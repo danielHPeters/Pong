@@ -20,7 +20,6 @@ public class Game implements IGame {
    * This method updates all the components on the painter area.
    */
   public void update() {
-
     gameState.getBall().move();
     gameState.getPlayers().forEach(pl -> {
       // move player

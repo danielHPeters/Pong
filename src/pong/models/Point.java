@@ -1,8 +1,12 @@
 package pong.models;
 
-import pong.interfaces.IPoint;
-
-public class Point implements IPoint {
+/**
+ * Point class representing a canvas coordinate.
+ *
+ * @author Daniel Peters
+ * @version 1.0
+ */
+public class Point {
   private int x;
   private int y;
 
@@ -11,34 +15,28 @@ public class Point implements IPoint {
     this.y = y;
   }
 
-  @Override
   public int getX() {
     return x;
   }
 
-  @Override
   public int getY() {
     return y;
   }
 
-  @Override
   public void setX(int x) {
     this.x = x;
   }
 
-  @Override
   public void setY(int y) {
     this.y = y;
   }
 
-  @Override
   public void set(int x, int y) {
     this.x = x;
     this.y = y;
   }
 
-  @Override
-  public void set(IPoint point) {
+  public void set(Point point) {
     this.x = point.getX();
     this.y = point.getY();
   }

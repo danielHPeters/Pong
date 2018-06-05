@@ -1,6 +1,6 @@
 package pong.models;
 
-import pong.interfaces.CollideAble;
+import pong.interfaces.Collideable;
 import pong.interfaces.IVector2I;
 
 /**
@@ -9,7 +9,7 @@ import pong.interfaces.IVector2I;
  * @author Daniel Peters
  * @version 1.0
  */
-abstract class GameObject implements CollideAble {
+abstract class GameObject implements Collideable {
   protected IVector2I location;
   protected int width;
   protected int height;
@@ -30,15 +30,11 @@ abstract class GameObject implements CollideAble {
   /**
    * Checks for collision with other objects.
    *
-   * @param other CollideAble Object
+   * @param other Collideable Object
    * @return boolean which tells if there was a collision with an object
    */
   @Override
-  public boolean collision(CollideAble other) {
-    boolean coll = false;
-    if (getBounds().getBounds2D().intersects(other.getBounds().getBounds2D())) {
-      coll = true;
-    }
-    return coll;
+  public boolean collision(Collideable other) {
+    return getBounds().getBounds2D().intersects(other.getBounds().getBounds2D());
   }
 }

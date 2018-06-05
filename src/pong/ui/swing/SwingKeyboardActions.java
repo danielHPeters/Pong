@@ -20,9 +20,9 @@ public class SwingKeyboardActions implements IKeyboardActions {
   /**
    * This method creates the methods for the up actions.
    *
-   * @param player   the player object
-   * @param toggleUp boolean which is true for key pressed and for for key released
-   * @return the abstract action
+   * @param player   The player object
+   * @param toggleUp Boolean which is true for key pressed and for for key released
+   * @return The abstract action
    */
   @Override
   public Action upAction(Player player, boolean toggleUp) {
@@ -38,9 +38,9 @@ public class SwingKeyboardActions implements IKeyboardActions {
   /**
    * This method creates the methods for the down actions.
    *
-   * @param player     the player object
-   * @param toggleDown boolean which is true for key pressed and for for key released
-   * @return the abstract action
+   * @param player     The player object
+   * @param toggleDown Boolean which is true for key pressed and for for key released
+   * @return The abstract action
    */
   @Override
   public Action downAction(Player player, boolean toggleDown) {
@@ -56,10 +56,10 @@ public class SwingKeyboardActions implements IKeyboardActions {
   /**
    * Action that stops the application thread and closes the GUI.
    *
-   * @param window   main window frame
-   * @param game     game state
-   * @param executor thread pool executor
-   * @return escape action
+   * @param window   Main window frame
+   * @param game     Game state
+   * @param executor Thread pool executor
+   * @return Escape action
    */
   @Override
   public Action escAction(IWindow window, IGameState game, ScheduledThreadPoolExecutor executor) {
@@ -76,8 +76,8 @@ public class SwingKeyboardActions implements IKeyboardActions {
   /**
    * Restart action.
    *
-   * @param game game state
-   * @return restart action
+   * @param game Game state
+   * @return Restart action
    */
   @Override
   public Action restartAction(IGameState game) {
@@ -88,5 +88,4 @@ public class SwingKeyboardActions implements IKeyboardActions {
       }
     };
   }
-
 }

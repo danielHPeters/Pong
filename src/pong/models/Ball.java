@@ -9,7 +9,6 @@ import java.awt.geom.Ellipse2D;
  * @author Daniel Peters
  */
 public class Ball extends MovableObject {
-
   /**
    * Default constructor setting position, speed, width, height.
    *

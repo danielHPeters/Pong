@@ -22,26 +22,24 @@ import pong.interfaces.IWindow;
 public class SwingUi implements IUi {
   private JFrame window;
   private final ICanvas canvas;
-  private final SwingButtonActions btnActions;
-  private final JToggleButton pauseButton;
-  private final JButton restartButton;
-  private JMenuBar actionBar;
 
   /**
    * Default constructor. Configures all ui components.
    *
-   * @param config default settings
-   * @param game   game state
+   * @param config Default settings
+   * @param game   Game state
    */
   public SwingUi(Settings config, IGameState game) {
     window = new SwingWindow(config);
     canvas = new SwingCanvas(config, game);
-    actionBar = new JMenuBar();
+
+    var actionBar = new JMenuBar();
+    var btnActions = new SwingButtonActions(game);
+    var pauseButton = new JToggleButton("Pause");
+    var restartButton = new JButton("Restart");
+
     actionBar.setFocusable(false);
-    btnActions = new SwingButtonActions(game);
-    pauseButton = new JToggleButton("Pause");
     pauseButton.addItemListener(btnActions.pauseListener());
-    restartButton = new JButton("Restart");
     restartButton.addActionListener(btnActions.restartListener());
     restartButton.setFocusable(false);
     actionBar.add(pauseButton);

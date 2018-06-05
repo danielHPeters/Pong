@@ -15,11 +15,11 @@ public class Settings {
   /**
    * Default constructor. Initializes all game setting.
    *
-   * @param width            window width
-   * @param height           window height
-   * @param victoryCondition required score to win a match
-   * @param ballSpeed        speed of the ball
-   * @param playerSpeed      speed of the players
+   * @param width            Window width
+   * @param height           Window height
+   * @param victoryCondition Required score to win a match
+   * @param ballSpeed        Speed of the ball
+   * @param playerSpeed      Speed of the players
    */
   public Settings(int width, int height, int victoryCondition, int ballSpeed, int playerSpeed) {
     this.width = width;
