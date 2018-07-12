@@ -36,3 +36,8 @@ repositories {
   // You can declare any Maven/Ivy/file repository here.
   jcenter()
 }
+
+configure<JavaPluginConvention> {
+    sourceCompatibility = JavaVersion.VERSION_1_10
+    targetCompatibility = JavaVersion.VERSION_1_10
+}
