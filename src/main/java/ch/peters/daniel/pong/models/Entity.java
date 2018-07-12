@@ -9,7 +9,7 @@ import ch.peters.daniel.pong.math.Vector;
  * @version 1.0
  */
 abstract class Entity implements Collideable {
-  protected Vector location;
+  protected Vector<Integer> location;
   protected int width;
   protected int height;
 

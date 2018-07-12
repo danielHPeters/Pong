@@ -12,9 +12,9 @@ import ch.peters.daniel.pong.math.Vector2I;
 abstract class MovableEntity extends Entity implements Movable {
   protected int speed;
   protected int maxSpeed;
-  protected Vector startLocation;
-  protected Vector velocity;
-  protected Vector acceleration;
+  protected Vector<Integer> startLocation;
+  protected Vector<Integer> velocity;
+  protected Vector<Integer> acceleration;
   protected boolean up;
   protected boolean down;
   protected boolean left;
@@ -75,11 +75,11 @@ abstract class MovableEntity extends Entity implements Movable {
     velocity = new Vector2I(1, 1);
   }
 
-  public Vector getVelocity() {
+  public Vector<Integer> getVelocity() {
     return velocity;
   }
 
-  public Vector getAcceleration() {
+  public Vector<Integer> getAcceleration() {
     return acceleration;
   }
 }
