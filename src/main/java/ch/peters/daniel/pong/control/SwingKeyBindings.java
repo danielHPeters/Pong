@@ -1,12 +1,13 @@
-package ch.peters.daniel.pong.ui.swing;
+package ch.peters.daniel.pong.control;
+
+import ch.peters.daniel.pong.action.KeyboardActions;
+import ch.peters.daniel.pong.game.GameState;
+import ch.peters.daniel.pong.ui.swing.Ui;
 
 import java.awt.event.KeyEvent;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
-
-import ch.peters.daniel.pong.enums.Direction;
-import ch.peters.daniel.pong.game.GameState;
 
 /**
  * Keyboard configuration of the Pong.
@@ -28,7 +29,12 @@ public class SwingKeyBindings implements Keybindings {
    * @param game     game state
    * @param actions  keyboard actions
    */
-  public SwingKeyBindings(Ui ui, ScheduledThreadPoolExecutor executor, GameState game, KeyboardActions actions) {
+  public SwingKeyBindings(
+      Ui ui,
+      ScheduledThreadPoolExecutor executor,
+      GameState game,
+      KeyboardActions actions
+  ) {
     this.executor = executor;
     this.ui = ui;
     this.actions = actions;
@@ -48,7 +54,7 @@ public class SwingKeyBindings implements Keybindings {
     }
 
     inMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "ESC pressed");
-    acMap.put("ESC pressed", actions.escAction(ui.getWindow(), game, executor));
+    acMap.put("ESC pressed", actions.quitAction(ui.getWindow(), game, executor));
 
     inMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_R, 0), "R pressed");
     acMap.put("R pressed", actions.restartAction(game));

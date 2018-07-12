@@ -1,14 +1,12 @@
 package ch.peters.daniel.pong.ui.swing;
 
+import ch.peters.daniel.pong.configuration.Settings;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
-
-import ch.peters.daniel.pong.configuration.Settings;
 
 /**
  * The main window of the game.
@@ -46,12 +44,15 @@ public class SwingWindow extends JFrame implements Window {
    */
   private void setLandF() {
     try {
-      UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-    } catch (ClassNotFoundException | InstantiationException
-        | IllegalAccessException | UnsupportedLookAndFeelException e) {
-      System.out.println("Failed to set look and feel.");
+      for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+        if ("Nimbus".equals(info.getName())) {
+          UIManager.setLookAndFeel(info.getClassName());
+          break;
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
-    SwingUtilities.updateComponentTreeUI(this);
   }
 
   @Override

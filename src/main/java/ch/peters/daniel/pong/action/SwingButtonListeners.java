@@ -1,9 +1,9 @@
-package ch.peters.daniel.pong.ui.swing;
+package ch.peters.daniel.pong.action;
+
+import ch.peters.daniel.pong.game.GameState;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
-
-import ch.peters.daniel.pong.game.GameState;
 
 /**
  * Button action listeners.
@@ -11,18 +11,18 @@ import ch.peters.daniel.pong.game.GameState;
  * @author Daniel Peters
  * @version 1.0
  */
-class SwingButtonActions {
+public class SwingButtonListeners {
   private final GameState game;
 
-  SwingButtonActions(GameState game) {
+  public SwingButtonListeners(GameState game) {
     this.game = game;
   }
 
-  ItemListener pauseListener() {
+  public ItemListener pauseListener() {
     return event -> game.pauseToggle();
   }
 
-  ActionListener restartListener() {
+  public ActionListener restartListener() {
     return event -> game.restart();
   }
 }

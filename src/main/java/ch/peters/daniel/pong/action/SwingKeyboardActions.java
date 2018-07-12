@@ -1,12 +1,11 @@
-package ch.peters.daniel.pong.ui.swing;
-
-import java.awt.event.ActionEvent;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
+package ch.peters.daniel.pong.action;
 
 import ch.peters.daniel.pong.game.GameState;
 import ch.peters.daniel.pong.models.Player;
+import ch.peters.daniel.pong.ui.swing.Window;
+
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import javax.swing.Action;
 
 /**
  * Definitions of keyboard actions.
@@ -20,17 +19,11 @@ public class SwingKeyboardActions implements KeyboardActions {
    *
    * @param player   The player object
    * @param toggleUp Boolean which is true for key pressed and for for key released
-   * @return The abstract action
+   * @return Move up action
    */
   @Override
   public Action upAction(Player player, boolean toggleUp) {
-    return new AbstractAction() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        player.setUp(toggleUp);
-      }
-
-    };
+    return new FunctionalAction(e -> player.setUp(toggleUp));
   }
 
   /**
@@ -38,17 +31,11 @@ public class SwingKeyboardActions implements KeyboardActions {
    *
    * @param player     The player object
    * @param toggleDown Boolean which is true for key pressed and for for key released
-   * @return The abstract action
+   * @return Move down action
    */
   @Override
   public Action downAction(Player player, boolean toggleDown) {
-    return new AbstractAction() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        player.setDown(toggleDown);
-      }
-
-    };
+    return new FunctionalAction(e -> player.setDown(toggleDown));
   }
 
   /**
@@ -57,18 +44,15 @@ public class SwingKeyboardActions implements KeyboardActions {
    * @param window   Main window frame
    * @param game     Pong state
    * @param executor Thread pool executor
-   * @return Escape action
+   * @return Quit action
    */
   @Override
-  public Action escAction(Window window, GameState game, ScheduledThreadPoolExecutor executor) {
-    return new AbstractAction() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        game.setPlaying(false);
-        executor.shutdown();
-        window.close();
-      }
-    };
+  public Action quitAction(Window window, GameState game, ScheduledThreadPoolExecutor executor) {
+    return new FunctionalAction(e -> {
+      game.setPlaying(false);
+      executor.shutdown();
+      window.close();
+    });
   }
 
   /**
@@ -79,11 +63,6 @@ public class SwingKeyboardActions implements KeyboardActions {
    */
   @Override
   public Action restartAction(GameState game) {
-    return new AbstractAction() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        game.restart();
-      }
-    };
+    return new FunctionalAction(e -> game.restart());
   }
 }

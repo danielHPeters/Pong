@@ -1,10 +1,11 @@
-package ch.peters.daniel.pong.ui.swing;
+package ch.peters.daniel.pong.action;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import javax.swing.Action;
 
 import ch.peters.daniel.pong.game.GameState;
 import ch.peters.daniel.pong.models.Player;
+import ch.peters.daniel.pong.ui.swing.Window;
 
 /**
  * Keyboard actions interface.
@@ -17,7 +18,7 @@ public interface KeyboardActions {
 
   Action downAction(Player player, boolean toggleDown);
 
-  Action escAction(Window window, GameState game, ScheduledThreadPoolExecutor executor);
+  Action quitAction(Window window, GameState game, ScheduledThreadPoolExecutor executor);
 
   Action restartAction(GameState game);
 }

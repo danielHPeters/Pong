@@ -1,4 +1,4 @@
-package ch.peters.daniel.pong.enums;
+package ch.peters.daniel.pong.control;
 
 import java.awt.event.KeyEvent;
 import javax.swing.KeyStroke;
@@ -10,7 +10,6 @@ import javax.swing.KeyStroke;
  * @version 1.0
  */
 public enum Direction {
-
   UP("UP pressed", KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, false)),
   UP_REL("UP released", KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, true)),
   DOWN("DOWN pressed", KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, false)),

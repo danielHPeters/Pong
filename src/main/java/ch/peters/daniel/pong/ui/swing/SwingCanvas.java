@@ -1,13 +1,13 @@
 package ch.peters.daniel.pong.ui.swing;
 
+import ch.peters.daniel.pong.configuration.Settings;
+import ch.peters.daniel.pong.game.GameState;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import javax.swing.JPanel;
-
-import ch.peters.daniel.pong.configuration.Settings;
-import ch.peters.daniel.pong.game.GameState;
 
 public class SwingCanvas extends JPanel implements Canvas {
   private Settings config;
@@ -76,11 +76,9 @@ public class SwingCanvas extends JPanel implements Canvas {
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-
     var g2 = (Graphics2D) g;
 
     g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
     g2.drawRect(
         game.getArea().getLocation().getX(),
         game.getArea().getLocation().getY(),

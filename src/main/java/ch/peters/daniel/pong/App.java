@@ -1,19 +1,22 @@
 package ch.peters.daniel.pong;
 
+import ch.peters.daniel.pong.action.KeyboardActions;
+import ch.peters.daniel.pong.action.SwingKeyboardActions;
+import ch.peters.daniel.pong.configuration.Settings;
+import ch.peters.daniel.pong.control.Keybindings;
+import ch.peters.daniel.pong.control.SwingKeyBindings;
+import ch.peters.daniel.pong.game.Game;
+import ch.peters.daniel.pong.game.GameState;
+import ch.peters.daniel.pong.game.Loop;
+import ch.peters.daniel.pong.game.Pong;
+import ch.peters.daniel.pong.game.PongState;
+import ch.peters.daniel.pong.ui.swing.SwingUi;
+import ch.peters.daniel.pong.ui.swing.Ui;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import javax.swing.SwingUtilities;
-
-import ch.peters.daniel.pong.configuration.Settings;
-import ch.peters.daniel.pong.game.*;
-import ch.peters.daniel.pong.game.Pong;
-import ch.peters.daniel.pong.ui.swing.KeyboardActions;
-import ch.peters.daniel.pong.ui.swing.Ui;
-import ch.peters.daniel.pong.ui.swing.Keybindings;
-import ch.peters.daniel.pong.ui.swing.SwingKeyBindings;
-import ch.peters.daniel.pong.ui.swing.SwingKeyboardActions;
-import ch.peters.daniel.pong.ui.swing.SwingUi;
 
 /**
  * Starter class of the pong game. This is a simple remake of the classic pong

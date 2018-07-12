@@ -1,14 +1,15 @@
 package ch.peters.daniel.pong.ui.swing;
 
+import ch.peters.daniel.pong.action.SwingButtonListeners;
+import ch.peters.daniel.pong.configuration.Settings;
+import ch.peters.daniel.pong.game.GameState;
+
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
-
-import ch.peters.daniel.pong.configuration.Settings;
-import ch.peters.daniel.pong.game.GameState;
 
 /**
  * Swing implementation of UI interface.
@@ -31,7 +32,7 @@ public class SwingUi implements Ui {
     canvas = new SwingCanvas(config, game);
 
     var actionBar = new JMenuBar();
-    var btnActions = new SwingButtonActions(game);
+    var btnActions = new SwingButtonListeners(game);
     var pauseButton = new JToggleButton("Pause");
     var restartButton = new JButton("Restart");
 
