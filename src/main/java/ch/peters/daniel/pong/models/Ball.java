@@ -8,7 +8,8 @@ import java.awt.geom.Ellipse2D;
 /**
  * Describes a ball object, its movement functions etc.
  *
- * @author Daniel Peters
+ * @author Daniel Peters <daniel.peters.ch@gmail.com>
+ * @version 1.0
  */
 public class Ball extends MovableEntity {
   /**

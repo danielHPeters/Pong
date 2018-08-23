@@ -5,7 +5,7 @@ import ch.peters.daniel.pong.math.Vector;
 /**
  * Abstract base class for game objects.
  *
- * @author Daniel Peters
+ * @author Daniel Peters <daniel.peters.ch@gmail.com>
  * @version 1.0
  */
 abstract class Entity implements Collideable {

@@ -15,7 +15,7 @@ plugins {
 application {
   applicationName= "pong"
   // Define the main class for the application
-  mainClassName = "${project.group}.${applicationName}.App"
+  mainClassName = "${project.group}.$applicationName.App"
 }
 
 dependencies {
@@ -30,10 +30,7 @@ dependencies {
   testImplementation("junit:junit:4.12")
 }
 
-// In this section you declare where to find the dependencies of your project
 repositories {
-  // Use jcenter for resolving your dependencies.
-  // You can declare any Maven/Ivy/file repository here.
   jcenter()
 }
 

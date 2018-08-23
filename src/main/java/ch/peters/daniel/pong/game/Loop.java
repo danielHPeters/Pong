@@ -5,7 +5,8 @@ import ch.peters.daniel.pong.ui.swing.Canvas;
 /**
  * This class contains the canvas loop, which controls canvas speed, frame rate etc.
  *
- * @author Daniel Peters
+ * @author Daniel Peters <daniel.peters.ch@gmail.com>
+ * @version 1.0
  */
 public class Loop implements Runnable {
   private final int fps;

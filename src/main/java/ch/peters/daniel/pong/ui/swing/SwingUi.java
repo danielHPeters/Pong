@@ -1,7 +1,7 @@
 package ch.peters.daniel.pong.ui.swing;
 
 import ch.peters.daniel.pong.action.SwingButtonListeners;
-import ch.peters.daniel.pong.configuration.Settings;
+import ch.peters.daniel.pong.config.Settings;
 import ch.peters.daniel.pong.game.GameState;
 
 import java.awt.BorderLayout;
@@ -14,7 +14,7 @@ import javax.swing.JToggleButton;
 /**
  * Swing implementation of UI interface.
  *
- * @author Daniel Peters
+ * @author Daniel Peters <daniel.peters.ch@gmail.com>
  * @version 1.0
  */
 public class SwingUi implements Ui {

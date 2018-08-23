@@ -2,7 +2,7 @@ package ch.peters.daniel.pong;
 
 import ch.peters.daniel.pong.action.KeyboardActions;
 import ch.peters.daniel.pong.action.SwingKeyboardActions;
-import ch.peters.daniel.pong.configuration.Settings;
+import ch.peters.daniel.pong.config.Settings;
 import ch.peters.daniel.pong.control.Keybindings;
 import ch.peters.daniel.pong.control.SwingKeyBindings;
 import ch.peters.daniel.pong.game.Game;
@@ -22,7 +22,7 @@ import javax.swing.SwingUtilities;
  * Starter class of the pong game. This is a simple remake of the classic pong
  * using an object oriented approach.
  *
- * @author Daniel Peters
+ * @author Daniel Peters <daniel.peters.ch@gmail.com>
  * @version 2.6
  * @since 12.10.2016
  */

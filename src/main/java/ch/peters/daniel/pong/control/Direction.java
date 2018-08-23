@@ -6,7 +6,7 @@ import javax.swing.KeyStroke;
 /**
  * Enum to check which direction the player should move.
  *
- * @author Daniel Peters
+ * @author Daniel Peters <daniel.peters.ch@gmail.com>
  * @version 1.0
  */
 public enum Direction {

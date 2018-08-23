@@ -8,7 +8,8 @@ import java.awt.Shape;
 /**
  * Pong area to used to check if game objects are out of getBounds.
  *
- * @author Daniel Peters
+ * @author Daniel Peters <daniel.peters.ch@gmail.com>
+ * @version 1.0
  */
 public class Court extends Entity {
   /**

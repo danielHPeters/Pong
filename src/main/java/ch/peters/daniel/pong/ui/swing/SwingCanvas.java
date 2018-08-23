@@ -1,6 +1,6 @@
 package ch.peters.daniel.pong.ui.swing;
 
-import ch.peters.daniel.pong.configuration.Settings;
+import ch.peters.daniel.pong.config.Settings;
 import ch.peters.daniel.pong.game.GameState;
 
 import java.awt.Color;
@@ -9,6 +9,12 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
+/**
+ * Swing canvas implementation.
+ *
+ * @author Daniel Peters <daniel.peters.ch@gmail.com>
+ * @version 1.0
+ */
 public class SwingCanvas extends JPanel implements Canvas {
   private Settings config;
   private final GameState game;

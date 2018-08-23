@@ -1,6 +1,6 @@
 package ch.peters.daniel.pong.ui.swing;
 
-import ch.peters.daniel.pong.configuration.Settings;
+import ch.peters.daniel.pong.config.Settings;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -11,7 +11,7 @@ import javax.swing.WindowConstants;
 /**
  * The main window of the game.
  *
- * @author Daniel Peters
+ * @author Daniel Peters <daniel.peters.ch@gmail.com>
  * @version 1.0
  */
 public class SwingWindow extends JFrame implements Window {

@@ -10,7 +10,7 @@ import ch.peters.daniel.pong.ui.swing.Window;
 /**
  * Keyboard actions interface.
  *
- * @author Daniel Peters
+ * @author Daniel Peters <daniel.peters.ch@gmail.com>
  * @version 1.0
  */
 public interface KeyboardActions {

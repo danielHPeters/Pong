@@ -1,6 +1,6 @@
 package ch.peters.daniel.pong.game;
 
-import ch.peters.daniel.pong.configuration.Settings;
+import ch.peters.daniel.pong.config.Settings;
 import ch.peters.daniel.pong.models.Ball;
 import ch.peters.daniel.pong.models.Court;
 import ch.peters.daniel.pong.models.Player;
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * PongState interface.
  *
- * @author Daniel Peters
+ * @author Daniel Peters <daniel.peters.ch@gmail.com>
  * @version 1.0
  */
 public interface GameState {

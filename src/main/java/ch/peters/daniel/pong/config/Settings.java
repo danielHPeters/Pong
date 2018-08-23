@@ -1,9 +1,9 @@
-package ch.peters.daniel.pong.configuration;
+package ch.peters.daniel.pong.config;
 
 /**
  * Application settings.
  *
- * @author Daniel Peters
+ * @author Daniel Peters <daniel.peters.ch@gmail.com>
  */
 public class Settings {
   private int width;
