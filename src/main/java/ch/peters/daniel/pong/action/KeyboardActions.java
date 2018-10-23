@@ -1,16 +1,16 @@
 package ch.peters.daniel.pong.action;
 
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import javax.swing.Action;
-
 import ch.peters.daniel.pong.game.GameState;
 import ch.peters.daniel.pong.models.Player;
 import ch.peters.daniel.pong.ui.swing.Window;
 
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import javax.swing.Action;
+
 /**
  * Keyboard actions interface.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
+ * @author Daniel Peters
  * @version 1.0
  */
 public interface KeyboardActions {

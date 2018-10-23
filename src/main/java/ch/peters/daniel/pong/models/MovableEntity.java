@@ -6,7 +6,7 @@ import ch.peters.daniel.pong.math.Vector2I;
 /**
  * Abstract class which defines movable game objects.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
+ * @author Daniel Peters
  * @version 1.0
  */
 abstract class MovableEntity extends Entity implements Movable {

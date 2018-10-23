@@ -22,7 +22,7 @@ import javax.swing.SwingUtilities;
  * Starter class of the pong game. This is a simple remake of the classic pong
  * using an object oriented approach.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
+ * @author Daniel Peters
  * @version 2.6
  * @since 12.10.2016
  */

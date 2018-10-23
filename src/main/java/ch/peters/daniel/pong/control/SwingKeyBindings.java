@@ -12,7 +12,7 @@ import javax.swing.KeyStroke;
 /**
  * Keyboard configuration of the Pong.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
+ * @author Daniel Peters
  * @version 1.0
  */
 public class SwingKeyBindings implements Keybindings {

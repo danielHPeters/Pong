@@ -1,17 +1,17 @@
 package ch.peters.daniel.pong.game;
 
-import java.util.Arrays;
-import java.util.List;
-
 import ch.peters.daniel.pong.config.Settings;
 import ch.peters.daniel.pong.models.Ball;
 import ch.peters.daniel.pong.models.Court;
 import ch.peters.daniel.pong.models.Player;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Pong state holding game objects information.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
+ * @author Daniel Peters
  * @version 1.0
  */
 public class PongState implements GameState {

@@ -3,7 +3,7 @@ package ch.peters.daniel.pong.config;
 /**
  * Application settings.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
+ * @author Daniel Peters
  */
 public class Settings {
   private int width;

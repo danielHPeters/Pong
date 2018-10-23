@@ -3,7 +3,7 @@ package ch.peters.daniel.pong.math;
 /**
  * Basic 2D int vector implementation.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
+ * @author Daniel Peters
  * @version 1.0
  */
 public class Vector2I implements Vector<Integer> {

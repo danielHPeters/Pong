@@ -3,7 +3,7 @@ package ch.peters.daniel.pong.math;
 /**
  * Interface for 2D integer vectors.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
+ * @author Daniel Peters
  * @version 1.0
  */
 public interface Vector<T> {

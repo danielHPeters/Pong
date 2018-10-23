@@ -3,7 +3,7 @@ package ch.peters.daniel.pong.math;
 /**
  * Point class representing a canvas coordinate.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
+ * @author Daniel Peters
  * @version 1.0
  */
 public class Point {
