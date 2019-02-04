@@ -31,8 +31,8 @@ public class PongState implements GameState {
     this.config = config;
     this.area = new Court(config.getWidth() - 10, config.getHeight() - 80);
     this.players = Arrays.asList(
-        new Player(2 * 5, area.getHeight() / 2, config.getPlayerSpeed(), area),
-        new Player(config.getWidth() - 4 * 5, area.getHeight() / 2, config.getPlayerSpeed(), area)
+      new Player(2 * 5, area.getHeight() / 2, config.getPlayerSpeed(), area),
+      new Player(config.getWidth() - 4 * 5, area.getHeight() / 2, config.getPlayerSpeed(), area)
     );
     this.ball = new Ball(config.getWidth() / 2, config.getHeight() / 2, config.getBallSpeed());
     this.playing = true;

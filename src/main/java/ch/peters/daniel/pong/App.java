@@ -58,7 +58,7 @@ public class App {
     // Configure keyboard controls
     application.actions = new SwingKeyboardActions();
     application.keyBindings = new SwingKeyBindings(
-        application.ui, application.executor, application.game, application.actions);
+      application.ui, application.executor, application.game, application.actions);
     application.ui.getWindow().display();
   }
 

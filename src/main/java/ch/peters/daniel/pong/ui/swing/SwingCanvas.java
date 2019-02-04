@@ -38,10 +38,10 @@ public class SwingCanvas extends JPanel implements Canvas {
   private void drawBall(Graphics2D g2) {
     g2.setColor(Color.BLACK);
     g2.fillOval(
-        game.getBall().getLocation().getX(),
-        game.getBall().getLocation().getY(),
-        game.getBall().getSize(),
-        game.getBall().getSize()
+      game.getBall().getLocation().getX(),
+      game.getBall().getLocation().getY(),
+      game.getBall().getSize(),
+      game.getBall().getSize()
     );
   }
 
@@ -52,12 +52,12 @@ public class SwingCanvas extends JPanel implements Canvas {
    */
   private void drawPlayers(Graphics2D g2) {
     game.getPlayers().forEach(
-        pl -> g2.fillRect(
-            pl.getLocation().getX(),
-            pl.getLocation().getY(),
-            pl.getWidth(),
-            pl.getHeight()
-        )
+      pl -> g2.fillRect(
+        pl.getLocation().getX(),
+        pl.getLocation().getY(),
+        pl.getWidth(),
+        pl.getHeight()
+      )
     );
   }
 
@@ -72,7 +72,7 @@ public class SwingCanvas extends JPanel implements Canvas {
     g2.drawString("Player 2: " + game.getPlayers().get(1).getScore(), config.getWidth() - 100, 10);
 
     if (!this.game.isPlaying()) {
-      g2.drawString("Pong Over", this.config.getWidth() / 2 - 20, this.config.getHeight() / 2 - 20);
+      g2.drawString("Game Over", this.config.getWidth() / 2 - 20, this.config.getHeight() / 2 - 20);
     }
   }
 
@@ -86,10 +86,10 @@ public class SwingCanvas extends JPanel implements Canvas {
 
     g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     g2.drawRect(
-        game.getArea().getLocation().getX(),
-        game.getArea().getLocation().getY(),
-        game.getArea().getWidth(),
-        game.getArea().getHeight()
+      game.getArea().getLocation().getX(),
+      game.getArea().getLocation().getY(),
+      game.getArea().getWidth(),
+      game.getArea().getHeight()
     );
     drawBall(g2);
     drawPlayers(g2);

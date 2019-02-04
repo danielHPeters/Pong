@@ -6,10 +6,10 @@ import javax.swing.AbstractAction;
 
 /**
  * Functional action. Use this for shorter action code.
- * @see KeyboardActions
  *
  * @author Daniel Peters
  * @version 1.0
+ * @see KeyboardActions
  */
 public class FunctionalAction extends AbstractAction {
   private ActionListener action;

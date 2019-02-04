@@ -38,6 +38,7 @@ public class Loop implements Runnable {
       }
 
       time = (time - System.nanoTime() + (1000000000L / fps)) / 1000000L;
+
       if (time > 0) {
         try {
           Thread.sleep(time);

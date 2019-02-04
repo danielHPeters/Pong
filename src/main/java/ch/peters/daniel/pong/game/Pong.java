@@ -34,23 +34,27 @@ public class Pong implements Game {
     });
 
     if (gameState.getBall().collision(gameState.getArea())) {
-      if (gameState.getBall().getLocation().getY() == 0
-          || gameState.getBall().getLocation().getY()
-          > (gameState.getArea().getHeight() - gameState.getBall().getSize())) {
+      var ballY = gameState.getBall().getLocation().getY();
+      var worldTop = 0;
+      var worldBottom = gameState.getArea().getHeight() - gameState.getBall().getSize();
+
+      if (ballY == worldTop || ballY > worldBottom) {
         gameState.getBall().getVelocity().setY(-gameState.getBall().getVelocity().getY());
       }
-
     }
 
+    var ballX = gameState.getBall().getLocation().getX();
+    var worldRight = gameState.getArea().getWidth() - gameState.getBall().getSize();
+    var worldLeft = 0;
+
     // check if the ball hit the right border
-    if (gameState.getBall().getLocation().getX() > (
-        gameState.getArea().getWidth() - gameState.getBall().getSize())) {
+    if (ballX > worldRight) {
       gameState.getPlayers().get(0).incrementScore();
       gameState.resetGameObjects();
     }
 
     // check if the ball hit the left border
-    if (gameState.getBall().getLocation().getX() == 0) {
+    if (ballX == worldLeft) {
       gameState.getPlayers().get(1).incrementScore();
       gameState.resetGameObjects();
     }

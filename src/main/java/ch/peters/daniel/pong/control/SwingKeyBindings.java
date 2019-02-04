@@ -30,10 +30,10 @@ public class SwingKeyBindings implements Keybindings {
    * @param actions  keyboard actions
    */
   public SwingKeyBindings(
-      Ui ui,
-      ScheduledThreadPoolExecutor executor,
-      GameState game,
-      KeyboardActions actions
+    Ui ui,
+    ScheduledThreadPoolExecutor executor,
+    GameState game,
+    KeyboardActions actions
   ) {
     this.executor = executor;
     this.ui = ui;
